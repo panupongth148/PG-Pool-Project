@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="cdgs.co.th.employee.Employee"/>
+    <fullyQualifiedTypeName name="cdgs.co.th.project.Project"/>
+    <fullyQualifiedTypeName name="cdgs.co.th.resource.Resource"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="cdgs.co.th.employee_project.EmployeeProject"/>
+</qualifiedTypeNameHistroy>

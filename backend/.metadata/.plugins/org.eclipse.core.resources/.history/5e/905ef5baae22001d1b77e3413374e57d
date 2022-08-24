@@ -1,0 +1,5 @@
+package cdgs.co.th.beans;
+
+public class EmployeeDTO {
+
+}

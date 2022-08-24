@@ -1,0 +1,16 @@
+package cdgs.co.th.project_resource;
+
+import javax.persistence.Cacheable;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "project_resource")
+@NamedQuery(name = "ProjectResource.findAll", query = "SELECT pr FROM project_resource pr ORDER BY pr.pro_re_id", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+@Cacheable
+public class ProjectResource {
+	
+	
+}

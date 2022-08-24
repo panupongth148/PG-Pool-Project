@@ -1,0 +1,66 @@
+package cdgs.co.th.project_resource;
+
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import cdgs.co.th.project.Project;
+import cdgs.co.th.resource.Resource;
+
+
+
+@Entity
+@Table(name = "project_resource")
+@Cacheable
+public class ProjectResource {
+	
+	 @Id
+	 @SequenceGenerator(name = "projectResourceSequence", sequenceName = "projectResource_id_seq", allocationSize = 1, initialValue = 15)
+	 @GeneratedValue(generator = "projectResourceSequence")
+	 @Column(name="pro_re_id", updatable = false, nullable = false)
+	 private Integer id;
+	 
+	 @ManyToOne(fetch = FetchType.EAGER)
+	 @JoinColumn(name = "project_id")
+	 private Project projectId;
+	 
+	 @ManyToOne(fetch = FetchType.EAGER)
+	 @JoinColumn(name = "resource_id")
+	 private Resource resourceId;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Project getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Project projectId) {
+		this.projectId = projectId;
+	}
+
+	public Resource getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(Resource resourceId) {
+		this.resourceId = resourceId;
+	}
+	 
+	 
+	
+}

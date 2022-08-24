@@ -1,0 +1,17 @@
+
+
+INSERT INTO employee(emp_no, first_name,last_name,gender) VALUES (1, 'Tony','Stark','M');
+INSERT INTO employee(emp_no, first_name,last_name,gender) VALUES (2, 'Bruce' , 'Wayne' , 'M' );
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (3, 'Bruce' , 'Banner' , 'M' );
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (4, 'Barry' , 'Allen' , 'M' );
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (5, 'Diana' , 'Prince' , 'F' );
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (6, 'Clark' , 'Kent' , 'M' );
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (7, 'Carol' , 'Danvers' , 'F');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (8, 'Steve' , 'Rogers' , 'M');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (9, 'Natasha' , 'Romanova' , 'F');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (10, 'Stephen' , 'Strange' , 'M');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (11, 'Peter' , 'Parker' , 'M');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (12, 'Peter' , 'Quill' , 'M');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (13, 'Arthur' , 'Curry' , 'M');
+--INSERT INTO employee(id, first_name,last_name,gender) VALUES (14, 'Victor' , 'Stone' , 'M');
+
