@@ -1,1 +1,13 @@
-<p>resource-list works!</p>
+<div *ngIf="positionList">
+    <div *ngFor="let position of positionList">
+      {{ position.positionName}} {{"  "}} {{position.count}}
+    </div>
+  </div>
+-----------------------
+<div *ngIf="resources">
+    <div *ngFor="let resource of resources">
+      {{ resource.firstName}} {{"  "}} {{resource.lastName}}
+    </div>
+  </div>
+
+<!-- <button label="Submit" (click)="getAllResource()">submit</button> -->

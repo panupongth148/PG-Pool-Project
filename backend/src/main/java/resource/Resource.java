@@ -31,7 +31,7 @@ public class Resource {
 		@BsonProperty(value = "hire_date")
 	    private Date hireDate;
 	    
-		@BsonProperty(value = "expire_name")
+		@BsonProperty(value = "expire_date")
 	    private Date expireDate;
 	    
 		@BsonProperty(value = "position")

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ResourceHttpRequestService } from '../service/resource/resource-http-request.service';
+import PositionModel from '../shared/interface/PostionDetail';
+import ResourceModel from '../shared/interface/ResourceModel';
 
 
 @Component({
@@ -7,13 +10,65 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resource-list.component.scss']
 })
 export class ResourceListComponent implements OnInit {
+  resources: Array<ResourceModel>;
+  positions: Array<PositionModel>;
+  positionList = [{
+    positionName: '',
+    count: 0
+  }]
+  constructor(private resourceHttpRequestService: ResourceHttpRequestService) {
+    this.resources = [{
+      id: "",
+      firstName: "",
+      lastName: "",
+      empEmail: "",
+      expireDate: new Date(),
+      hireDate: new Date(),
+      position: "",
+      tel: "",
+      projects: [{
+        projectId: "",
+        duration: 2.5,
+        assigned: 3.5,
+        startDate: new Date(),
+        endDate: new Date()
 
-  constructor() {
-    
+      }]
 
-   }
+    }];
+    this.positions = [{
+      positionName: "",
+      count: 2
+    }]
+      this.getAllResource();
+  }
 
   ngOnInit(): void {
+
   }
+  async getAllResource() {
+    await this.resourceHttpRequestService.getAllResource().subscribe(res => {
+      console.log(res)
+      this.resources = res;
+    })
+    let countIndex = 0
+    this.resources.forEach((val, index) => {
+      console.log(val.position)
+      if(this.positionList[countIndex].positionName == val.position){
+        let objIndex = this.positionList.findIndex((obj => obj.positionName == val.position));
+        this.positionList[objIndex].count = this.positionList[objIndex].count+1
+        
+
+      }else{
+        this.positionList.push({
+          positionName: val.position,
+          count: 1
+        })
+        countIndex++;
+      }
+    })
+  }
+
+  
 
 }

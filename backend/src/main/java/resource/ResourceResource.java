@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 
 import project.Project;
 
-@Path("/resource")
+@Path("/api/resource")
 @Consumes("application/json")
 @Produces("application/json")
 public class ResourceResource {
