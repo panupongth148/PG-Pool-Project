@@ -50,7 +50,13 @@ export class ResourceListComponent implements OnInit {
     await this.resourceHttpRequestService.getAllResource().subscribe(res => {
       console.log(res)
       this.resources = res;
+      this.getPosition();
     })
+    // await this.getPosition();
+  }
+
+  getPosition() {
+   
     let countIndex = 0
     this.resources.forEach((val, index) => {
       console.log(val.position)
@@ -67,8 +73,8 @@ export class ResourceListComponent implements OnInit {
         countIndex++;
       }
     })
+    console.log(this.positionList)
+    this.positionList.splice(0,1)
   }
-
-  
 
 }
