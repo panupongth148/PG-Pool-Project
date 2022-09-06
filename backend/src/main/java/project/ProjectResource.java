@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
 
-@Path("/project")
+@Path("/api/project")
 @Consumes("application/json")
 @Produces("application/json")
 public class ProjectResource {
