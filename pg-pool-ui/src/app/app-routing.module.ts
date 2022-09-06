@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { ResourceListComponent } from './resource-list/resource-list.component'
 import { HomepageComponent } from './homepage/homepage.component';
 import { NewResourceComponent } from './new-resource/new-resource.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { NewProjectComponent } from './new-project/new-project.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -20,6 +22,8 @@ const routes: Routes = [
     ],
   },
   {path: 'newresource', component: NewResourceComponent},
+  {path: 'project', component: ProjectListComponent},
+  {path: 'project/new', component: NewProjectComponent}
 
 ];
 

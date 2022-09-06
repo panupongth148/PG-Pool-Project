@@ -1,11 +1,13 @@
 package project;
 
 import java.util.Date;
+import java.util.List;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 import io.quarkus.mongodb.panache.common.MongoEntity;
+import sub.document.RequestResource;
 
 @MongoEntity(collection = "project")
 public class Project {
@@ -17,6 +19,13 @@ public class Project {
 	 
 	@BsonProperty(value = "project_code")
 	 private String projectCode;
+	
+
+	 @BsonProperty(value = "requests")
+	 private List<RequestResource> requests;
+
+	 @BsonProperty(value = "member_amount")
+	 private String memberAmount;
 	 
 	@BsonProperty(value = "progress")
 	 private float progress;
@@ -73,6 +82,22 @@ public class Project {
 
 	public void setContractEnd(Date contractEnd) {
 		this.contractEnd = contractEnd;
+	}
+
+	public List<RequestResource> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<RequestResource> requests) {
+		this.requests = requests;
+	}
+
+	public String getMemberAmount() {
+		return memberAmount;
+	}
+
+	public void setMemberAmount(String memberAmount) {
+		this.memberAmount = memberAmount;
 	}
 	
 	

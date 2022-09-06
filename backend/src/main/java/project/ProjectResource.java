@@ -36,6 +36,7 @@ public class ProjectResource {
 
     @POST
     public Response create(Project project) {
+        System.out.println(project);
         projectRepository.persist(project);
         return Response.status(201).build();
     }

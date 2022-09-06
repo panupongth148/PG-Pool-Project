@@ -13,6 +13,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NewResourceComponent } from './new-resource/new-resource.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectBoxComponent } from './project-list/project-box/project-box.component';
+import { NewProjectComponent } from './new-project/new-project.component';
+import { FileUploadModule } from "primeng/fileupload";
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +24,10 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     ResourceListComponent,
     NavbarComponent,
     HomepageComponent,
-    NewResourceComponent
+    NewResourceComponent,
+    ProjectListComponent,
+    ProjectBoxComponent,
+    NewProjectComponent
 
   ],
   imports: [
@@ -31,7 +38,8 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    FileUploadModule,
     
   ],
   providers: [],
