@@ -1,0 +1,12 @@
+<div class="m-5">
+    <div>
+        <h2 class="my-center-text"> Project</h2>
+    </div>
+    <div *ngFor="let project of projects" class="p-2 mb-4 box" (click)="toDetailProject(project.id)">
+        {{ project.projectName}} {{" "}} {{project.projectCode}}
+    </div>
+    <button pButton routerLink="/project/new">New Project</button>
+</div>
+
+
+<!-- <app-project-box></app-project-box> -->

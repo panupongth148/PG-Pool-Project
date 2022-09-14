@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 
 import project.Project;
 
-@Path("/resource")
+@Path("/api/resource")
 @Consumes("application/json")
 @Produces("application/json")
 public class ResourceResource {
@@ -35,6 +35,12 @@ public class ResourceResource {
     public Resource get(String id) {
         System.out.println("get =>" + id);
         return resourceRepository.findById(new ObjectId(id));
+    }
+
+    @GET
+    @Path("/findbypc/{code}")
+    public List<Resource> findByProductCode(String code){
+        return resourceRepository.findByProjectCode(code);
     }
 
     @POST

@@ -2,79 +2,41 @@ package sub.document;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 public class SubProject implements Serializable{
 	
-	@BsonProperty(value = "project_id")
-	private ObjectId projectId;
+	@BsonProperty(value = "project_code")
+	private String projectCode;
 	
-	private float duration;
+	@BsonProperty(value = "working_detail")
+	private List<WorkingDetail> workingDetail = new ArrayList<>();
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	public List<WorkingDetail> getWorkingDetail() {
+		return workingDetail;
+	}
+
+	public void setWorkingDetail(List<WorkingDetail> workingDetail) {
+		this.workingDetail = workingDetail;
+	}
+
+
 	
-	private float assigned;
-
-	private String startDate;
-	
-	
-	
-	private String endDate;
-
 
 	
-
-
-	public String getStartDate() {
-		return startDate;
-	}
-
-
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-
-
-	public ObjectId getProjectId() {
-		return projectId;
-	}
-
-
-	public void setProjectId(ObjectId projectId) {
-		this.projectId = projectId;
-	}
-
-
-	public float getDuration() {
-		return duration;
-	}
-
-
-	public void setDuration(float duration) {
-		this.duration = duration;
-	}
-
-
-	public float getAssigned() {
-		return assigned;
-	}
-
-
-	public void setAssigned(float assigned) {
-		this.assigned = assigned;
-	}
-
-
+	
 	
 
 

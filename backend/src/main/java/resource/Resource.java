@@ -9,119 +9,142 @@ import org.bson.types.ObjectId;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 import sub.document.SubProject;
 
-
 @MongoEntity(collection = "resource")
 public class Resource {
-	 	
-		private ObjectId id;
-		
-		@BsonProperty(value = "first_name")
-	    private String firstName;
-	    
-		@BsonProperty(value = "last_name")
-	    private String lastName;
-	    
-		@BsonProperty(value = "tel")
-	    private String tel;
-	    
-		@BsonProperty(value = "emp_email")
-	    private String empEmail;
-	    
-	    
-		@BsonProperty(value = "hire_date")
-	    private Date hireDate;
-	    
-		@BsonProperty(value = "expire_name")
-	    private Date expireDate;
-	    
-		@BsonProperty(value = "position")
-	    private String position;
-		
-		@BsonProperty(value = "projects")
-		private List<SubProject> projects;
-		
-		public ObjectId getId() {
-			return id;
-		}
 
-		public void setId(ObjectId id) {
-			this.id = id;
-		}
+	private ObjectId id;
 
-		public String getFirstName() {
-			return firstName;
-		}
+	@BsonProperty(value = "emp_no")
+	private String empNo;
 
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
+	@BsonProperty(value = "prefix")
+	private String prefix;
 
-		public String getLastName() {
-			return lastName;
-		}
+	@BsonProperty(value = "first_name")
+	private String firstName;
 
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
+	@BsonProperty(value = "last_name")
+	private String lastName;
 
-		public String getTel() {
-			return tel;
-		}
+	@BsonProperty(value = "tel")
+	private String tel;
 
-		public void setTel(String tel) {
-			this.tel = tel;
-		}
+	@BsonProperty(value = "emp_email")
+	private String empEmail;
 
-		public String getEmpEmail() {
-			return empEmail;
-		}
+	@BsonProperty(value = "hire_date")
+	private Date hireDate;
 
-		public void setEmpEmail(String empEmail) {
-			this.empEmail = empEmail;
-		}
+	@BsonProperty(value = "expire_date")
+	private Date expireDate;
 
-		public Date getHireDate() {
-			return hireDate;
-		}
+	@BsonProperty(value = "position")
+	private String position;
 
-		public void setHireDate(Date hireDate) {
-			this.hireDate = hireDate;
-		}
+	@BsonProperty(value = "projects")
+	private List<SubProject> projects;
 
-		public Date getExpireDate() {
-			return expireDate;
-		}
 
-		public void setExpireDate(Date expireDate) {
-			this.expireDate = expireDate;
-		}
+	@BsonProperty(value = "history")
+	private List<ObjectId> history;
 
-		public String getPosition() {
-			return position;
-		}
+	public ObjectId getId() {
+		return id;
+	}
 
-		public void setPosition(String position) {
-			this.position = position;
-		}
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
 
-		public List<SubProject> getProjects() {
-			return projects;
-		}
+	public String getFirstName() {
+		return firstName;
+	}
 
-		public void setProjects(List<SubProject> projects) {
-			this.projects = projects;
-		}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-		public List<ObjectId> getHistory() {
-			return history;
-		}
+	public String getLastName() {
+		return lastName;
+	}
 
-		public void setHistory(List<ObjectId> history) {
-			this.history = history;
-		}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-		@BsonProperty(value = "history")
-		private List<ObjectId> history;
-	    
-	    
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getEmpEmail() {
+		return empEmail;
+	}
+
+	public void setEmpEmail(String empEmail) {
+		this.empEmail = empEmail;
+	}
+
+	public Date getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	public Date getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(Date expireDate) {
+		this.expireDate = expireDate;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public List<SubProject> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<SubProject> projects) {
+		this.projects = projects;
+	}
+
+	public List<ObjectId> getHistory() {
+		return history;
+	}
+
+	public void setHistory(List<ObjectId> history) {
+		this.history = history;
+	}
+
+	
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+
+	public String getEmpNo() {
+		return empNo;
+	}
+
+	public void setEmpNo(String empNo) {
+		this.empNo = empNo;
+	}
+
 }

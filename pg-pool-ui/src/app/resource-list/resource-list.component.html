@@ -1,0 +1,32 @@
+
+<div style="text-align: center; margin-bottom: 30px"> <h1>Resource</h1></div>
+
+<div class="grid mx-5 my-3">
+    <div class="col-6" >
+        <div class="mb-3"> <h2>Position</h2></div>
+        <div *ngIf="positionList">
+            <div *ngFor="let position of positionList; let i =index" class="grid p-2 box-container mb-4" >
+                <div class="col">{{ position.positionName}}</div>
+
+                <div class="col">
+                    {{position.count}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="grid">
+            <div class="col-3"><h2>Resource</h2></div>
+            <div class="col-4"> 
+                <button pButton routerLink="/newresource">New</button></div>
+        </div>
+        
+        <div *ngIf="resources">
+            <div *ngFor="let resource of resources" class="p-2 box-container mb-4">
+               {{resource.prefix}} {{ resource.firstName}} {{" "}} {{resource.lastName}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <button label="Submit" (click)="getAllResource()">submit</button> -->
