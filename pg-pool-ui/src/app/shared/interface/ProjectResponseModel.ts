@@ -2,9 +2,9 @@ export default interface ProjectResponseModel{
     id: string,
     projectName: string,
     projectCode: string,
-    progress: Number,
+    progress: number,
     requests:[{
-        amount : Number,
+        amount : number,
         positionRequest: string
     }]
     memberAmount:number,

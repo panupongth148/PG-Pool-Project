@@ -24,4 +24,9 @@ export class ResourceHttpRequestService {
   getResourceByProductCode(id: string){
     return this.http.get<any>("api/resource/findbypc/" + id);
   }
+
+  getResourceById(id: string){
+    
+    return this.http.get<any>("api/resource/"+ id);
+  }
 }

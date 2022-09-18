@@ -1,1 +1,40 @@
-<p>resource-detail works!</p>
+<div class="m-5">
+    <div class="grid">
+        <div class="col text-center">
+            <h1>Resource Detail</h1>
+        </div>
+        
+    </div>
+    <div class="grid">
+        <div class="col">
+            <h2>Resource Detail</h2>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <b>Emp No: </b> <p>{{ resource.empNo }}</p>
+            <b>Name : </b> <p> {{" "+ resource.prefix + " "}} {{resource.firstName + ' '}} {{resource.lastName}}</p>
+            <b>Position : </b> <p>{{ resource.position}}</p>
+            
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="col inline">
+            <h2> Project</h2>
+            <div *ngIf="resource.projects == null;else elseTemplate">
+                <h4>
+                    no assigned
+                </h4>
+            </div>
+            <ng-template #elseTemplate>
+                <div *ngFor="let project of resource.projects" class="box-member">
+                    <p>
+                        {{project.projectCode}}
+                    </p>
+                </div>
+            </ng-template>
+        </div>
+   
+    </div>
+</div>

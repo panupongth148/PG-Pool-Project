@@ -42,7 +42,6 @@ export class ProjectDetailComponent implements OnInit {
     projects: [{
         projectCode: "",
         workingDetail: [{
-            projectId: "",
             duration: 0.0,
             assigned: 0.0,
             working: 0.0,

@@ -13,7 +13,6 @@ export default interface ResourceModel {
     projects: [{
         projectCode: string,
         workingDetail: [{
-            projectId: string;
             duration: number;
             assigned: number;
             working: number;

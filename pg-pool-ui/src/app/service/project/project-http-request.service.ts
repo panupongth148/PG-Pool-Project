@@ -20,4 +20,7 @@ export class ProjectHttpRequestService {
   getProject(id:any){
     return this.http.get<any>('/api/project/' + id);
   }
+  getProjectByProductCode(id : any){
+    return this.http.get<any>('/api/project/findbypc/'+ id);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ResourceHttpRequestService } from '../service/resource/resource-http-request.service';
 import PositionModel from '../shared/interface/PostionDetail';
 import ResourceModel from '../shared/interface/ResourceModel';
@@ -16,7 +17,7 @@ export class ResourceListComponent implements OnInit {
     positionName: '',
     count: 0
   }]
-  constructor(private resourceHttpRequestService: ResourceHttpRequestService) {
+  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private router:Router) {
     this.resources = [{
       id: "",
       empNo: "",
@@ -31,7 +32,6 @@ export class ResourceListComponent implements OnInit {
       projects: [{
         projectCode: "",
         workingDetail: [{
-          projectId: "",
           duration: 0.0,
           working: 0.0,
           assigned: 0.0,
@@ -83,5 +83,10 @@ export class ResourceListComponent implements OnInit {
     console.log(this.positionList)
     this.positionList.splice(0, 1)
   }
-
+  async toDetailResource(id:any){
+    await this.router.navigate(['/resource/' + id], { replaceUrl: true })
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }

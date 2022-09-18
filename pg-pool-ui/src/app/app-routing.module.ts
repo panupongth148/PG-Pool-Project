@@ -29,7 +29,8 @@ const routes: Routes = [
     path: 'project/:id',
     component: ProjectDetailComponent
   },
-  { path: 'project/new', component: NewProjectComponent }
+  { path: 'project/new', component: NewProjectComponent },
+  { path: 'resource/:id', component: ResourceDetailComponent}
 
 ];
 
