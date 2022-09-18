@@ -52,6 +52,13 @@ public class ProjectResource {
         return projectRepository.findById(new ObjectId(id));
     }
 
+    @GET
+    @Path("/findbypc/{id}")
+    public List<Project> getProjectByPC(String id) {
+        System.out.println("get =>" + id);
+        return projectRepository.findByProductCode(id);
+    }
+
 
     @POST
     public Response create(Project project) {
