@@ -19,6 +19,9 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { FileUploadModule } from "primeng/fileupload";
 import { ResourceDetailComponent } from './resource-detail/resource-detail.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { DashboardProjectsComponent } from './dashboard-projects/dashboard-projects.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     NewProjectComponent,
     ResourceDetailComponent,
     ProjectDetailComponent,
+    DashboardProjectsComponent,
    
 
   ],
@@ -46,6 +50,8 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     ReactiveFormsModule,
     ButtonModule,
     FileUploadModule,
+    NgChartsModule
+    
     
   ],
   providers: [],

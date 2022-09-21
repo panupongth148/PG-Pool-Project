@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NewResourceComponent implements OnInit {
   resourceForm = new FormGroup({
+    empNo: new FormControl(),
     prefix: new FormControl(),
     firstName: new FormControl(),
     lastName: new FormControl(),

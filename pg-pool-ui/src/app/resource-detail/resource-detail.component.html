@@ -3,7 +3,7 @@
         <div class="col text-center">
             <h1>Resource Detail</h1>
         </div>
-        
+
     </div>
     <div class="grid">
         <div class="col">
@@ -11,11 +11,14 @@
         </div>
     </div>
     <div class="grid">
-        <div class="col">
-            <b>Emp No: </b> <p>{{ resource.empNo }}</p>
-            <b>Name : </b> <p> {{" "+ resource.prefix + " "}} {{resource.firstName + ' '}} {{resource.lastName}}</p>
-            <b>Position : </b> <p>{{ resource.position}}</p>
-            
+        <div class="col working-detail">
+            <b>Emp No: </b>
+            <p>{{ resource.empNo }}</p>
+            <b>Name : </b>
+            <p> {{" "+ resource.prefix + " "}} {{resource.firstName + ' '}} {{resource.lastName}}</p>
+            <b>Position : </b>
+            <p>{{ resource.position}}</p>
+
         </div>
     </div>
 
@@ -28,13 +31,43 @@
                 </h4>
             </div>
             <ng-template #elseTemplate>
-                <div *ngFor="let project of resource.projects" class="box-member">
-                    <p>
-                        {{project.projectCode}}
-                    </p>
+                <div *ngFor="let project of projects;index as i" >
+                    <div class="grid box-member" >
+                        <div class="col-6">
+
+                            <p>
+                                {{i+1}}{{". "}} {{project.projectCode}} {{project.projectName}}
+                            </p>
+                        </div>
+                        <div class="col-6">
+
+                            <p>
+                                Contract Start : {{project.contractStart | date}} Contract End : {{project.contractEnd |
+                                date}}
+                            </p>
+                        </div>
+                    </div>
+                    <div *ngFor="let projectRe of resource.projects" class="working-detail">
+                        <div *ngIf="projectRe.projectCode == project.projectCode">
+                            <div *ngFor="let working of projectRe.workingDetail">
+                                <div class="grid" style="margin: 10px;" >
+                                    <div class="col">
+                                        <p>Start Date : {{working.startDate|date}}  endDate : {{working.endDate |date}}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p> Assigned : {{working.assigned}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+
+
                 </div>
             </ng-template>
         </div>
-   
+
     </div>
 </div>

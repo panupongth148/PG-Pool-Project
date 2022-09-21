@@ -4,6 +4,7 @@ import { ProjectHttpRequestService } from '../service/project/project-http-reque
 import ProjectResponseModel from 'src/app/shared/interface/ProjectResponseModel';
 import { ResourceHttpRequestService } from '../service/resource/resource-http-request.service';
 import ResourceModel from '../shared/interface/ResourceModel';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
@@ -13,7 +14,7 @@ export class ProjectDetailComponent implements OnInit {
   id: any;
   project: ProjectResponseModel;
   resources: Array<ResourceModel>;
-  constructor(private route: ActivatedRoute, private projectHttpRequestService: ProjectHttpRequestService, private resourceHttpRequest: ResourceHttpRequestService) {
+  constructor(private route: ActivatedRoute, private projectHttpRequestService: ProjectHttpRequestService, private resourceHttpRequest: ResourceHttpRequestService, private router:Router) {
     this.project = {
       id: "",
       projectName: "",
@@ -84,5 +85,10 @@ export class ProjectDetailComponent implements OnInit {
     }
   }
 
-
+  async toDetailResource(id:any){
+    await this.router.navigate(['/resource/' + id], { replaceUrl: true })
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }

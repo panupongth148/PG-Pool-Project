@@ -1,4 +1,5 @@
 export default interface AddResourceModel{
+    empNo: string,
     prefix: string,
     firstName : string,
     lastName: string,

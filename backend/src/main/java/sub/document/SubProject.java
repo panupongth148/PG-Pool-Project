@@ -13,7 +13,6 @@ public class SubProject implements Serializable{
 	@BsonProperty(value = "project_code")
 	private String projectCode;
 	
-	@BsonProperty(value = "working_detail")
 	private List<WorkingDetail> workingDetail = new ArrayList<>();
 
 	public String getProjectCode() {

@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
       {
         label:'Dashboard',
         icon:'pi pi-fw pi-power-off',
+        routerLink: "dashboard"
     },
       {
           label:'Resource',

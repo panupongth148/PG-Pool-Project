@@ -23,6 +23,7 @@ import org.jboss.resteasy.reactive.server.core.multipart.FormData;
 
 import lib.excel.ReadExcel;
 import pojo.ExcelObject;
+import resource.Resource;
 import resource.ResourceRepository;
 
 import java.awt.image.BufferedImage;
@@ -54,11 +55,22 @@ public class ProjectResource {
 
     @GET
     @Path("/findbypc/{id}")
-    public List<Project> getProjectByPC(String id) {
+    public Project getProjectByPC(String id) {
         System.out.println("get =>" + id);
         return projectRepository.findByProductCode(id);
     }
 
+    @GET
+    @Path("/findprojectrequest/")
+    public List<Resource> findProjectWantResource(){
+        return projectRepository.findProjectRequest();
+    }
+
+    @POST
+    @Path("/findmanybypc")
+    public List<Project> getProjectsByPC(List<String> listId){
+        return projectRepository.findProjectsbyPC(listId);
+    }
 
     @POST
     public Response create(Project project) {

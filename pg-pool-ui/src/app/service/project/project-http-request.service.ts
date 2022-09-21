@@ -23,4 +23,9 @@ export class ProjectHttpRequestService {
   getProjectByProductCode(id : any){
     return this.http.get<any>('/api/project/findbypc/'+ id);
   }
+
+  getProjectsByProductCode(idList : any[]){
+    console.log("many");
+    return this.http.post<Array<any>>('/api/project/findmanybypc', idList);
+  }
 }

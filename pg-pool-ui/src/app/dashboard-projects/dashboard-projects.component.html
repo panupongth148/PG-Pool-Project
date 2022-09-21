@@ -1,0 +1,25 @@
+<!-- <canvas id="canvas" width="400" height="400"></canvas> -->
+<div class="m-5">
+    <div class="grid">
+        <div class="col">
+            <h4>Resource Remaning</h4>
+        </div>
+    </div>
+    <div>
+        <div *ngFor="let request of diffDate;index as i">
+            <div *ngIf="request.month < 12" class="grid box-member">
+                <div class="col">
+                    {{request.projectCode}} {{request.projectInfo.projectName}} {{request.name}} End in : {{request.month}} Month End Date : {{request.endDate |date}}
+                </div>
+                
+                <!-- <div *ngFor="let project of projectsRequest" class="grid box-member">
+                    <div class="col" *ngIf="request.projectCode == project.projectCode">
+                        {{request.projectCode}} {{project.projectName}} {{request.name}} End in : {{request.month}} Month End Date : {{request.endDate |date}}
+                    </div>
+                    
+                </div> -->
+                
+            </div>
+        </div>
+    </div>
+</div>

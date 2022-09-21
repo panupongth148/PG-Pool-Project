@@ -67,6 +67,7 @@ export class ResourceDetailComponent implements OnInit {
       this.resourceHttpRequestService.getResourceById(this.id).subscribe(res => {
         this.resource = res;
         console.log(res);
+        this.getProjectsByProductCode();
       })
 
     } catch (error) {
@@ -75,7 +76,20 @@ export class ResourceDetailComponent implements OnInit {
   }
 
   getProjectsByProductCode(){
-    
+    const projectCodeList = [{}];
+    this.resource.projects.forEach((val) =>{
+      projectCodeList.push(val.projectCode);
+    })
+    projectCodeList.splice(0, 1);
+    console.log(projectCodeList)
+    try{
+      this.projectHttpRequestService.getProjectsByProductCode(projectCodeList).subscribe((res) =>{
+        console.log(res)
+        this.projects = res;
+      })
+    }catch(err){
+      console.log(err)
+    }
   }
 
 }

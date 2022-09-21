@@ -3,6 +3,17 @@
 <form [formGroup]="resourceForm">
   <div class="grid ">
     <div class="col-2">
+      Emp No
+     <div class="col-4">
+   </div>
+      <input type="text" pInputText formControlName="empNo" />
+      <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+        <em class="pi pi-times-circle"></em> Field is required.
+      </small> -->
+    </div>
+  </div>
+  <div class="grid ">
+    <div class="col-2">
       Prefix
      <div class="col-4">
    </div>

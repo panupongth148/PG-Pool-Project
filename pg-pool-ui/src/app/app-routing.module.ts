@@ -8,6 +8,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { ResourceDetailComponent } from './resource-detail/resource-detail.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { DashboardProjectsComponent } from './dashboard-projects/dashboard-projects.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,7 +31,8 @@ const routes: Routes = [
     component: ProjectDetailComponent
   },
   { path: 'project/new', component: NewProjectComponent },
-  { path: 'resource/:id', component: ResourceDetailComponent}
+  { path: 'resource/:id', component: ResourceDetailComponent},
+  { path: 'dashboard', component: DashboardProjectsComponent}
 
 ];
 

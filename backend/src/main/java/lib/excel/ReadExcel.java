@@ -74,8 +74,8 @@ public class ReadExcel {
                 while (cellIterator.hasNext()) {
 
                     Cell cell = cellIterator.next();
-                    // System.out.println("row : " + cell.getRowIndex() + ", col : " +
-                    // cell.getColumnIndex());
+                    System.out.println("row : " + cell.getRowIndex() + ", col : " +
+                    cell.getColumnIndex());
                     // Check the cell type and format accordingly
                     switch (cell.getCellType()) {
                         case NUMERIC:
@@ -89,9 +89,10 @@ public class ReadExcel {
                                     this.workingDetail.setWorking(cell.getNumericCellValue());
                                 } else if (cell.getColumnIndex() == 8) {
                                     this.workingDetail.setAssigned(cell.getNumericCellValue());
+                                    System.out.println(this.workingDetail.getAssigned());;
                                     this.subProject.setProjectCode(this.getProjectCodeTemp());
 
-                                    this.subProject.getWorkingDetail().add(this.getWorkingDetail());
+                                    this.subProject.getWorkingDetail().add(this.workingDetail);
                                     this.isProgrammer = false;
                                     this.workingDetail = new WorkingDetail();
 
@@ -165,9 +166,11 @@ public class ReadExcel {
                                 // System.out.println(this.workingDetail.getDuration());
                                 if (cell.getColumnIndex() == 4) {
                                     // this.subProject.getEndDate().add(cell.getStringCellValue());
-                                    this.workingDetail.setStartDate(cell.getStringCellValue());
+                                    Date day = new Date(cell.getStringCellValue());
+                                    this.workingDetail.setStartDate(day);
                                 } else if (cell.getColumnIndex() == 5) {
-                                    this.workingDetail.setEndDate(cell.getStringCellValue());
+                                    Date day = new Date(cell.getStringCellValue());
+                                    this.workingDetail.setEndDate(day);
                                 }
 
                             }
@@ -229,12 +232,14 @@ public class ReadExcel {
                                     // Date date = new
                                     // SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     // this.subProject.getWorkingDetail().add(cell.getStringCellValue());
-                                    this.workingDetail.setStartDate(cell.getStringCellValue());
+                                    Date day = new Date(cell.getStringCellValue());
+                                    this.workingDetail.setStartDate(day);
                                 } 
                                 //endDate
                                 else if (cell.getColumnIndex() == 5) {
                                     // this.subProject.setEndDate(cell.getStringCellValue());
-                                    this.workingDetail.setEndDate(cell.getStringCellValue());
+                                    Date day = new Date(cell.getStringCellValue());
+                                    this.workingDetail.setEndDate(day);
                                 }
 
                             }
