@@ -5,6 +5,7 @@ export default interface DiifDateModel{
     empNo: string,
     month:number,
     name: string,
+    startDate: Date,
     endDate: Date,
     projectInfo: ProjectResponseModel
 

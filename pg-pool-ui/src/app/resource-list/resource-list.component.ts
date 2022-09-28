@@ -13,6 +13,7 @@ import ResourceModel from '../shared/interface/ResourceModel';
 export class ResourceListComponent implements OnInit {
   resources: Array<ResourceModel>;
   positions: Array<PositionModel>;
+  searchText = ""
   positionList = [{
     positionName: '',
     count: 0
@@ -88,5 +89,9 @@ export class ResourceListComponent implements OnInit {
       .then(() => {
         window.location.reload();
       });
+  }
+
+  onSearchChange(): void{
+    console.log(this.searchText)
   }
 }

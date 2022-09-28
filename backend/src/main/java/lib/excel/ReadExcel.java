@@ -54,10 +54,10 @@ public class ReadExcel {
 
     public ExcelObject read() {
         try {
-            // FileInputStream file = new FileInputStream(
-            //         new File("C:\\Users\\admin\\Downloads\\PD220002 (DLT) Team  Working  Period.xlsx"));
             FileInputStream file = new FileInputStream(
-                    new File("C:\\Users\\admin\\Downloads\\PD200071 (CDGS) Team  Working  Period.xlsx"));
+                    new File("C:\\Users\\admin\\Downloads\\PD220002 (DLT) Team  Working  Period.xlsx"));
+            // FileInputStream file = new FileInputStream(
+            //         new File("C:\\Users\\admin\\Downloads\\PD200071 (CDGS) Team  Working  Period.xlsx"));
             // Create Workbook instance holding reference to .xlsx file
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
@@ -166,10 +166,10 @@ public class ReadExcel {
                                 // System.out.println(this.workingDetail.getDuration());
                                 if (cell.getColumnIndex() == 4) {
                                     // this.subProject.getEndDate().add(cell.getStringCellValue());
-                                    Date day = new Date(cell.getStringCellValue());
+                                    Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     this.workingDetail.setStartDate(day);
                                 } else if (cell.getColumnIndex() == 5) {
-                                    Date day = new Date(cell.getStringCellValue());
+                                    Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     this.workingDetail.setEndDate(day);
                                 }
 
@@ -193,7 +193,7 @@ public class ReadExcel {
                                     && cell.getColumnIndex() == 2) {
                                 projectdetailBoolean.setContractStart(false);
                                 String cellValue = cell.getStringCellValue();
-                                Date day = new Date(cell.getStringCellValue());
+                                Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                 // day.setDate(cellValue.charAt(0)+ cellValue.charAt(1));
                                 // day.setMonth(cellValue.charAt(3)+ cellValue.charAt(4));
                                 // day.setYear(cellValue.charAt(6)+ cellValue.charAt(7) + + cellValue.charAt(8)+
@@ -206,7 +206,7 @@ public class ReadExcel {
                                     && cell.getColumnIndex() == 6) {
                                 projectdetailBoolean.setContractEnd(false);
                                 String cellValue = cell.getStringCellValue();
-                                Date day = new Date(cell.getStringCellValue());
+                                Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                 project.setContractEnd(day);
                             //set empNo, prefix, firstName, lastName, startDate, endDate
                             } else if (isProgrammer) {
@@ -232,14 +232,16 @@ public class ReadExcel {
                                     // Date date = new
                                     // SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     // this.subProject.getWorkingDetail().add(cell.getStringCellValue());
-                                    Date day = new Date(cell.getStringCellValue());
+                                    Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     this.workingDetail.setStartDate(day);
                                 } 
                                 //endDate
                                 else if (cell.getColumnIndex() == 5) {
-                                    // this.subProject.setEndDate(cell.getStringCellValue());
-                                    Date day = new Date(cell.getStringCellValue());
-                                    this.workingDetail.setEndDate(day);
+                                    
+                                    Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    System.out.println(date1);
+                                    this.workingDetail.setEndDate(date1);
                                 }
 
                             }

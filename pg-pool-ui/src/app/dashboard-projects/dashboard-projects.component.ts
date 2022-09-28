@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ProjectHttpRequestService } from '../service/project/project-http-request.service';
 import { ResourceHttpRequestService } from '../service/resource/resource-http-request.service';
+import MountResource from '../shared/interface/MonthResource';
 import DiifDateModel from '../shared/interface/DiffDateModel';
+import MonthModel from '../shared/interface/MonthModel';
 import ProjectResponseModel from '../shared/interface/ProjectResponseModel';
 import ResourceModel from '../shared/interface/ResourceModel';
+import mountResourceEnd from '../shared/interface/MonthResourceEnd';
+
+interface testChart {
+    year: string,
+    monthDetail: Array<MountResource>
+}
 
 @Component({
     selector: 'app-dashboard-projects',
@@ -14,37 +22,171 @@ import ResourceModel from '../shared/interface/ResourceModel';
 export class DashboardProjectsComponent implements OnInit {
     resources: Array<ResourceModel>;
     diffDate: Array<DiifDateModel>;
+    resouseAssign: Array<DiifDateModel>
     projects: Array<ProjectResponseModel>
     listCode: Array<String>
     projectsRequest: Array<ProjectResponseModel>
-
+    months: Array<MonthModel>;
+    selectedMonth: MonthModel;
+    chartDetail: MountResource;
+    chartDetailList: MountResource[];
+    years: string = "2565"
+    testChart: testChart
+    typeChartLabel?: any
+    mountsResource: mountResourceEnd[];
+    today: Date = new Date(Date.now());
+    isGetDetailChart: boolean = false
     ngOnInit(): void {
         this.getAllProject();
-        
+
     }
 
 
     constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectService: ProjectHttpRequestService) {
         // Chart.register(...registerables);
+        this.typeChartLabel = ""
+        this.mountsResource = [
+            {
+                label: "January",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "February",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "March",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "April",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "May",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "June",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "July",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "August",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "September",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "October",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "November",
+                count: 0,
+                empty: 0
+            },
+            {
+                label: "December",
+                count: 0,
+                empty: 0
+            }
+        ]
+        this.selectedMonth = {
+            name: "January",
+            code: "Jan"
+        }
+        this.months = [{ name: "January", code: "Jan" }, { name: "February", code: "Feb" }, { name: "March", code: "Mar" }, { name: "April", code: "Apr" }, { name: "May", code: "May" }, { name: "June", code: "Jun" }
+            , { name: "July", code: "Jul" }, { name: "August", code: "Aug" }, { name: "September", code: "Sep" }, { name: "October", code: "Oct" }, { name: "November", code: "Nov" }, { name: "December", code: "Dec" }]
+        this.chartDetail = {
+            month: this.selectedMonth.name,
+            empty: {
+                week1: 0,
+                week2: 0,
+                week3: 0,
+                week4: 0
+            },
+            assigned: {
+                week1: 0,
+                week2: 0,
+                week3: 0,
+                week4: 0
+            }
+
+        }
+        this.chartDetailList = [{
+            month: this.selectedMonth.name,
+            empty: {
+                week1: 0,
+                week2: 0,
+                week3: 0,
+                week4: 0
+            },
+            assigned: {
+                week1: 0,
+                week2: 0,
+                week3: 0,
+                week4: 0
+            }
+
+        }]
         this.listCode = [""]
         this.diffDate = [{
             projectCode: "",
             month: 0,
             empNo: "",
             name: "",
+            startDate: new Date(),
             endDate: new Date(),
             projectInfo: {
                 id: "",
-            projectName: "",
-            requests: [{
-              amount: 0,
-              positionRequest: ""
-            }],
-            memberAmount: 0,
+                projectName: "",
+                requests: [{
+                    amount: 0,
+                    positionRequest: ""
+                }],
+                memberAmount: 0,
+                projectCode: "",
+                progress: 0.0,
+                contractStart: new Date(),
+                contractEnd: new Date()
+            }
+
+        }]
+        this.resouseAssign = [{
             projectCode: "",
-            progress: 0.0,
-            contractStart: new Date(),
-            contractEnd: new Date()
+            month: 0,
+            empNo: "",
+            name: "",
+            startDate: new Date(),
+            endDate: new Date(),
+            projectInfo: {
+                id: "",
+                projectName: "",
+                requests: [{
+                    amount: 0,
+                    positionRequest: ""
+                }],
+                memberAmount: 0,
+                projectCode: "",
+                progress: 0.0,
+                contractStart: new Date(),
+                contractEnd: new Date()
             }
 
         }]
@@ -53,29 +195,29 @@ export class DashboardProjectsComponent implements OnInit {
             id: "",
             projectName: "",
             requests: [{
-              amount: 0,
-              positionRequest: ""
+                amount: 0,
+                positionRequest: ""
             }],
             memberAmount: 0,
             projectCode: "",
             progress: 0.0,
             contractStart: new Date(),
             contractEnd: new Date()
-          }]
+        }]
 
-          this.projectsRequest = [{
+        this.projectsRequest = [{
             id: "",
             projectName: "",
             requests: [{
-              amount: 0,
-              positionRequest: ""
+                amount: 0,
+                positionRequest: ""
             }],
             memberAmount: 0,
             projectCode: "",
             progress: 0.0,
             contractStart: new Date(),
             contractEnd: new Date()
-          }]
+        }]
         this.resources = [{
             id: "",
             empNo: "",
@@ -101,49 +243,34 @@ export class DashboardProjectsComponent implements OnInit {
             }]
 
         }];
+        this.testChart = {
+            year: "2565",
+            monthDetail: [{
+                month: this.selectedMonth.name,
+                empty: {
+                    week1: 0,
+                    week2: 0,
+                    week3: 0,
+                    week4: 0
+                },
+                assigned: {
+                    week1: 0,
+                    week2: 0,
+                    week3: 0,
+                    week4: 0
+                }
+
+            }]
+        }
     }
-
-    // chart = new Chart('canvas', {
-    //     type: 'line',
-    //     data: {
-    //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    //         datasets: [{
-    //             label: '# of Votes',
-    //             data: [12, 19, 3, 5, 2, 3],
-    //             backgroundColor: [
-    //                 'rgba(255, 99, 132, 0.2)',
-    //                 'rgba(54, 162, 235, 0.2)',
-    //                 'rgba(255, 206, 86, 0.2)',
-    //                 'rgba(75, 192, 192, 0.2)',
-    //                 'rgba(153, 102, 255, 0.2)',
-    //                 'rgba(255, 159, 64, 0.2)'
-    //             ],
-    //             borderColor: [
-    //                 'rgba(255, 99, 132, 1)',
-    //                 'rgba(54, 162, 235, 1)',
-    //                 'rgba(255, 206, 86, 1)',
-    //                 'rgba(75, 192, 192, 1)',
-    //                 'rgba(153, 102, 255, 1)',
-    //                 'rgba(255, 159, 64, 1)'
-    //             ],
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         }
-    //     }
-    // });
-
     getAllResource() {
         this.resourceHttpRequestService.getAllResource().subscribe(res => {
             this.diffDate = [];
+            this.resouseAssign = [];
             this.listCode = [];
             // console.log(res)
             this.resources = res;
+
             // console.log(this.projects)
             const dateNow = new Date(Date.now());
             // const [dayNow, monthNow, yearNow] = [dateNow.getDate(), dateNow.getMonth() + 1, dateNow.getFullYear()]
@@ -151,27 +278,32 @@ export class DashboardProjectsComponent implements OnInit {
             let resourceFilter = this.resources.filter((val) => {
                 return val.projects !== null
             });
+            // console.log("resource filterd: ")
+            // console.log(resourceFilter)
             resourceFilter.forEach((val) => {
-                
                 val.projects.forEach((val2) => {
                     const lastWork = val2.workingDetail[val2.workingDetail.length - 1]
-                    if(!this.listCode.includes(val2.projectCode)){
+                    const startWork = val2.workingDetail[0]
+                    if (!this.listCode.includes(val2.projectCode)) {
                         this.listCode.push(val2.projectCode);
                     }
                     // console.log(lastWork.endDate.toString().slice(0, 10))
-                    this.calDiffDay(lastWork.endDate.toString().slice(0, 10), dateNow, val2.projectCode, val.empNo, val.prefix +" "+  val.firstName + " "+ val.lastName)
+                    this.calDiffDay(lastWork.endDate.toString().slice(0, 10), startWork.startDate.toString().slice(0, 10), dateNow, val2.projectCode, val.empNo, val.prefix + " " + val.firstName + " " + val.lastName)
                 })
             })
+            this.setChartDetail();
             // console.log(this.diffDate)
             // this.getProjectsByProductCode();
             // this.getAllProject();
         })
+
     }
 
-    calDiffDay(endDate: any, dateNow: any, projectCode: string, empNo:string, name:string) {
+    calDiffDay(endDate: any, startDate: any, dateNow: any, projectCode: string, empNo: string, name: string) {
         let [yearResource, monthResource, dayResource] = endDate.split("-")
         // console.log(yearResource + " - " + monthResource + " - " + dayResource)
         // let day, month, year;
+        console.log(yearResource)
         const date1 = new Date((yearResource - 543) + "/" + monthResource + "/" + dayResource);
         const date2 = new Date(dateNow);
         // console.log("date1 : " + date1 + " vs " + "date2 : " + date2)
@@ -181,52 +313,119 @@ export class DashboardProjectsComponent implements OnInit {
         // console.log(diffTime + " milliseconds");
         // console.log(diffDays + " days");
         // console.log(diffDays * 0.032855)
+        let project = this.projects.filter(val => {
+            return val.projectCode == projectCode
+        })
+        this.resouseAssign.push({
+            projectCode: projectCode,
+            month: Math.ceil(diffDays * 0.032855),
+            empNo: empNo,
+            name: name,
+            startDate: startDate,
+            endDate: endDate,
+            projectInfo: project[0]
+        })
         if (date1 > date2) {
-            let project = this.projects.filter(val =>{
-                return val.projectCode == projectCode
-            })
+
             this.diffDate.push({
                 projectCode: projectCode,
                 month: Math.ceil(diffDays * 0.032855),
                 empNo: empNo,
                 name: name,
+                startDate: startDate,
                 endDate: endDate,
                 projectInfo: project[0]
             })
         }
-        // if(yearResource-yearNow >= 0){
-        //     monthResource += (yearResource - yearNow) *12
-        //     if(monthResource - monthNow >= 0){
 
-        //     }
-        //     // this.diffDate.push({
-        //     //         projectCode: projectCode,
-        //     //         day: parseInt(day) - dayNow,
-        //     //         month: parseInt(month) - monthNow,
-        //     //         year: parseInt(year) - yearNow
-        //     //     })
-        // }
-        // this.diffDate.push({
-        //     projectCode: projectCode,
-        //     day: parseInt(day) - dayNow,
-        //     month: parseInt(month) - monthNow,
-        //     year: parseInt(year) - yearNow
-        // })
     }
-    // filterResourceEnd(value){
-    //    value.
+    findIndexMonth(ind:any){
+        let index = 0;
+        for(let i = 0;i< this.mountsResource.length;i++){
+            // console.log(this.months[ind-1].name + " " + this.mountsResource[i].label)
+            if(this.mountsResource[i].label.includes(this.months[ind-1].name)){
+                index = i
+                break;
+            }
+        }
+        
+        return index
+    }
+    setChartDetail() {
+      
+        // this.mountsResource = []
+        let emptyOnly;
+        emptyOnly = this.resources.filter((val) => {
+            return val.projects === null
+        })
+        let countEmpty = emptyOnly.length
+        this.mountsResource.forEach((val) => {
+            val.empty = countEmpty
+        })
+        let mountInNewYear = [...this.mountsResource];
+        this.mountsResource.splice(0, this.today.getMonth())
+      
+        mountInNewYear.splice(this.today.getMonth(), this.mountsResource.length)
+   
+        mountInNewYear.forEach(val =>{
+            val.label += "("+ (this.today.getFullYear() + 544 )+ ")"
+            this.mountsResource.push(val)
+        })
+        console.log(this.mountsResource);
+        
+        // console.log(this.mountsResource)
+        this.resouseAssign.forEach((val) => {
+            // console.log(val.endDate)
+            // console.log(val.endDate.toString().includes("2565"))
+            let strEndDate = val.endDate.toString()
+            // console.log(this.today.getFullYear() + 544)
+            // console.log(strEndDate.includes((this.today.getFullYear() + 544).toString()) )
+            if (strEndDate.includes((this.today.getFullYear() + 543).toString()) || (strEndDate.includes((this.today.getFullYear() + 544).toString()) 
+            && parseInt(strEndDate.charAt(5) + strEndDate.charAt(6)) < this.today.getMonth()+1) 
+            ) {
+                let mon = parseInt(strEndDate.charAt(5) + strEndDate.charAt(6))
+                // console.log(val)
+                // console.log(this.months[mon-1].name)
+                let ind = this.findIndexMonth(mon-1);
+                // console.log(ind)
+                for (let i = 0; i <= ind; i++) {
+                    this.mountsResource[i].count += 1
+                }
+                // console.log(this.mountsResource[mon-1])
+                for (let i = ind+1; i < 12; i++) {
+                    // console.log(this.mountsResource[i])
+                    // console.log(i)
+                    this.mountsResource[i].empty += 1
+                }
+                // let day = parseInt(strEndDate.charAt(8) + strEndDate.charAt(9))
+                // console.log(day)
+                // if(day%7 == 0){
+                //     this.chartDetail.assigned.week1
+                // }
+            }
+            // if(val.endDate.getFullYear)
+        })
+        // console.log(this.today.getMonth())
+        // console.log(this.months[this.today.getMonth()])
+        // this.mountsResource.splice(0, this.today.getMonth())
+        this.isGetDetailChart = true;
+        // console.log("finisish ")
+        // console.log("after")
 
-    // }
-    getAllProject(){
-        this.projectService.getAllProject().subscribe(res =>{
+        console.log(this.mountsResource)
+
+    }
+
+    getAllProject() {
+        this.projectService.getAllProject().subscribe(res => {
             // console.log(res)
             this.projects = res
             this.getAllResource();
         })
     }
 
-    getProjectsByProductCode(){
-        this.projectService.getProjectsByProductCode(this.listCode).subscribe(res =>{
+    getProjectsByProductCode() {
+        this.projectService.getProjectsByProductCode(this.listCode).subscribe(res => {
             console.log(res)
             this.projectsRequest = res
         })

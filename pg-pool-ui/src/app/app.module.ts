@@ -21,6 +21,13 @@ import { ResourceDetailComponent } from './resource-detail/resource-detail.compo
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { DashboardProjectsComponent } from './dashboard-projects/dashboard-projects.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ChartResourceComponent } from './chart-resource/chart-resource.component';
+import { CalendarResourceComponent } from './calendar-resource/calendar-resource.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {DropdownModule} from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -37,7 +44,8 @@ import { NgChartsModule } from 'ng2-charts';
     ResourceDetailComponent,
     ProjectDetailComponent,
     DashboardProjectsComponent,
-   
+    ChartResourceComponent,
+    CalendarResourceComponent,
 
   ],
   imports: [
@@ -50,9 +58,11 @@ import { NgChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     ButtonModule,
     FileUploadModule,
-    NgChartsModule
-    
-    
+    NgChartsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    DropdownModule,
+    BrowserAnimationsModule,
+    TabViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

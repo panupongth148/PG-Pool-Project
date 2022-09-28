@@ -16,13 +16,13 @@
         </div>
     </div>
     <div class="col-6">
+        <form class="search-container">
+            <input type="text" id="search-bar" placeholder="Search resource" (input)="onSearchChange()" [(ngModel)]="searchText">
+            <a href="#" class="search-icon">
+                <i class="fa fa-search"></i>
+            </a>
+          </form>
         <div class="grid">
-            <form class="search-container">
-                <input type="text" id="search-bar" placeholder="What can I help you with today?">
-                <a href="#" class="search-icon">
-                    <i class="fa fa-search"></i>
-                </a>
-              </form>
             <div class="col-3"><h2>Resource</h2></div>
             <div class="col-4"> 
                 <button pButton routerLink="/newresource">New</button></div>

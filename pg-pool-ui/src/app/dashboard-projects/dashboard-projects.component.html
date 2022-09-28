@@ -1,25 +1,53 @@
 <!-- <canvas id="canvas" width="400" height="400"></canvas> -->
-<div class="m-5">
+<div class="container mt-4">
     <div class="grid">
         <div class="col">
             <h4>Resource Remaning</h4>
+            
         </div>
+    </div>
+    <div class="grid mt-3">
+        <div class="col">
+
+            <p-tabView>
+                <p-tabPanel header="Year">
+
+                    <h4 class="mt-3" style="text-align: center">{{years}}</h4>
+                    <div class="graph" class="mt-3" *ngIf="isGetDetailChart">
+                        <app-chart-resource [chartDetail]="mountsResource"></app-chart-resource>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Month">
+                    <p-dropdown [options]="months" [(ngModel)]="selectedMonth" placeholder="Select Month"
+                        optionLabel="name" [showClear]="true" class="mt-3"></p-dropdown>
+                    <h4 class="mt-3" style="text-align: center">{{this.selectedMonth.name}}</h4>
+                    <div class="graph" class="mt-3" *ngIf="isGetDetailChart">
+                        <app-chart-resource [chartDetail]="mountsResource"></app-chart-resource>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+
+
+        </div>
+
     </div>
     <div>
         <div *ngFor="let request of diffDate;index as i">
             <div *ngIf="request.month < 12" class="grid box-member">
                 <div class="col">
-                    {{request.projectCode}} {{request.projectInfo.projectName}} {{request.name}} End in : {{request.month}} Month End Date : {{request.endDate |date}}
+                    {{request.projectCode}} {{request.projectInfo.projectName}} {{request.name}} End in :
+                    {{request.month}} Month End Date : {{request.endDate | date}}
                 </div>
-                
+
                 <!-- <div *ngFor="let project of projectsRequest" class="grid box-member">
                     <div class="col" *ngIf="request.projectCode == project.projectCode">
                         {{request.projectCode}} {{project.projectName}} {{request.name}} End in : {{request.month}} Month End Date : {{request.endDate |date}}
                     </div>
                     
                 </div> -->
-                
+
             </div>
         </div>
     </div>
+
 </div>
