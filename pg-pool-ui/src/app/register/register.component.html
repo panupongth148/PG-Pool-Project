@@ -1,0 +1,69 @@
+<div class="container mt-3">
+    <div class="grid">
+        <div class="col">
+            <p class="header">Register</p>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <form [formGroup]="registerForm">
+                <!-- <div class="grid">
+                    <div class="col-2">
+                      Lastname
+                     <div class="col-4">
+                   </div>
+                      <input type="text" pInputText formControlName="lastName" />
+                      <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                        <em class="pi pi-times-circle"></em> Field is required.
+                      </small>
+                    </div>
+                  </div> -->
+                <div class="grid ">
+                  <div class="col-2">
+                    Username
+                   <div class="col-4">
+                 </div>
+                    <input type="text" pInputText formControlName="username" />
+                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                      <em class="pi pi-times-circle"></em> Field is required.
+                    </small> -->
+                  </div>
+                </div>
+                <div class="grid ">
+                  <div class="col-2">
+                    Password
+                   <div class="col-4">
+                 </div>
+                    <input type="password" pInputText formControlName="password" />
+                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                      <em class="pi pi-times-circle"></em> Field is required.
+                    </small> -->
+                  </div>
+                </div>
+                <div class="grid ">
+                  <div class="col-2">
+                    Email
+                   <div class="col-4">
+                 </div>
+                    <input type="email" pInputText formControlName="email" />
+                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                      <em class="pi pi-times-circle"></em> Field is required.
+                    </small> -->
+                  </div>
+                </div>
+                  
+                    
+                  <div class="grid">
+              
+                    <div class="col-1">
+              
+                      <button pButton pRipple (click)="onSubmit()">Register </button>
+              
+                    </div>
+                  </div>
+                </form>
+
+
+        </div>
+    </div>
+</div>

@@ -28,8 +28,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {DropdownModule} from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TabViewModule} from 'primeng/tabview';
-
-
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { RouterModule } from '@angular/router';
+import {MenuItem} from 'primeng/api';
+import { FilterResourcePipe } from './shared/pipe/filter-resource.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,9 @@ import {TabViewModule} from 'primeng/tabview';
     DashboardProjectsComponent,
     ChartResourceComponent,
     CalendarResourceComponent,
+    LoginComponent,
+    RegisterComponent,
+    FilterResourcePipe,
 
   ],
   imports: [
@@ -62,7 +68,10 @@ import {TabViewModule} from 'primeng/tabview';
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     DropdownModule,
     BrowserAnimationsModule,
-    TabViewModule
+    TabViewModule,
+    RouterModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

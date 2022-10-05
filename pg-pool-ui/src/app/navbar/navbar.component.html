@@ -3,6 +3,15 @@
         <img src="assets/images/cat-logo.jpg" height="40" class="mr-2">
     </ng-template>
     <ng-template pTemplate="end">
-        <input type="text" pInputText placeholder="Search">
+        <div *ngIf="user;else other_content">
+            {{user.username}}
+            <button pButton (click)="logout()"> Logout</button>
+        </div>
+
+        <ng-template #other_content>
+            <button pButton (click)="toRegister()">Register</button>
+            <button pButton (click)="toLogin()"> Login</button>
+        </ng-template>
+
     </ng-template>
 </p-menubar>
