@@ -24,7 +24,7 @@ export class NewProjectComponent implements OnInit {
   });
   listPositionRequest: PositionProjectRequest[] = []
    positionList: string[] = [];
- 
+   uploadedFiles: any[] = [];
  
   selectedResource = "";
   constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectHttpRequestService:ProjectHttpRequestService, private router:Router) { 
@@ -73,10 +73,22 @@ export class NewProjectComponent implements OnInit {
     })
 
   }
-  onChange(){
+  onUpload(event:any) {
+    for(let file of event.files) {
+        this.uploadedFiles.push(file);
+        console.log("choose file")
+    }
+    console.log("upload")
+    const formData = new FormData();
+    formData.append("description", "Excelfile")
+    formData.append("file", this.uploadedFiles[0])
+    this.projectHttpRequestService.importExcel(formData).subscribe(val =>{
+       console.log(val)
+    })   
+}
+onChange(){
 
-  }
-
+}
   addRequest(){
     console.log(this.projectForm.get("positionRequestForm")?.value);
     this.listPositionRequest.push({

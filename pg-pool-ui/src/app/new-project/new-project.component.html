@@ -13,7 +13,17 @@
         </div>
     </div>
     <div class="grid">
-        <p-fileUpload name="myfile[]"></p-fileUpload>
+        <div class="col">
+            <p-fileUpload #fileInput name="image" (uploadHandler)="onUpload($event)"
+            [customUpload]="true" >
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+        </div>
+        
     </div>
 
 
@@ -71,8 +81,9 @@
                 <div class="col-3">
                     <div>Position</div>
                     <div>
-                        
-                        <input list="id-position" formControlName="positionRequestForm" value="" (ngModelChange)="onChange()" pInputText>
+
+                        <input list="id-position" formControlName="positionRequestForm" value=""
+                            (ngModelChange)="onChange()" pInputText>
                         <datalist id="id-position">
                             <option *ngFor="let position of positionList" [value]="position">{{position}}</option>
                         </datalist>
@@ -83,7 +94,7 @@
                     <div><input type="number" pInputText formControlName="amountRequestForm" /></div>
                 </div>
                 <div class="col-3">
-                    
+
                     <div class="pt-3"><button pButton pRipple label="add" (click)="addRequest()"></button></div>
                 </div>
             </div>
@@ -112,7 +123,8 @@
 
                 <div class="col">
                     <ul>
-                        <li *ngFor="let postionL of  listPositionRequest">{{postionL.positionRequest }}  {{postionL.amount}}   Person</li>
+                        <li *ngFor="let postionL of  listPositionRequest">{{postionL.positionRequest }}
+                            {{postionL.amount}} Person</li>
                     </ul>
                 </div>
             </div>

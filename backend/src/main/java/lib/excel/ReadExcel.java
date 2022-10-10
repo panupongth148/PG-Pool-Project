@@ -1,12 +1,16 @@
 package lib.excel;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.inject.Singleton;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -25,6 +29,7 @@ import sub.document.RequestResource;
 import sub.document.SubProject;
 import sub.document.WorkingDetail;
 
+@Singleton
 public class ReadExcel {
 
     private ExcelObject excelObject = new ExcelObject();
@@ -52,13 +57,15 @@ public class ReadExcel {
 
     }
 
-    public ExcelObject read() {
+    public ExcelObject read(byte[] bytes) {
         try {
-            FileInputStream file = new FileInputStream(
-                    new File("C:\\Users\\admin\\Downloads\\PD220002 (DLT) Team  Working  Period.xlsx"));
+            // FileInputStream file = new FileInputStream(
+            //         new File("C:\\Users\\admin\\Downloads\\PD220002 (DLT) Team  Working  Period.xlsx"));
             // FileInputStream file = new FileInputStream(
             //         new File("C:\\Users\\admin\\Downloads\\PD200071 (CDGS) Team  Working  Period.xlsx"));
             // Create Workbook instance holding reference to .xlsx file
+
+            InputStream file = new ByteArrayInputStream(bytes);
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
             // Get first/desired sheet from the workbook
@@ -74,8 +81,8 @@ public class ReadExcel {
                 while (cellIterator.hasNext()) {
 
                     Cell cell = cellIterator.next();
-                    System.out.println("row : " + cell.getRowIndex() + ", col : " +
-                    cell.getColumnIndex());
+                    // System.out.println("row : " + cell.getRowIndex() + ", col : " +
+                    // cell.getColumnIndex());
                     // Check the cell type and format accordingly
                     switch (cell.getCellType()) {
                         case NUMERIC:
@@ -89,7 +96,7 @@ public class ReadExcel {
                                     this.workingDetail.setWorking(cell.getNumericCellValue());
                                 } else if (cell.getColumnIndex() == 8) {
                                     this.workingDetail.setAssigned(cell.getNumericCellValue());
-                                    System.out.println(this.workingDetail.getAssigned());;
+                                    // System.out.println(this.workingDetail.getAssigned());;
                                     this.subProject.setProjectCode(this.getProjectCodeTemp());
 
                                     this.subProject.getWorkingDetail().add(this.workingDetail);
@@ -240,7 +247,7 @@ public class ReadExcel {
                                     
                                     Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
-                                    System.out.println(date1);
+                                    // System.out.println(date1);
                                     this.workingDetail.setEndDate(date1);
                                 }
 

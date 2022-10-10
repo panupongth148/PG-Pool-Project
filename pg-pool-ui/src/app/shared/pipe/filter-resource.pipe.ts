@@ -6,12 +6,23 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterResourcePipe implements PipeTransform {
 
   transform(value: any, searchValue: any): any {
-    if (!searchValue) return value;
-    return value.filter((val: any) => {
-      console.log(val);
-      val.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ||
-        val.size.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+
+
+    if (!searchValue) {
+      // console.log("in non search text")
+      // console.log(value)
+      return value;
+    }
+    const result = value.filter((val: any) => {
+      if(searchValue.indexOf(" ") > -1){
+        searchValue = searchValue.replace(/\s/g, '');
+      }
+      console.log(searchValue)
+      return ( val.firstName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ||
+        val.lastName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ) || (val.firstName.toLowerCase()+val.lastName.toLowerCase()).indexOf(searchValue.toLowerCase()) > -1
     })
+    console.log(result)
+    return result
   }
 
 }

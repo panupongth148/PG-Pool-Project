@@ -42,9 +42,10 @@
         </div> -->
         <input type="search" [(ngModel)]="searchText">
 
-        <div *ngFor="let f of (resources | filterResource:searchText)as folder">
-            {{f.name}}
-            {{f.size}}
+        <div *ngFor="let f of (resources | filterResource:searchText)as folder" class="p-2 box-container mb-4" (click)="toDetailResource(f.id)">
+            {{f.prefix + " "}}
+            {{f.firstName + " "}}
+            {{f.lastName}}
 
         </div>
 

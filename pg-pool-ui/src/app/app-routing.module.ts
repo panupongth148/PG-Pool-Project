@@ -32,7 +32,7 @@ const routes: Routes = [
     path: 'project/:id',
     component: ProjectDetailComponent
   },
-  { path: 'project/new', component: NewProjectComponent },
+  { path: 'new/project', component: NewProjectComponent },
   { path: 'resource/:id', component: ResourceDetailComponent},
   { path: 'dashboard', component: DashboardProjectsComponent},
   { path: 'login', component: LoginComponent},

@@ -56,7 +56,7 @@ export class ResourceListComponent implements OnInit {
   }
   async getAllResource() {
     await this.resourceHttpRequestService.getAllResource().subscribe(res => {
-      console.log(res)
+      // console.log(res)
       this.resources = res;
       this.getPosition();
     })
@@ -67,7 +67,7 @@ export class ResourceListComponent implements OnInit {
 
     let countIndex = 0
     this.resources.forEach((val, index) => {
-      console.log(val.position)
+      // console.log(val.position)
       if (this.positionList[countIndex].positionName == val.position) {
         let objIndex = this.positionList.findIndex((obj => obj.positionName == val.position));
         this.positionList[objIndex].count = this.positionList[objIndex].count + 1
@@ -81,7 +81,7 @@ export class ResourceListComponent implements OnInit {
         countIndex++;
       }
     })
-    console.log(this.positionList)
+    // console.log(this.positionList)
     this.positionList.splice(0, 1)
   }
   async toDetailResource(id:any){

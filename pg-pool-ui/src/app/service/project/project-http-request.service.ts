@@ -28,4 +28,9 @@ export class ProjectHttpRequestService {
     console.log("many");
     return this.http.post<Array<any>>('/api/project/findmanybypc', idList);
   }
+
+  importExcel(excelFile:any){
+    console.log("import")
+    return this.http.post('/api/project/upload', excelFile)
+  }
 }

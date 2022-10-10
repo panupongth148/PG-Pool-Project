@@ -1,8 +1,18 @@
 package project;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
@@ -19,27 +29,31 @@ import javax.ws.rs.core.Response;
 import org.bson.types.ObjectId;
 
 import org.jboss.resteasy.reactive.MultipartForm;
-import org.jboss.resteasy.reactive.server.core.multipart.FormData;
+// import org.jboss.resteasy.reactive.server.core.multipart.FormData;
 
+import lib.SaveFile;
 import lib.excel.ReadExcel;
 import pojo.ExcelObject;
+import pojo.FormData;
 import resource.Resource;
 import resource.ResourceRepository;
 
 import java.awt.image.BufferedImage;
 
-
-
-
 @Path("/api/project")
-@Consumes("application/json")
-@Produces("application/json")
+
 public class ProjectResource {
 
     @Inject
     ProjectRepository projectRepository;
     @Inject
     ResourceRepository resourceRepository;
+
+    @Inject
+    SaveFile saveFile;
+
+    @Inject
+    ReadExcel readExcel;
 
     @GET
     public List<Project> list() {
@@ -48,6 +62,8 @@ public class ProjectResource {
 
     @GET
     @Path("/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
     public Project get(String id) {
         System.out.println("get =>" + id);
         return projectRepository.findById(new ObjectId(id));
@@ -55,6 +71,8 @@ public class ProjectResource {
 
     @GET
     @Path("/findbypc/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
     public Project getProjectByPC(String id) {
         System.out.println("get =>" + id);
         return projectRepository.findByProductCode(id);
@@ -62,65 +80,123 @@ public class ProjectResource {
 
     @GET
     @Path("/findprojectrequest/")
-    public List<Resource> findProjectWantResource(){
+    @Consumes("application/json")
+    @Produces("application/json")
+    public List<Resource> findProjectWantResource() {
         return projectRepository.findProjectRequest();
     }
 
     @POST
     @Path("/findmanybypc")
-    public List<Project> getProjectsByPC(List<String> listId){
+    @Consumes("application/json")
+    @Produces("application/json")
+    public List<Project> getProjectsByPC(List<String> listId) {
         return projectRepository.findProjectsbyPC(listId);
     }
 
     @POST
+    @Consumes("application/json")
+    @Produces("application/json")
     public Response create(Project project) {
         System.out.println(project);
         projectRepository.persist(project);
         return Response.status(201).build();
     }
 
-    
-    @POST
-    // @Produces(MediaType.APPLICATION_JSON)
-    // @Consumes(MediaType.MULTIPART_FORM_DATA)
-    
-    @Path("/form")
-    public ExcelObject form() {
-        System.out.println("read excel");
-        // return something
-        // Flie file = formData.getFile().getAbsoluteFile();
-        // FileInputStream fl = new FileInputStream(formData.getFile());
-        // byte[] arr = new byte[(int)file.length()];
-  
-        // // Reading file content to byte array
-        // // using standard read() method
-        // fl.read(arr);
-  
-        // // lastly closing an instance of file input stream
-        // // to avoid memory leakage
-        // fl.close();
-        ReadExcel excel = new ReadExcel();
-        ExcelObject excelObject = excel.read();
-        System.out.println(excelObject.getProject().getProjectName());
+    // @POST
+    // // @Produces(MediaType.APPLICATION_JSON)
+    // // @Consumes(MediaType.MULTIPART_FORM_DATA)
+    // @Consumes("application/json")
+    // @Produces("application/json")
+    // @Path("/form")
+    // public ExcelObject form() {
+    // System.out.println("read excel");
+    // // return something
+    // // Flie file = formData.getFile().getAbsoluteFile();
+    // // FileInputStream fl = new FileInputStream(formData.getFile());
+    // // byte[] arr = new byte[(int)file.length()];
 
-        // for(Resource resource : excelObject) {
-        //     // System.out.println("Firstname : " + resource.getFirstName());
-        //     // System.out.println("Lastname: " + resource.getLastName());
+    // // // Reading file content to byte array
+    // // // using standard read() method
+    // // fl.read(arr);
+
+    // // // lastly closing an instance of file input stream
+    // // // to avoid memory leakage
+    // // fl.close();
+    // ReadExcel excel = new ReadExcel();
+    // ExcelObject excelObject = excel.read();
+    // System.out.println(excelObject.getProject().getProjectName());
+
+    // // for(Resource resource : excelObject) {
+    // // // System.out.println("Firstname : " + resource.getFirstName());
+    // // // System.out.println("Lastname: " + resource.getLastName());
+    // // }
+    // // formData.getFile().uploadedFile();
+    // try {
+    // projectRepository.persist(excelObject.getProject());
+    // resourceRepository.persist(excelObject.getResourceList());
+    // } catch (Exception e) {
+    // // TODO: handle exception
+    // e.printStackTrace();
+    // }
+
+    // return excelObject;
+    // }
+
+    @POST
+    @Path("/upload")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response upload(@MultipartForm FormData formData) {
+        System.out.println(">>>>");
+        // for (Map.Entry<String, InputStream> entry : parts.entrySet()){
+        // System.out.println(entry.getKey() + ": " + new
+        // String(entry.getValue().readAllBytes()));
         // }
-        // formData.getFile().uploadedFile();
         try {
-             projectRepository.persist(excelObject.getProject());
+            System.out.println(formData.description);
+            System.out.println("input  = " + formData.file.uploadedFile());
+            System.out.println("inputFile = " + formData.file.fileName());
+
+            // System.out.println("content = " +
+            // Files.readString(formData.file.uploadedFile()));
+            System.out.println("<<<<");
+            String located = "./src/main/resources/files/" + formData.file.fileName(); // located File
+            // String statusSave =
+            // saveFile.saveFile(Files.readAllBytes(formData.file.uploadedFile()), located);
+            // System.out.println(statusSave);
+            ExcelObject excelObject = readExcel.read(Files.readAllBytes(formData.file.uploadedFile()));
+            System.out.println(excelObject.getProject().getProjectName());
+
+            // for(Resource resource : excelObject) {
+            // // System.out.println("Firstname : " + resource.getFirstName());
+            // // System.out.println("Lastname: " + resource.getLastName());
+            // }
+            // formData.getFile().uploadedFile();
+
+            projectRepository.persist(excelObject.getProject());
             resourceRepository.persist(excelObject.getResourceList());
+
+            return Response.ok(excelObject).status(200).build();
+
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
+            return Response.ok(e).status(500).build();
         }
-        
-        return excelObject;
+
+        // try (
+        // final BufferedWriter writer = Files.newBufferedWriter(path,
+        // StandardCharsets.UTF_8, StandardOpenOption.CREATE);) {
+        // writer.write(content);
+        // writer.flush();
+        // }
+
     }
 
     @PUT
     @Path("/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
     public void update(String id, Project project) {
         projectRepository.update(project);
     }
@@ -141,5 +217,10 @@ public class ProjectResource {
     @DELETE
     public void deleteAll() {
         projectRepository.deleteAll();
+    }
+
+    public void saveReport(Byte[] file, String str)
+            throws IOException {
+
     }
 }
