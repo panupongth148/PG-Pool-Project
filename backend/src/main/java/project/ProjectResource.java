@@ -86,6 +86,15 @@ public class ProjectResource {
         return projectRepository.findProjectRequest();
     }
 
+
+    @GET
+    @Path("/findbyownerid/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public List<Project> getProjectByOwnerId(String id){
+        return projectRepository.findProjectByUserId(id);
+    }
+
     @POST
     @Path("/findmanybypc")
     @Consumes("application/json")
@@ -103,45 +112,7 @@ public class ProjectResource {
         return Response.status(201).build();
     }
 
-    // @POST
-    // // @Produces(MediaType.APPLICATION_JSON)
-    // // @Consumes(MediaType.MULTIPART_FORM_DATA)
-    // @Consumes("application/json")
-    // @Produces("application/json")
-    // @Path("/form")
-    // public ExcelObject form() {
-    // System.out.println("read excel");
-    // // return something
-    // // Flie file = formData.getFile().getAbsoluteFile();
-    // // FileInputStream fl = new FileInputStream(formData.getFile());
-    // // byte[] arr = new byte[(int)file.length()];
-
-    // // // Reading file content to byte array
-    // // // using standard read() method
-    // // fl.read(arr);
-
-    // // // lastly closing an instance of file input stream
-    // // // to avoid memory leakage
-    // // fl.close();
-    // ReadExcel excel = new ReadExcel();
-    // ExcelObject excelObject = excel.read();
-    // System.out.println(excelObject.getProject().getProjectName());
-
-    // // for(Resource resource : excelObject) {
-    // // // System.out.println("Firstname : " + resource.getFirstName());
-    // // // System.out.println("Lastname: " + resource.getLastName());
-    // // }
-    // // formData.getFile().uploadedFile();
-    // try {
-    // projectRepository.persist(excelObject.getProject());
-    // resourceRepository.persist(excelObject.getResourceList());
-    // } catch (Exception e) {
-    // // TODO: handle exception
-    // e.printStackTrace();
-    // }
-
-    // return excelObject;
-    // }
+    
 
     @POST
     @Path("/upload")
@@ -154,7 +125,7 @@ public class ProjectResource {
         // String(entry.getValue().readAllBytes()));
         // }
         try {
-            System.out.println(formData.description);
+            System.out.println(formData.userId);
             System.out.println("input  = " + formData.file.uploadedFile());
             System.out.println("inputFile = " + formData.file.fileName());
 
@@ -166,7 +137,8 @@ public class ProjectResource {
             // saveFile.saveFile(Files.readAllBytes(formData.file.uploadedFile()), located);
             // System.out.println(statusSave);
             ExcelObject excelObject = readExcel.read(Files.readAllBytes(formData.file.uploadedFile()));
-            System.out.println(excelObject.getProject().getProjectName());
+            excelObject.getProject().setProjectOwner(formData.userId);
+            System.out.println(excelObject.getProject().getProjectOwner());
 
             // for(Resource resource : excelObject) {
             // // System.out.println("Firstname : " + resource.getFirstName());

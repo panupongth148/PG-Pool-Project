@@ -18,7 +18,7 @@ export class FilterResourcePipe implements PipeTransform {
         searchValue = searchValue.replace(/\s/g, '');
       }
       console.log(searchValue)
-      return ( val.firstName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ||
+      return (  val.prefix.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ||val.firstName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ||
         val.lastName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ) || (val.firstName.toLowerCase()+val.lastName.toLowerCase()).indexOf(searchValue.toLowerCase()) > -1
     })
     console.log(result)

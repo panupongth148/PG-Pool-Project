@@ -9,5 +9,6 @@ export default interface ProjectResponseModel{
     }]
     memberAmount:number,
     contractStart: Date
-    contractEnd: Date
+    contractEnd: Date,
+    projectOwner: string
 }

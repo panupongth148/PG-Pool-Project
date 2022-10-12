@@ -52,7 +52,12 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
     </dependency>
-    
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>1.6.2</version>
+  </dependency>
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-mongodb-panache</artifactId>
@@ -109,8 +114,8 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-elytron-security-jdbc</artifactId>
-  </dependency>
-  
+    </dependency>
+
 
   </dependencies>
   <build>

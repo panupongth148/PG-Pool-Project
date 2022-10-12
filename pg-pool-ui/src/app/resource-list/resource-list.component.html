@@ -1,51 +1,66 @@
-<div style="text-align: center; margin-bottom: 30px">
-    <h1>Resource</h1>
-</div>
-
-<div class="grid mx-5 my-3">
-    <div class="col-6">
-        <div class="mb-3">
-            <h2>Position</h2>
-        </div>
-        <div *ngIf="positionList">
-            <div *ngFor="let position of positionList; let i =index" class="grid p-2 box-container mb-4">
-                <div class="col">{{ position.positionName}}</div>
-
-                <div class="col">
-                    {{position.count}}
-                </div>
-
-            </div>
-        </div>
+<div class="container mt-5">
+    <div style="text-align: center; margin-bottom: 30px">
+        <h1 class="title-content">Resource</h1>
     </div>
-    <div class="col-6">
-        <!-- <form class="search-container">
-            <input type="text" id="search-bar" placeholder="Search resource" (input)="onSearchChange()"
-                [(ngModel)]="searchText">
-            <a href="#" class="search-icon">
-                <i class="fa fa-search"></i>
-            </a>
-        </form> -->
-        <div class="grid">
-            <div class="col-3">
-                <h2>Resource</h2>
-            </div>
-            <div class="col-4">
-                <button pButton routerLink="/newresource">New</button>
-            </div>
-        </div>
 
-        <!-- <div *ngIf="resources">
-            <div *ngFor="let resource of resources" class="p-2 box-container mb-4" (click)="toDetailResource(resource.id)">
-               {{resource.prefix}} {{ resource.firstName}} {{" "}} {{resource.lastName}}
+    <div class="grid mx-5 my-3">
+        <!-- <div class="col-6">
+            <div class="mb-3">
+                <p class="title1">Position</p>
+            </div>
+            <div *ngIf="positionList">
+                <div *ngFor="let position of positionList; let i =index" class="grid p-2 box-container mb-4">
+                    <div class="col">{{ position.positionName}}</div>
+
+                    <div class="col">
+                        {{position.count}}
+                    </div>
+
+                </div>
             </div>
         </div> -->
-        <input type="search" [(ngModel)]="searchText">
 
-        <div *ngFor="let f of (resources | filterResource:searchText)as folder" class="p-2 box-container mb-4" (click)="toDetailResource(f.id)">
-            {{f.prefix + " "}}
-            {{f.firstName + " "}}
-            {{f.lastName}}
+        <!-- <form class="search-container">
+                <input type="text" id="search-bar" placeholder="Search resource" (input)="onSearchChange()"
+                    [(ngModel)]="searchText">
+                <a href="#" class="search-icon">
+                    <i class="fa fa-search"></i>
+                </a>
+            </form> -->
+
+        <div class="col-9">
+            <input type="search" [(ngModel)]="searchText" pInputText placeholder="Name Resource">
+        </div>
+
+        <div class="col-3">
+            <button pButton routerLink="/newresource">New</button>
+        </div>
+
+
+        <!-- <div *ngIf="resources">
+                <div *ngFor="let resource of resources" class="p-2 box-container mb-4" (click)="toDetailResource(resource.id)">
+                   {{resource.prefix}} {{ resource.firstName}} {{" "}} {{resource.lastName}}
+                </div>
+            </div> -->
+
+
+
+    </div>
+    <div class="my-3 grid">
+                
+        <div *ngFor="let f of (resources | filterResource:searchText)as folder" class="p-2 box-container col-12"
+            (click)="toDetailResource(f.id)">
+            <p-card [style]="{'width': '100%', 'margin-bottom': '2em'}">
+                <div class="grid">
+                    <div class="col"><p>{{f.prefix + " "}}
+                        {{f.firstName + " "}}
+                        {{f.lastName}}</p></div>
+                        <div class="col">{{f.position}}</div>
+                </div>
+                
+                
+            </p-card>
+
 
         </div>
 
@@ -53,5 +68,7 @@
             Not Found
         </div>
     </div>
+
 </div>
+
 <!-- <button label="Submit" (click)="getAllResource()">submit</button> -->

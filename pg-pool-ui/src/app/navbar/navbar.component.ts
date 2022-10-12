@@ -4,6 +4,8 @@ import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import UserModel from '../shared/interface/UserModel';
 import jwt_decode from "jwt-decode";
+import { UserCommunicateService } from '../service/communicate/user-communicate.service';
+import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
 
 @Component({
     selector: 'app-navbar',
@@ -34,7 +36,7 @@ export class NavbarComponent implements OnInit {
         icon: 'pi pi-fw pi-power-off'
     }];
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private userComservice: UserCommunicateService, private jwtService:JwtDecodeService) {
 
 
     }
@@ -56,78 +58,6 @@ export class NavbarComponent implements OnInit {
                 icon: 'pi pi-fw pi-pencil',
                 routerLink: "/resource"
             },
-            {
-                label: 'Users',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'New',
-                        icon: 'pi pi-fw pi-user-plus',
-
-                    },
-                    {
-                        label: 'Delete',
-                        icon: 'pi pi-fw pi-user-minus',
-
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'pi pi-fw pi-users',
-                        items: [
-                            {
-                                label: 'Filter',
-                                icon: 'pi pi-fw pi-filter',
-                                items: [
-                                    {
-                                        label: 'Print',
-                                        icon: 'pi pi-fw pi-print'
-                                    }
-                                ]
-                            },
-                            {
-                                icon: 'pi pi-fw pi-bars',
-                                label: 'List'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                label: 'Events',
-                icon: 'pi pi-fw pi-calendar',
-                items: [
-                    {
-                        label: 'Edit',
-                        icon: 'pi pi-fw pi-pencil',
-                        items: [
-                            {
-                                label: 'Save',
-                                icon: 'pi pi-fw pi-calendar-plus'
-                            },
-                            {
-                                label: 'Delete',
-                                icon: 'pi pi-fw pi-calendar-minus'
-                            },
-
-                        ]
-                    },
-                    {
-                        label: 'Archieve',
-                        icon: 'pi pi-fw pi-calendar-times',
-                        items: [
-                            {
-                                label: 'Remove',
-                                icon: 'pi pi-fw pi-calendar-minus'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-
-                label: 'Register',
-                icon: 'pi pi-fw pi-power-off'
-            }
         ];
         this.authChange();
     }
@@ -147,20 +77,15 @@ export class NavbarComponent implements OnInit {
     authChange() {
         const token = localStorage.getItem("PG_Pool_token")
         if (token) {
-            const tokenInfo = this.getDecodedAccessToken(token); // decode token
+            const tokenInfo = this.jwtService.getDecodedAccessToken(token); // decode token
             const expireDate = tokenInfo.exp; // get token expiration dateTime
             // console.log(tokenInfo); // show decoded token object in console
             this.user = {
+                id: tokenInfo.id,
                 username: tokenInfo.username,
                 email: tokenInfo.email
             }
-        }
-    }
-    getDecodedAccessToken(token: string): any {
-        try {
-            return jwt_decode(token);
-        } catch (Error) {
-            return null;
+            this.userComservice.getUser(this.user);
         }
     }
     logout(){

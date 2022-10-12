@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
 import { ProjectHttpRequestService } from '../service/project/project-http-request.service';
 import ProjectResponseModel from '../shared/interface/ProjectResponseModel';
 
@@ -10,7 +11,8 @@ import ProjectResponseModel from '../shared/interface/ProjectResponseModel';
 })
 export class ProjectListComponent implements OnInit {
   projects: Array<ProjectResponseModel>
-  constructor(private projectHttpRequestService: ProjectHttpRequestService, private router:Router) {
+  user?:any;
+  constructor(private projectHttpRequestService: ProjectHttpRequestService, private router:Router, private jwtService:JwtDecodeService) {
     this.projects = [{
       id: "",
       projectName: "",
@@ -22,15 +24,33 @@ export class ProjectListComponent implements OnInit {
       projectCode: "",
       progress: 0.0,
       contractStart: new Date(),
-      contractEnd: new Date()
+      contractEnd: new Date(),
+      projectOwner: ""
     }]
+    this.getUser();
     this.getAllResource();
+    
   }
 
   ngOnInit(): void {
   }
+
+  getUser(){
+    const token = localStorage.getItem("PG_Pool_token")
+        if (token) {
+            const tokenInfo = this.jwtService.getDecodedAccessToken(token); // decode token
+            const expireDate = tokenInfo.exp; // get token expiration dateTime
+            // console.log(tokenInfo); // show decoded token object in console
+            this.user = {
+                id: tokenInfo.id,
+                username: tokenInfo.username,
+                email: tokenInfo.email
+            }
+        }
+  }
   async getAllResource() {
-    await this.projectHttpRequestService.getAllProject().subscribe(res => {
+    console.log(this.user.id)
+    await this.projectHttpRequestService.getAllProjectByUserId(this.user.id).subscribe(res => {
       console.log(res)
       this.projects = res
     })

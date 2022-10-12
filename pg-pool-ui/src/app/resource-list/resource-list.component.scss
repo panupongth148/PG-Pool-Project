@@ -1,6 +1,6 @@
 .box-container{
-    border: 1px;
-    text-align: center;
+
+    cursor: pointer;
 }
 
 .search-container{
@@ -18,4 +18,12 @@
       top: -39px;
       right: -38px;
       font-size: 30px;
+  }
+  .title-content{
+    font-family: 'Kanit', sans-serif;
+    font-size: 32px;
+  }
+  .title1{
+    font-family: 'Kanit', sans-serif;
+    font-size: 26px;
   }

@@ -12,7 +12,9 @@ export class ProjectHttpRequestService {
   getAllProject(){
     return this.http.get<Array<ProjectResponseModel>>('/api/project')
   }
-
+  getAllProjectByUserId(id: string){
+    return this.http.get<Array<ProjectResponseModel>>('/api/project/findbyownerid/'+id)
+  }
   addProject(project: any){
     return this.http.post<any>('/api/project', project);
   }

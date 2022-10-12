@@ -33,6 +33,7 @@ import { RegisterComponent } from './register/register.component';
 import { RouterModule } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import { FilterResourcePipe } from './shared/pipe/filter-resource.pipe';
+import { CardModule, } from 'primeng/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,7 @@ import { FilterResourcePipe } from './shared/pipe/filter-resource.pipe';
     BrowserAnimationsModule,
     TabViewModule,
     RouterModule,
+    CardModule
     
     
   ],

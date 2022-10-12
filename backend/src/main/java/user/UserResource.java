@@ -20,6 +20,10 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.wildfly.security.WildFlyElytronProvider;
 
 import beans.TokenResponse;
+// import io.quarkus.mailer.Mail;
+// import io.quarkus.mailer.reactive.ReactiveMailer;
+import io.smallrye.mutiny.Uni;
+import lib.SendEmail.SendEmail;
 
 @Path("/api/user")
 @Consumes("application/json")
@@ -27,9 +31,13 @@ import beans.TokenResponse;
 public class UserResource {
     static final Provider ELYTRON_PROVIDER = new WildFlyElytronProvider();
     private static byte[] salt = ("APPLE").getBytes();
-
+    // @Inject
+    // ReactiveMailer reactiveMailer;
     @Inject
     private UserService userService;
+
+    @Inject
+    private SendEmail sendEmail;
     // static final String TEST_PASSWORD = "test_password";
     @Inject
     JsonWebToken jwt;
@@ -127,6 +135,14 @@ public class UserResource {
     @DELETE
     public void deleteAll() {
         userRepository.deleteAll();
+    }
+
+
+    @GET
+    @Path("/mail")
+    public String sendEmailUsingReactiveMailer() {
+        System.out.println("send email api");
+        return sendEmail.sendEmail();
     }
 
 }

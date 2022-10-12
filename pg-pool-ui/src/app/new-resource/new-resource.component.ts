@@ -10,6 +10,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./new-resource.component.scss']
 })
 export class NewResourceComponent implements OnInit {
+  prefixs: any[] = [{
+    name: "Mr."
+  },
+  {
+    name: "Miss."
+  },
+  {
+    name: "Mrs."
+  }]
   resourceForm = new FormGroup({
     empNo: new FormControl(),
     prefix: new FormControl(),
@@ -22,18 +31,18 @@ export class NewResourceComponent implements OnInit {
     expireDate: new FormControl(),
     projects: new FormControl(null)
   });
-  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private route:ActivatedRoute, private router:Router) { }
+  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  async onSubmit(){
+  async onSubmit() {
     const resource = this.resourceForm.value as AddResourceModel;
     console.log(resource)
-      await this.resourceHttpRequestService.AddResource(resource).subscribe(response => {
-        alert("success");
-      });
-      this.router.navigate(['/resource'])
+    await this.resourceHttpRequestService.AddResource(resource).subscribe(response => {
+      alert("success");
+    });
+    this.router.navigate(['/resource'])
       .then(() => {
         window.location.reload();
       });

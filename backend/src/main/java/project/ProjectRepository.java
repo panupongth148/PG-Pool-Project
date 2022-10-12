@@ -19,12 +19,17 @@ import resource.Resource;
 import resource.ResourceRepository;
 import sub.document.SubProject;
 import sub.document.WorkingDetail;
+import user.UserRepository;
 
 @ApplicationScoped
 public class ProjectRepository implements PanacheMongoRepository<Project> {
 
     @Inject
     private ResourceRepository resourceRepository;
+
+
+    @Inject
+    private UserRepository userRepository;
 
     public Project findByName(String name) {
         return find("project_name", name).firstResult();
@@ -68,10 +73,9 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
         // List<Project> listData = list(" > ?1 and firstname != ?2", )
         return resourceList;
     }
-    // @Transactional
-    // public boolean saveProject(Project project){
-    // persist(project);
-    // return true;
+    
 
-    // }
+    public List<Project> findProjectByUserId(String userId){
+         return find("project_owner", userId).list();
+    }
 }

@@ -10,7 +10,7 @@ import org.jboss.resteasy.reactive.multipart.FileUpload;
 public class FormData {
     @RestForm
     @PartType(MediaType.TEXT_PLAIN)
-    public String description;
+    public String userId;
 
     @RestForm("file")
     public FileUpload file;

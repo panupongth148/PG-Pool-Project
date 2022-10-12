@@ -26,7 +26,8 @@ export class ProjectDetailComponent implements OnInit {
       }],
       memberAmount: 0,
       contractStart: new Date(),
-      contractEnd: new Date()
+      contractEnd: new Date(),
+      projectOwner: ""
     }
 
     this.resources =[{
@@ -64,7 +65,7 @@ export class ProjectDetailComponent implements OnInit {
     try {
       await this.projectHttpRequestService.getProject(this.id).subscribe(res => {
           this.project = res;
-          console.log(res);
+          // console.log(res);
           this.getResources()
         })
       

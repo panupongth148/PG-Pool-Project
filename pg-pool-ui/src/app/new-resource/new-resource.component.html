@@ -17,7 +17,7 @@
       Prefix
      <div class="col-4">
    </div>
-      <input type="text" pInputText formControlName="prefix" />
+   <p-dropdown [options]="prefixs" formControlName="prefix" placeholder="Select a Prefix" optionLabel="name" [showClear]="true"></p-dropdown>
       <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
         <em class="pi pi-times-circle"></em> Field is required.
       </small> -->

@@ -11,33 +11,35 @@ import sub.document.RequestResource;
 
 @MongoEntity(collection = "project")
 public class Project {
-	
+
 	private ObjectId id;
 
 	@BsonProperty(value = "customer_code")
-	 private String customerCode;
+	private String customerCode;
 
 	@BsonProperty(value = "project_name")
-	 private String projectName;
-	 
+	private String projectName;
+
 	@BsonProperty(value = "project_code")
-	 private String projectCode;
-	
+	private String projectCode;
 
-	 @BsonProperty(value = "requests")
-	 private List<RequestResource> requests;
+	@BsonProperty(value = "requests")
+	private List<RequestResource> requests;
 
-	 @BsonProperty(value = "member_amount")
-	 private int memberAmount;
-	 
+	@BsonProperty(value = "member_amount")
+	private int memberAmount;
+
 	@BsonProperty(value = "progress")
-	 private float progress;
-	 
+	private float progress;
+
 	@BsonProperty(value = "contract_start")
-	 private Date contractStart;
-	 
+	private Date contractStart;
+
 	@BsonProperty(value = "contract_end")
-	 private Date contractEnd;
+	private Date contractEnd;
+
+	@BsonProperty(value = "project_owner")
+	private String projectOwner;
 
 	public ObjectId getId() {
 		return id;
@@ -110,6 +112,14 @@ public class Project {
 	public void setCustomerCode(String customerCode) {
 		this.customerCode = customerCode;
 	}
-	
+
+	public String getProjectOwner() {
+		return projectOwner;
+	}
+
+	public void setProjectOwner(String projectOwner) {
+		this.projectOwner = projectOwner;
+	}
+
 	
 }

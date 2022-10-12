@@ -164,7 +164,8 @@ export class DashboardProjectsComponent implements OnInit {
                 projectCode: "",
                 progress: 0.0,
                 contractStart: new Date(),
-                contractEnd: new Date()
+                contractEnd: new Date(),
+                projectOwner: ""
             }
 
         }]
@@ -186,7 +187,8 @@ export class DashboardProjectsComponent implements OnInit {
                 projectCode: "",
                 progress: 0.0,
                 contractStart: new Date(),
-                contractEnd: new Date()
+                contractEnd: new Date(),
+                projectOwner: ""
             }
 
         }]
@@ -202,7 +204,8 @@ export class DashboardProjectsComponent implements OnInit {
             projectCode: "",
             progress: 0.0,
             contractStart: new Date(),
-            contractEnd: new Date()
+            contractEnd: new Date(),
+             projectOwner: ""
         }]
 
         this.projectsRequest = [{
@@ -216,7 +219,8 @@ export class DashboardProjectsComponent implements OnInit {
             projectCode: "",
             progress: 0.0,
             contractStart: new Date(),
-            contractEnd: new Date()
+            contractEnd: new Date(),
+            projectOwner: ""
         }]
         this.resources = [{
             id: "",

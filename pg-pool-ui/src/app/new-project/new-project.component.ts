@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserCommunicateService } from '../service/communicate/user-communicate.service';
+import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
 import { ProjectHttpRequestService } from '../service/project/project-http-request.service';
 import { ResourceHttpRequestService } from '../service/resource/resource-http-request.service';
 import PositionProjectRequest from '../shared/interface/PositionProjectRequest';
-import ResourceModel from '../shared/interface/ResourceModel';
+import UserModel from '../shared/interface/UserModel';
 
 @Component({
   selector: 'app-new-project',
@@ -22,12 +25,14 @@ export class NewProjectComponent implements OnInit {
     positionRequestForm : new FormControl(),
     amountRequestForm : new FormControl()
   });
+  user?:any;
+  subscription?: Subscription;
   listPositionRequest: PositionProjectRequest[] = []
    positionList: string[] = [];
    uploadedFiles: any[] = [];
  
   selectedResource = "";
-  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectHttpRequestService:ProjectHttpRequestService, private router:Router) { 
+  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectHttpRequestService:ProjectHttpRequestService, private router:Router, private userCommunacate:UserCommunicateService, private jwtService:JwtDecodeService) { 
     // this.resources = [{
     //   id: "",
     //   firstName: "",
@@ -49,6 +54,19 @@ export class NewProjectComponent implements OnInit {
     // }];
     this.getAllResource()
     this.projectForm.get("amountRequestForm")?.setValue("1")
+    const token = localStorage.getItem("PG_Pool_token")
+        if (token) {
+            const tokenInfo = this.jwtService.getDecodedAccessToken(token); // decode token
+            const expireDate = tokenInfo.exp; // get token expiration dateTime
+            // console.log(tokenInfo); // show decoded token object in console
+            this.user = {
+                id: tokenInfo.id,
+                username: tokenInfo.username,
+                email: tokenInfo.email
+            }
+        }
+    // this.subscription = this.userCommunacate.userId$.subscribe(x =>{this.user = x})
+    // console.log(this.user)
   }
 
   ngOnInit(): void {
@@ -80,7 +98,7 @@ export class NewProjectComponent implements OnInit {
     }
     console.log("upload")
     const formData = new FormData();
-    formData.append("description", "Excelfile")
+    formData.append("userId", this.user.id)
     formData.append("file", this.uploadedFiles[0])
     this.projectHttpRequestService.importExcel(formData).subscribe(val =>{
        console.log(val)
