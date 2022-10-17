@@ -8,9 +8,9 @@ import javax.inject.Singleton;
 
 @Singleton
 public class SendEmail {
-    public static String sendEmail() {
+    public static String sendEmail(String emailReciever) {
           // Recipient's email ID needs to be mentioned.
-          String to = "panupongthongbainoi@gmail.com";
+          String to = emailReciever;
 
           // Sender's email ID needs to be mentioned
           String from = "mailsender148@gmail.com";
@@ -32,7 +32,7 @@ public class SendEmail {
   
               protected PasswordAuthentication getPasswordAuthentication() {
   
-                  return new PasswordAuthentication("mailsender148@gmail.com", "pW3dgihefx");
+                  return new PasswordAuthentication("mailsender148@gmail.com", "sbcquvfbuounabfp");
   
               }
   
@@ -52,10 +52,10 @@ public class SendEmail {
               message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
   
               // Set Subject: header field
-              message.setSubject("This is the Subject Line!");
+              message.setSubject("หัวข้อ");
   
               // Now set the actual message
-              message.setText("This is actual message");
+              message.setText("เนื้อหาภายใน");
   
               System.out.println("sending...");
               // Send message

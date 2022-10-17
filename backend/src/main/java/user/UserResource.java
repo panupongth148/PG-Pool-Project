@@ -23,6 +23,7 @@ import beans.TokenResponse;
 // import io.quarkus.mailer.Mail;
 // import io.quarkus.mailer.reactive.ReactiveMailer;
 import io.smallrye.mutiny.Uni;
+import lib.Schedule.ScheduleAssigned;
 import lib.SendEmail.SendEmail;
 
 @Path("/api/user")
@@ -35,6 +36,10 @@ public class UserResource {
     // ReactiveMailer reactiveMailer;
     @Inject
     private UserService userService;
+
+
+    @Inject
+    private ScheduleAssigned scheduleAssigned;
 
     @Inject
     private SendEmail sendEmail;
@@ -140,9 +145,9 @@ public class UserResource {
 
     @GET
     @Path("/mail")
-    public String sendEmailUsingReactiveMailer() {
-        System.out.println("send email api");
-        return sendEmail.sendEmail();
+    public Response sendEmailUsingReactiveMailer() {
+        scheduleAssigned.scheduleSendEmail();
+        return Response.status(200).build();
     }
 
 }

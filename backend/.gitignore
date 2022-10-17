@@ -34,3 +34,5 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 release.properties
 /.apt_generated/
+
+application.properties

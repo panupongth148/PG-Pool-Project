@@ -18,6 +18,7 @@ export class ResourceHttpRequestService {
 
 
   AddResource(addResource: AddResourceModel): Observable<AddResourceModel>{
+    console.log(addResource)
     return this.http.post<AddResourceModel>("/api/resource", addResource);
   }
 

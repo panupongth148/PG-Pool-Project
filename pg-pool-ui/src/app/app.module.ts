@@ -34,6 +34,7 @@ import { RouterModule } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import { FilterResourcePipe } from './shared/pipe/filter-resource.pipe';
 import { CardModule, } from 'primeng/card';
+import {ToastModule} from 'primeng/toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,8 @@ import { CardModule, } from 'primeng/card';
     BrowserAnimationsModule,
     TabViewModule,
     RouterModule,
-    CardModule
+    CardModule,
+    ToastModule
     
     
   ],

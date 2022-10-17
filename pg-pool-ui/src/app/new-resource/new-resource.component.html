@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="m-5 align-items-center">
   <h2>New Resource</h2>
 <form [formGroup]="resourceForm">
@@ -72,7 +73,8 @@
           Position
          <div class="col-4">
        </div>
-          <input type="text" pInputText formControlName="position" />
+       <p-dropdown [options]="positions" formControlName="position" placeholder="Select a Position" optionLabel="name" [showClear]="true"></p-dropdown>
+          <!-- <input type="text" pInputText formControlName="position" /> -->
           <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
             <em class="pi pi-times-circle"></em> Field is required.
           </small> -->
@@ -109,4 +111,5 @@
       </div>
     </div>
   </form>
+  <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
 </div>
