@@ -1,4 +1,4 @@
-package beans;
+package pojo;
 
 public class TokenResponse {
     private String token;

@@ -19,12 +19,12 @@ import org.bson.types.ObjectId;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.wildfly.security.WildFlyElytronProvider;
 
-import beans.TokenResponse;
 // import io.quarkus.mailer.Mail;
 // import io.quarkus.mailer.reactive.ReactiveMailer;
 import io.smallrye.mutiny.Uni;
 import lib.Schedule.ScheduleAssigned;
 import lib.SendEmail.SendEmail;
+import pojo.TokenResponse;
 
 @Path("/api/user")
 @Consumes("application/json")
