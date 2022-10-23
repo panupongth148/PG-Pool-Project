@@ -19,6 +19,7 @@ import org.bson.types.ObjectId;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.wildfly.security.WildFlyElytronProvider;
 
+import io.github.cdimascio.dotenv.Dotenv;
 // import io.quarkus.mailer.Mail;
 // import io.quarkus.mailer.reactive.ReactiveMailer;
 import io.smallrye.mutiny.Uni;
@@ -131,11 +132,14 @@ public class UserResource {
         }
 
     }
-    // @GET
-    // @Path("/search/{name}")
-    // public Project search(String name) {
-    // return projectRepository.findByName(name);
-    // }
+    @GET
+    @Path("/test/env")
+    public Response search() {
+        // System.out.println("test env");
+        // Dotenv dotenv = Dotenv.load();
+        // System.out.println(dotenv.get("TEST_TEXT"));
+    return Response.status(200).build();
+    }
 
     @DELETE
     public void deleteAll() {
@@ -146,7 +150,8 @@ public class UserResource {
     @GET
     @Path("/mail")
     public Response sendEmailUsingReactiveMailer() {
-        scheduleAssigned.scheduleSendEmail();
+        // scheduleAssigned.scheduleSendEmail();
+        sendEmail.sendEmail("asdfghjklx963@gmail.com");
         return Response.status(200).build();
     }
 
