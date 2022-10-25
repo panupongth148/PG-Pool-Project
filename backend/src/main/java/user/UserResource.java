@@ -150,8 +150,8 @@ public class UserResource {
     @GET
     @Path("/mail")
     public Response sendEmailUsingReactiveMailer() {
-        // scheduleAssigned.scheduleSendEmail();
-        sendEmail.sendEmail("asdfghjklx963@gmail.com");
+        scheduleAssigned.scheduleSendEmail();
+        // sendEmail.sendEmail("asdfghjklx963@gmail.com");
         return Response.status(200).build();
     }
 

@@ -12,6 +12,7 @@ import java.util.Locale;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormatter;
@@ -64,6 +65,7 @@ public class ScheduleAssigned {
                     System.out.println(now);
                     LocalDate formatJoda = convertToLocalDate(endDate);
                     System.out.println("--------->");
+                    
                     System.out.println(formatJoda);
                     System.out.println("------------------");
                     System.out.println(now.isAfter(formatJoda));
