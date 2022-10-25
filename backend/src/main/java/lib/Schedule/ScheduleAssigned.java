@@ -81,7 +81,7 @@ public class ScheduleAssigned {
                         if(diff < 30){
                             System.out.println(subProject.getProjectCode());
                             Project project = projectRepository.find("project_code", subProject.getProjectCode()).firstResult();
-                            message = message + (resource.getPrefix() + " " + resource.getFirstName() + " " + resource.getLastName() + " ในโครงการ "+ project.getProjectName() +" ภายใน "+ diff + " วัน\n");
+                            message = message + "<p style='font-size:18px'>"+(resource.getPrefix() + " " + resource.getFirstName() + " " + resource.getLastName() + "  "+ project.getProjectName() +" ภายใน "+ diff + " วัน</p>");
                         }
                         // long diff = Math.abs(Days.daysBetween(now, formatJoda).getDays());
                         // System.out.println(diff);
