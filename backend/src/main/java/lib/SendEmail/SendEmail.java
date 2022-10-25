@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class SendEmail {
-    public static String sendEmail(String emailReciever) {
+    public static String sendEmail(String emailReciever, String textMessage) {
         Dotenv dotenv = Dotenv.load();
           // Recipient's email ID needs to be mentioned.
           String to = emailReciever;
@@ -57,10 +57,10 @@ public class SendEmail {
               message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
   
               // Set Subject: header field
-              message.setSubject("หัวข้อ");
+              message.setSubject("แจ้งเตือนหนักงานหมด Assigned");
   
               // Now set the actual message
-              message.setText("เนื้อหาภายใน");
+              message.setContent(textMessage, "text/html; charset=UTF-8");
   
               System.out.println("sending...");
               // Send message
