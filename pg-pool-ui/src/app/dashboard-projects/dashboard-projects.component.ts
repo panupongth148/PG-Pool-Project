@@ -8,6 +8,7 @@ import MonthModel from '../shared/interface/MonthModel';
 import ProjectResponseModel from '../shared/interface/ProjectResponseModel';
 import ResourceModel from '../shared/interface/ResourceModel';
 import mountResourceEnd from '../shared/interface/MonthResourceEnd';
+import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
 
 interface testChart {
     year: string,
@@ -33,6 +34,7 @@ export class DashboardProjectsComponent implements OnInit {
     years: string = "2565"
     testChart: testChart
     typeChartLabel?: any
+    user?:any;
     mountsResource: mountResourceEnd[];
     today: Date = new Date(Date.now());
     isGetDetailChart: boolean = false
@@ -42,8 +44,19 @@ export class DashboardProjectsComponent implements OnInit {
     }
 
 
-    constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectService: ProjectHttpRequestService) {
+    constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectService: ProjectHttpRequestService, private jwtService:JwtDecodeService) {
         // Chart.register(...registerables);
+        const token = localStorage.getItem("PG_Pool_token")
+        if (token) {
+            const tokenInfo = this.jwtService.getDecodedAccessToken(token); // decode token
+            const expireDate = tokenInfo.exp; // get token expiration dateTime
+            // console.log(tokenInfo); // show decoded token object in console
+            this.user = {
+                id: tokenInfo.id,
+                username: tokenInfo.username,
+                email: tokenInfo.email
+            }
+        }
         this.typeChartLabel = ""
         this.mountsResource = [
             {
@@ -421,8 +434,8 @@ export class DashboardProjectsComponent implements OnInit {
     }
 
     getAllProject() {
-        this.projectService.getAllProject().subscribe(res => {
-            // console.log(res)
+        this.projectService.getAllProjectByUserId(this.user.id).subscribe(res => {
+            console.log(res)
             this.projects = res
             this.getAllResource();
         })
