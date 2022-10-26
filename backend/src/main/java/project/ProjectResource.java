@@ -186,6 +186,12 @@ public class ProjectResource {
         return projectRepository.findByName(name);
     }
 
+    @GET
+    @Path("/project/requested")
+    public Response getProjectHaveRequest(){
+        return Response.ok(projectRepository).status(200).build();
+    }
+
     @DELETE
     public void deleteAll() {
         projectRepository.deleteAll();

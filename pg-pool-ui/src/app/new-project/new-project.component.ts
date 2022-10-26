@@ -23,7 +23,8 @@ export class NewProjectComponent implements OnInit {
     contractEnd: new FormControl(),
     resourceRequest: new FormControl(),
     positionRequestForm : new FormControl(),
-    amountRequestForm : new FormControl()
+    amountRequestForm : new FormControl(),
+    monthRequestForm : new FormControl()
   });
   user?:any;
   subscription?: Subscription;
@@ -80,7 +81,8 @@ export class NewProjectComponent implements OnInit {
     requests: this.listPositionRequest,
     memberAmount: 0,
     contractStart: this.projectForm.get("contractStart")?.value,
-    contractEnd: this.projectForm.get("contractEnd")?.value
+    contractEnd: this.projectForm.get("contractEnd")?.value,
+    projectOwner: this.user.id
     }
     await this.projectHttpRequestService.addProject(project).subscribe(res =>{
       console.log("sucess")
@@ -111,7 +113,8 @@ onChange(){
     console.log(this.projectForm.get("positionRequestForm")?.value);
     this.listPositionRequest.push({
       amount: this.projectForm.get("amountRequestForm")?.value,
-      positionRequest: this.projectForm.get("positionRequestForm")?.value
+      positionRequest: this.projectForm.get("positionRequestForm")?.value,
+      dateWithin: this.projectForm.get("monthRequestForm")?.value
     });
     this.projectForm.get("positionRequestForm")?.setValue("")
     this.projectForm.get("amountRequestForm")?.setValue("1")

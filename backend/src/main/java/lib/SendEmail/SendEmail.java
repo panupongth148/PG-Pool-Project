@@ -57,7 +57,7 @@ public class SendEmail {
               message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
   
               // Set Subject: header field
-              message.setSubject("แจ้งเตือนหนักงานหมด Assigned");
+              message.setSubject("แจ้งเตือนพนักงานหมด Assigned");
   
               // Now set the actual message
               message.setContent(textMessage, "text/html; charset=UTF-8");

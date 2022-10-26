@@ -35,6 +35,8 @@ import {MenuItem} from 'primeng/api';
 import { FilterResourcePipe } from './shared/pipe/filter-resource.pipe';
 import { CardModule, } from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
+import { AssignResourceComponent } from './assign-resource/assign-resource.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,7 @@ import {ToastModule} from 'primeng/toast';
     LoginComponent,
     RegisterComponent,
     FilterResourcePipe,
+    AssignResourceComponent,
 
   ],
   imports: [

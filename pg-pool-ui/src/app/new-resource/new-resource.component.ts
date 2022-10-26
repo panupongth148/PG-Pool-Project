@@ -51,11 +51,17 @@ export class NewResourceComponent implements OnInit {
     this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
 }
   async onSubmit() {
+    let firstNameRaw = this.resourceForm.get("firstName")?.value;
+    firstNameRaw = firstNameRaw.toLowerCase();
+    firstNameRaw = firstNameRaw.charAt(0).toUpperCase() + firstNameRaw.slice(1);
+    let lastNameRaw = this.resourceForm.get("lastName")?.value;
+    lastNameRaw = lastNameRaw.toLowerCase();
+    lastNameRaw = lastNameRaw.charAt(0).toUpperCase() + lastNameRaw.slice(1);
     const resource = {
       empNo: this.resourceForm.get("empNo")?.value,
       prefix: this.resourceForm.get("prefix")?.value.name,
-      firstName: this.resourceForm.get("firstName")?.value,
-      lastName: this.resourceForm.get("lastName")?.value,
+      firstName: firstNameRaw,
+      lastName: lastNameRaw,
       tel: this.resourceForm.get("tel")?.value,
       empEmail: this.resourceForm.get("empEmail")?.value,
       position: this.resourceForm.get("position")?.value.name,

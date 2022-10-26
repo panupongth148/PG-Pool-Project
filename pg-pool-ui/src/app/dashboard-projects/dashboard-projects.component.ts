@@ -36,6 +36,7 @@ export class DashboardProjectsComponent implements OnInit {
     typeChartLabel?: any
     user?:any;
     mountsResource: mountResourceEnd[];
+    monthDetail: mountResourceEnd[] = [];
     today: Date = new Date(Date.now());
     isGetDetailChart: boolean = false
     ngOnInit(): void {
@@ -121,11 +122,12 @@ export class DashboardProjectsComponent implements OnInit {
             }
         ]
         this.selectedMonth = {
-            name: "January",
-            code: "Jan"
+            name: "selected Month",
+            code: "default"
         }
-        this.months = [{ name: "January", code: "Jan" }, { name: "February", code: "Feb" }, { name: "March", code: "Mar" }, { name: "April", code: "Apr" }, { name: "May", code: "May" }, { name: "June", code: "Jun" }
-            , { name: "July", code: "Jul" }, { name: "August", code: "Aug" }, { name: "September", code: "Sep" }, { name: "October", code: "Oct" }, { name: "November", code: "Nov" }, { name: "December", code: "Dec" }]
+         this.months = [{name: "selected month", code: "default"}, { name: "January", code: "Jan" }, { name: "February", code: "Feb" }, { name: "March", code: "Mar" }, { name: "April", code: "Apr" }, { name: "May", code: "May" }, { name: "June", code: "Jun" }
+             , { name: "July", code: "Jul" }, { name: "August", code: "Aug" }, { name: "September", code: "Sep" }, { name: "October", code: "Oct" }, { name: "November", code: "Nov" }, { name: "December", code: "Dec" }]
+        // this.months = []
         this.chartDetail = {
             month: this.selectedMonth.name,
             empty: {
@@ -429,13 +431,14 @@ export class DashboardProjectsComponent implements OnInit {
         // console.log("finisish ")
         // console.log("after")
 
-        console.log(this.mountsResource)
+        // console.log(this.mountsResource)
+         this.setDropdown();
 
     }
 
     getAllProject() {
         this.projectService.getAllProjectByUserId(this.user.id).subscribe(res => {
-            console.log(res)
+            // console.log(res)
             this.projects = res
             this.getAllResource();
         })
@@ -443,13 +446,29 @@ export class DashboardProjectsComponent implements OnInit {
 
     getProjectsByProductCode() {
         this.projectService.getProjectsByProductCode(this.listCode).subscribe(res => {
-            console.log(res)
+            // console.log(res)
             this.projectsRequest = res
         })
     }
 
+    
 
+    setDropdown(){
+        //  this.months = []
+        this.mountsResource.forEach((val) =>{
+            this.months.push({
+                name: val.label,
+                code: val.label
+            })
+    })
+    this.months.splice(0,13)
+        // console.log(this.months)
+    }
 
+    onDropdownChange(event:any){
+        console.log(event.value)
+        console.log(this.resouseAssign)
+    }
 }
 
 

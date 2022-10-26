@@ -35,4 +35,8 @@ export class ProjectHttpRequestService {
     console.log("import")
     return this.http.post('/api/project/upload', excelFile)
   }
+
+  getProjectHaveRequest(){
+    return this.http.get("api/project/project/requested");
+  }
 }

@@ -78,4 +78,9 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
     public List<Project> findProjectByUserId(String userId){
          return find("project_owner", userId).list();
     }
+
+    public List<Project> getProjectHaveRequest(){
+        List<Project> projects = find("requests is not null").list();
+        return projects;
+    }
 }

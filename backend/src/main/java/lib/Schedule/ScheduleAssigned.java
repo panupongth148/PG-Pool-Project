@@ -12,6 +12,7 @@ import java.util.Locale;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -25,13 +26,19 @@ import resource.Resource;
 import resource.ResourceRepository;
 import sub.document.SubProject;
 import sub.document.WorkingDetail;
+import user.User;
+import user.UserRepository;
 
 @ApplicationScoped
 public class ScheduleAssigned {
 
     private List<Resource> listResource;
 
-    private List<Project> listProject;
+    private List<String> listOwner = new ArrayList<>();
+
+    private List<String> emailSend = new ArrayList<>();
+
+    private boolean haveAssigned = false;
 
     @Inject
     private SendEmail sendEmail;
@@ -41,6 +48,9 @@ public class ScheduleAssigned {
 
     @Inject
     private ProjectRepository projectRepository;
+
+    @Inject
+    private UserRepository userRepository;
 
     @Scheduled(cron = "{cron.expr}")
     public void scheduleSendEmail() {
@@ -59,28 +69,31 @@ public class ScheduleAssigned {
                 for (SubProject subProject : resource.getProjects()) {
                     Date endDate = subProject.getWorkingDetail().get(subProject.getWorkingDetail().size() - 1)
                             .getEndDate();
-                    System.out.println(endDate);
+                    // System.out.println(endDate);
                     ThaiBuddhistDate tbd = ThaiBuddhistDate.now(ZoneId.systemDefault());
                     // System.out.println(tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                     String dateNow = tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalDate now = LocalDate.parse(dateNow);
-                    System.out.println("Now : ");
-                    System.out.println(now);
+                    // System.out.println("Now : ");
+                    // System.out.println(now);
                     LocalDate formatJoda = convertToLocalDate(endDate);
-                    System.out.println("Enddate : ");
+                    // System.out.println("Enddate : ");
               
-                    System.out.println(formatJoda);
-                    System.out.println("------------------");
+                    // System.out.println(formatJoda);
+                    // System.out.println("------------------");
  
-                    System.out.println();
+                    // System.out.println();
                     long diff = Math.abs(Days.daysBetween(now, formatJoda).getDays());
                     // System.out.println(diff);
                     if (formatJoda.isAfter(now)) {
-                        System.out.println("end date : ");
-                        System.out.println(endDate);
+                        // System.out.println("end date : ");
+                        
+                        // System.out.println(endDate);
                         if(diff < 30){
-                            System.out.println(subProject.getProjectCode());
+                            haveAssigned = true;
+                            // System.out.println(subProject.getProjectCode());
                             Project project = projectRepository.find("project_code", subProject.getProjectCode()).firstResult();
+                            listOwner.add(project.getProjectOwner());
                             message = message + "<p style='font-size:18px'>"+(resource.getPrefix() + " " + resource.getFirstName() + " " + resource.getLastName() + "  "+ project.getProjectName() +" ภายใน "+ diff + " วัน</p>");
                         }
                         // long diff = Math.abs(Days.daysBetween(now, formatJoda).getDays());
@@ -94,7 +107,21 @@ public class ScheduleAssigned {
 
         }
         // System.out.println(message);
-        sendEmail.sendEmail("asdfghjklx963@gmail.com", message);
+        if(haveAssigned){
+            for(String id: listOwner){
+                System.out.println(id);
+                ObjectId objId = new ObjectId(id);
+                String email = userRepository.findById(objId).getEmail();
+                System.out.println(email);
+                emailSend.add(email);
+
+            }
+            for(String email: emailSend){
+                sendEmail.sendEmail(email, message);
+            }
+            
+        }
+        
         // System.out.println(this.listResource);
         // System.out.println("Cron expression configured in application.properties");
     }

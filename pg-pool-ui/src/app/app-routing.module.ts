@@ -11,6 +11,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { DashboardProjectsComponent } from './dashboard-projects/dashboard-projects.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AssignResourceComponent } from './assign-resource/assign-resource.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path: 'resource/:id', component: ResourceDetailComponent},
   { path: 'dashboard', component: DashboardProjectsComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'assign', component: AssignResourceComponent}
 
 ];
 

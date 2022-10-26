@@ -1,4 +1,5 @@
 export default interface PositionProjectRequest {
     amount: Number,
-    positionRequest: string
+    positionRequest: string,
+    dateWithin: Date
   }
