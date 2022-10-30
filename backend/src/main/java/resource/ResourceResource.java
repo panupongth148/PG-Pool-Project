@@ -68,6 +68,13 @@ public class ResourceResource {
         return resourceRepository.findByName(name);
     }
 
+    @GET
+    @Path("resource/empty")
+    public Response findResourceEmpty(){
+        
+        return Response.ok(resourceRepository.findResourcesCanAssigned()).status(200).build();
+    }
+
     @DELETE
     public void deleteAll(){
         resourceRepository.deleteAll();

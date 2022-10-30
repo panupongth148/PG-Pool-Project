@@ -37,6 +37,6 @@ export class ProjectHttpRequestService {
   }
 
   getProjectHaveRequest(){
-    return this.http.get("api/project/project/requested");
+    return this.http.get<Array<any>>("api/project/project/requested");
   }
 }

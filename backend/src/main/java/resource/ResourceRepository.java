@@ -16,4 +16,7 @@ public class ResourceRepository implements PanacheMongoRepository<Resource> {
     public List<Resource> findByProjectCode(String projectCode){
         return find("projects.project_code", projectCode).list();
     }
+    public List<Resource> findResourcesCanAssigned(){
+        return find("projects is null").list();
+    }
 }

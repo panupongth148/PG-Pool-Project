@@ -30,4 +30,7 @@ export class ResourceHttpRequestService {
     
     return this.http.get<any>("api/resource/"+ id);
   }
+  getResourceEmpty(){
+    return this.http.get<any>("resource/empty");
+  }
 }

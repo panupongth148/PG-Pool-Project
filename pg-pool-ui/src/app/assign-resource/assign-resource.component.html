@@ -1,1 +1,23 @@
-<p>assign-resource works!</p>
+<div class="container">
+    <div class="my-5">
+        <div><p class="header-title">บุคลากรที่ว่าง</p></div>
+        <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2 box">
+            <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+        </div>
+        
+    </div>
+    <div>
+        <p class="sub-header">โปรเจคที่่มีการร้องขอบุคลากร</p>
+        <div *ngFor="let project of projectRequest" class="pl-3 mt-2 box">
+            {{ project.projectName}} {{" "}} {{project.projectCode}}
+            <div>
+                <p >ตำแหน่งที่ต้องการ</p>
+            </div>
+            <div class="" *ngFor="let position of project.requests">
+                <p>{{position.positionRequest}} ภายใน {{position.dateWithin | date}}</p>
+                
+                <!-- มีดู duration ของ resource แต่ละคนอยู่แล้ว -->
+            </div>
+        </div>
+    </div>
+</div>
