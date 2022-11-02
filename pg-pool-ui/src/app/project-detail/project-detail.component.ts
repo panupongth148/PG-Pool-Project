@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class ProjectDetailComponent implements OnInit {
   id: any;
+  loading: boolean = true;
+  activityValues: number[] = [0, 100];
   project: ProjectResponseModel;
   resources: Array<ResourceModel>;
   constructor(private route: ActivatedRoute, private projectHttpRequestService: ProjectHttpRequestService, private resourceHttpRequest: ResourceHttpRequestService, private router:Router) {
@@ -80,6 +82,7 @@ export class ProjectDetailComponent implements OnInit {
       await this.resourceHttpRequest.getResourceByProductCode(this.project.projectCode).subscribe((res => {
         console.log(res)
         this.resources = res;
+        this.loading = false
       }));
     } catch (error) {
       console.log(error)

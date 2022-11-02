@@ -36,6 +36,7 @@ import { FilterResourcePipe } from './shared/pipe/filter-resource.pipe';
 import { CardModule, } from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
 import { AssignResourceComponent } from './assign-resource/assign-resource.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { AssignResourceComponent } from './assign-resource/assign-resource.compo
     TabViewModule,
     RouterModule,
     CardModule,
-    ToastModule
+    ToastModule,
+    TableModule
     
     
   ],
