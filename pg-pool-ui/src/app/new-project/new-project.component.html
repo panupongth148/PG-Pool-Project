@@ -1,148 +1,158 @@
-<div class="m-5">
-    <h2>New Project</h2>
-
-    <div class="grid">
-        <div class="col">
-            <h3>Import with file</h3>
-        </div>
-    </div>
-
-    <div class="grid">
-        <div class="col">
-            <h3>upload Excel file</h3>
-        </div>
-    </div>
-    <div class="grid">
-        <div class="col">
-            <p-fileUpload #fileInput name="image" (uploadHandler)="onUpload($event)"
-            [customUpload]="true" >
-                <ng-template pTemplate="content">
-                    <ul *ngIf="uploadedFiles.length">
-                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                    </ul>
-                </ng-template>
-            </p-fileUpload>
-        </div>
-        
-    </div>
-
-
-    <div class="grid">
-
-        <h3>New Project with Form</h3>
-    </div>
-    <div class="grid">
-        <form [formGroup]="projectForm">
-            <div class="grid my-3">
-                <div class="col-3">
-                    Project Name
-
-                    <input type="text" pInputText formControlName="projectName" />
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                  <em class="pi pi-times-circle"></em> Field is required.
-                </small> -->
-                </div>
-
-
-                <div class="col-3">
-                    Project Code
-
-                    <input type="text" pInputText formControlName="projectCode" />
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                    <em class="pi pi-times-circle"></em> Field is required.
-                  </small> -->
-                </div>
-
-
-                <div class="col-3">
-                    <div>ContractStart</div>
-
-                    <div><input type="date" pInputText formControlName="contractStart" /></div>
-
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                      <em class="pi pi-times-circle"></em> Field is required.
-                    </small> -->
-
-                </div>
-
-                <div class="col-3">
-                    <div>ContractEnd</div>
-
-                    <div><input type="date" pInputText formControlName="contractEnd" /></div>
-
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                      <em class="pi pi-times-circle"></em> Field is required.
-                    </small> -->
-                </div>
-
-
-            </div>
-            <div class="grid my-3">
-                <div class="col-3">
-                    <div>Position</div>
-                    <div>
-
-                        <input list="id-position" formControlName="positionRequestForm" value=""
-                            (ngModelChange)="onChange()" pInputText>
-                        <datalist id="id-position">
-                            <option *ngFor="let position of positionList" [value]="position">{{position}}</option>
-                        </datalist>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div>Amount</div>
-                    <div><input type="number" pInputText formControlName="amountRequestForm" /></div>
-                </div>
-                <div class="col-3">
-                    <div>Month Of Request</div>
-                    <div><input type="date" pInputText formControlName="monthRequestForm" /></div>
-                </div>
-                <div class="col-3">
-
-                    <div class="pt-3"><button pButton pRipple label="add" (click)="addRequest()"></button></div>
-                </div>
-            </div>
-            <div class="grid my-3"></div>
-            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                      <em class="pi pi-times-circle"></em> Field is required.
-                    </small> -->
-
-
-            <!-- <div class="grid my-3">
-                <div class="col-6"> -->
-            <!-- <input list="id-car" [(ngModel)]="selectedResource"
-                        value="" (ngModelChange)="onChange()">
-                    <datalist id="id-car">
-                        <option *ngFor="let car of cars" [value]="car.make">{{car.make}} - {{car.model}}</option>
-                    </datalist>
-
-                    {{selectedCarObj.model}} - {{selectedCarObj.make}} -->
-            <!-- </div>
-                <div class="col-6">
-                    <button pButton pRipple label="add" (click)="addProject()"></button>
-                    <button pButton routerLink="/newresource" class="ml-2">New</button>
-                </div>
-            </div> -->
+<div class="container mt-5">
+    
+    <p class="header-title">New Project</p>
+    <p-tabView>
+        <p-tabPanel header="Create Project With Excel File">
             <div class="grid">
-
                 <div class="col">
-                    <ul>
-                        <li *ngFor="let positionL of  listPositionRequest">{{positionL.positionRequest }}
-                            {{positionL.amount}} Person
-                        Within {{positionL.dateWithin}}</li>
-                    </ul>
+                    <p class="header-content">Import excel file</p>
                 </div>
             </div>
+        
+            <div class="grid">
+                <div class="col">
+                    <p-fileUpload #fileInput name="image" (uploadHandler)="onUpload($event)"
+                    [customUpload]="true" >
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+                
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Create File Manual">
             <div class="grid">
 
-                <div class="col-1">
-
-                    <button pButton pRipple label="Create" (click)="addProject()"></button>
-
-                </div>
+                <p class="header-content">New Project with Form</p>
             </div>
-        </form>
+            <div class="grid">
+                <form [formGroup]="projectForm">
+                    <div class="grid my-3">
+                        <div class="col-3">
+                            Project Name
+        
+                            <input type="text" pInputText formControlName="projectName" />
+                            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                          <em class="pi pi-times-circle"></em> Field is required.
+                        </small> -->
+                        </div>
+        
+        
+                        <div class="col-3">
+                            Project Code
+        
+                            <input type="text" pInputText formControlName="projectCode" />
+                            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                            <em class="pi pi-times-circle"></em> Field is required.
+                          </small> -->
+                        </div>
+        
+        
+                        <div class="col-3">
+                            <div>ContractStart</div>
+        
+                            <div><input type="date" pInputText formControlName="contractStart" /></div>
+        
+                            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                              <em class="pi pi-times-circle"></em> Field is required.
+                            </small> -->
+        
+                        </div>
+        
+                        <div class="col-3">
+                            <div>ContractEnd</div>
+        
+                            <div><input type="date" pInputText formControlName="contractEnd" /></div>
+        
+                            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                              <em class="pi pi-times-circle"></em> Field is required.
+                            </small> -->
+                        </div>
+        
+        
+                    </div>
+                    <div class="grid my-3">
+                        <div class="col">
+                            <p class="header-sub-content">Request Resource Part</p> </div>
+                    </div>
+                    <div class="grid">
+                        
+                        <div class="col-3">
+                            <div>Position</div>
+                            <div>
+        
+                                <input list="id-position" formControlName="positionRequestForm" value=""
+                                    (ngModelChange)="onChange()" pInputText>
+                                <datalist id="id-position">
+                                    <option *ngFor="let position of positionList" [value]="position">{{position}}</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>Amount</div>
+                            <div><input type="number" pInputText formControlName="amountRequestForm" /></div>
+                        </div>
+                        <div class="col-3">
+                            <div>Month Of Request</div>
+                            <div><input type="date" pInputText formControlName="monthRequestForm" /></div>
+                        </div>
+                        <div class="col-3">
+        
+                            <div class="pt-3"><button pButton pRipple label="add" (click)="addRequest()"></button></div>
+                        </div>
+                    </div>
+                    <div class="grid my-3"></div>
+                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                              <em class="pi pi-times-circle"></em> Field is required.
+                            </small> -->
+        
+        
+                    <!-- <div class="grid my-3">
+                        <div class="col-6"> -->
+                    <!-- <input list="id-car" [(ngModel)]="selectedResource"
+                                value="" (ngModelChange)="onChange()">
+                            <datalist id="id-car">
+                                <option *ngFor="let car of cars" [value]="car.make">{{car.make}} - {{car.model}}</option>
+                            </datalist>
+        
+                            {{selectedCarObj.model}} - {{selectedCarObj.make}} -->
+                    <!-- </div>
+                        <div class="col-6">
+                            <button pButton pRipple label="add" (click)="addProject()"></button>
+                            <button pButton routerLink="/newresource" class="ml-2">New</button>
+                        </div>
+                    </div> -->
+                    <div class="grid">
+        
+                        <div class="col">
+                            <ul>
+                                <li *ngFor="let positionL of  listPositionRequest">{{positionL.positionRequest }}
+                                    {{positionL.amount}} Person
+                                Within {{positionL.dateWithin}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="grid">
+        
+                        <div class="col-1">
+        
+                            <button pButton pRipple label="Create" (click)="addProject()"></button>
+        
+                        </div>
+                    </div>
+                </form>
+        
+        
+            </div>
+        </p-tabPanel>
+        
+    </p-tabView>
+
+    
 
 
-    </div>
+
 </div>

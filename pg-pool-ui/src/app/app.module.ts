@@ -37,7 +37,8 @@ import { CardModule, } from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
 import { AssignResourceComponent } from './assign-resource/assign-resource.component';
 import {TableModule} from 'primeng/table';
-
+import {ImageModule} from 'primeng/image';
+import {ChartModule} from 'primeng/chart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +79,10 @@ import {TableModule} from 'primeng/table';
     RouterModule,
     CardModule,
     ToastModule,
-    TableModule
+    TableModule,
+    ImageModule,
+    ChartModule
+    
     
     
   ],

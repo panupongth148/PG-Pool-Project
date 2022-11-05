@@ -18,11 +18,7 @@ export class NavbarComponent implements OnInit {
         label: 'File',
         icon: 'pi pi-fw pi-file',
     },
-    {
-        label: 'Resource',
-        icon: 'pi pi-fw pi-pencil',
-        routerLink: "/resource"
-    },
+
     {
         label: 'Users',
         icon: 'pi pi-fw pi-user',
@@ -47,11 +43,6 @@ export class NavbarComponent implements OnInit {
                 label: 'Project',
                 icon: 'pi pi-fw pi-file',
                 routerLink: "/project"
-            },
-            {
-                label: 'Dashboard',
-                icon: 'pi pi-fw pi-power-off',
-                routerLink: "dashboard"
             },
             {
                 label: 'Resource',

@@ -9,23 +9,9 @@
     <div class="grid mt-3">
         <div class="col">
 
-            <p-tabView>
-                <p-tabPanel header="Year">
-
-                    <h4 class="mt-3" style="text-align: center">{{years}}</h4>
-                    <div class="graph" class="mt-3" *ngIf="isGetDetailChart">
-                        <app-chart-resource [chartDetail]="mountsResource"></app-chart-resource>
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="Month">
-                    <p-dropdown [options]="months" [(ngModel)]="selectedMonth" (onChange)="onDropdownChange($event)" placeholder="Select Month"
-                        optionLabel="name" [showClear]="true" class="mt-3"></p-dropdown>
-                    <h4 class="mt-3" style="text-align: center">{{this.selectedMonth.name}}</h4>
-                    <div class="graph" class="mt-3" *ngIf="isGetDetailChart">
-                        <app-chart-resource [chartDetail]="mountsResource"></app-chart-resource>
-                    </div>
-                </p-tabPanel>
-            </p-tabView>
+            <div class="graph" class="mt-3" *ngIf="isGetDetailChart">
+                <app-chart-resource [chartDetail]="mountsResource"></app-chart-resource>
+            </div>
 
 
         </div>

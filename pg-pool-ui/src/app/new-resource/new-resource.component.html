@@ -1,115 +1,103 @@
 <p-toast></p-toast>
-<div class="m-5 align-items-center">
-  <h2>New Resource</h2>
-<form [formGroup]="resourceForm">
-  <div class="grid ">
-    <div class="col-2">
-      Emp No
-     <div class="col-4">
-   </div>
-      <input type="text" pInputText formControlName="empNo" />
-      <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-        <em class="pi pi-times-circle"></em> Field is required.
-      </small> -->
+<div class="container align-items-center">
+  <div class="grid">
+    <div class="col">
+      <p class="header-title">New Resource</p>
     </div>
   </div>
-  <div class="grid ">
-    <div class="col-2">
-      Prefix
-     <div class="col-4">
-   </div>
-   <p-dropdown [options]="prefixs" formControlName="prefix" placeholder="Select a Prefix" optionLabel="name" [showClear]="true"></p-dropdown>
-      <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-        <em class="pi pi-times-circle"></em> Field is required.
-      </small> -->
+  <div class="grid my-5 box-content">
+    
+    <div class="col relative" style="position: relative">
+      <p-image class="img-size" src="https://img.freepik.com/free-vector/managers-looking-chart-monitor_1262-19283.jpg?w=996&t=st=1667660411~exp=1667661011~hmac=f951cf544a679c8cb288330fd614d7d9fc8af8aca473c83a7191c1664291d47a" alt="Image" width="100%">
+      </p-image>
+    </div>
+    <div class="col">
+      <div class="my-3"><p class="header-content">Create Resource</p></div>
+      <div class="mt-5">
+      <form [formGroup]="resourceForm">
+        <div class="grid ">
+          <div class="col">
+            <p>Emp No</p>
+
+            <input type="text" pInputText formControlName="empNo" />
+            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+              <em class="pi pi-times-circle"></em> Field is required.
+            </small> -->
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col">
+            <p>Prefix</p>
+            <p-dropdown [options]="prefixs" formControlName="prefix" placeholder="Select a Prefix" optionLabel="name"
+              [showClear]="true"></p-dropdown>
+          </div>
+          <div class="col">
+            <p>Firstname</p>
+            <input type="text" pInputText formControlName="firstName" />
+          </div>
+          <div class="col">
+            <p>Lastname</p>
+            <input type="text" pInputText formControlName="lastName" />
+          </div>
+        </div>
+
+
+        <div class="grid">
+
+
+          <div class="col">
+            <p>Telephone</p>
+            <input type="text" pInputText formControlName="tel" />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col">
+            <p>Email</p>
+            <input type="text" pInputText formControlName="empEmail" />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col-4">
+            <p>Position</p>
+            <p-dropdown [options]="positions" formControlName="position" placeholder="Select a Position"
+              optionLabel="name" [showClear]="true"></p-dropdown>
+          </div>
+        </div>
+          
+
+          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                  <em class="pi pi-times-circle"></em> Field is required.
+                </small> -->
+        
+
+        <div class="grid">
+          <div class="col">
+            <p>Hiredate</p>
+            
+            <input type="date" pInputText formControlName="hireDate" />
+            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                  <em class="pi pi-times-circle"></em> Field is required.
+                </small> -->
+          </div>
+          <div class="col">
+
+            <p>Expire Date</p>
+            <input type="date" pInputText formControlName="expireDate" />
+          </div>
+
+        </div>
+        
+        <div class="grid mt-5">
+
+          <div class="col">
+
+            <button pButton pRipple  (click)="onSubmit()">Add </button>
+
+          </div>
+        </div>
+      </form>
+      </div>
     </div>
   </div>
-  <div class="grid ">
-    <div class="col-2">
-      Firstname
-     <div class="col-4">
-   </div>
-      <input type="text" pInputText formControlName="firstName" />
-      <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-        <em class="pi pi-times-circle"></em> Field is required.
-      </small> -->
-    </div>
-  </div>
-    <div class="grid">
-      <div class="col-2">
-        Lastname
-       <div class="col-4">
-     </div>
-        <input type="text" pInputText formControlName="lastName" />
-        <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-          <em class="pi pi-times-circle"></em> Field is required.
-        </small> -->
-      </div>
-    </div>
-    <div class="grid">
-        <div class="col-2">
-          Telephone
-         <div class="col-4">
-       </div>
-          <input type="text" pInputText formControlName="tel" />
-          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-            <em class="pi pi-times-circle"></em> Field is required.
-          </small> -->
-        </div>
-      </div>
-      <div class="grid">
-        <div class="col-2">
-          Email
-         <div class="col-4">
-       </div>
-          <input type="text" pInputText formControlName="empEmail" />
-          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-            <em class="pi pi-times-circle"></em> Field is required.
-          </small> -->
-        </div>
-      </div>
-      <div class="grid">
-        <div class="col-2">
-          Position
-         <div class="col-4">
-       </div>
-       <p-dropdown [options]="positions" formControlName="position" placeholder="Select a Position" optionLabel="name" [showClear]="true"></p-dropdown>
-          <!-- <input type="text" pInputText formControlName="position" /> -->
-          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-            <em class="pi pi-times-circle"></em> Field is required.
-          </small> -->
-        </div>
-      </div>
-      <div class="grid">
-        <div class="col-2">
-          Hiredate
-         <div class="col-4">
-       </div>
-          <input type="date" pInputText formControlName="hireDate" />
-          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-            <em class="pi pi-times-circle"></em> Field is required.
-          </small> -->
-        </div>
-      </div>
-      <div class="grid">
-        <div class="col-2">
-          Expire Date
-         <div class="col-4">
-       </div>
-          <input type="date" pInputText formControlName="expireDate" />
-          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-            <em class="pi pi-times-circle"></em> Field is required.
-          </small> -->
-        </div>
-      </div>
-    <div class="grid">
 
-      <div class="col-1">
-
-        <button pButton pRipple label="Save" (click)="onSubmit()">Add </button>
-
-      </div>
-    </div>
-  </form>
-  <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
 </div>

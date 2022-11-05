@@ -1,11 +1,25 @@
-<div class="m-5">
-    <div>
-        <h2 class="my-center-text"> Project</h2>
+<div class="container mt-5">
+    <div class="grid">
+        <div class="col">
+            <p class="header-title"> Project</p>
+        </div>
+        
+
     </div>
-    <div *ngFor="let project of projects" class="p-2 mb-4 box" (click)="toDetailProject(project.id)">
-        {{ project.projectName}} {{" "}} {{project.projectCode}}
+    <div class="grid">
+        <div class="col"></div>
+        <div class="col">
+            <button pButton routerLink="/new/project" class="" style="float: right;">New Project</button>
+        </div>
     </div>
-    <button pButton routerLink="/new/project">New Project</button>
+    <div *ngFor="let project of projects" class="p-2 my-3 position-card" (click)="toDetailProject(project.id)">
+        <p-card [header]="project.projectCode" [style]="{'width': '90%', 'margin-bottom': '2em'}">
+            <p>        {{ project.projectName}} </p>
+        </p-card>
+        
+
+    </div>
+    
 </div>
 
 

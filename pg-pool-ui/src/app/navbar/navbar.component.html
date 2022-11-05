@@ -1,6 +1,6 @@
 <p-menubar [model]="items">
     <ng-template pTemplate="start">
-        <img src="assets/images/cat-logo.jpg" height="40" class="mr-2">
+        <img src="assets/images/cat-logo.jpg" height="40" class="mr-2" [routerLink]="['/home']">
     </ng-template>
     <ng-template pTemplate="end">
         <div *ngIf="user;else other_content">

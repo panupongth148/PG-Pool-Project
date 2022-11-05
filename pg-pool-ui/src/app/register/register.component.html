@@ -1,13 +1,15 @@
 <div class="container mt-3">
-    <div class="grid">
-        <div class="col">
-            <p class="header">Register</p>
-        </div>
+
+  <div class="grid mt-5 box-content">
+    <div class="col m-5">
+      <p-image src="https://i.pinimg.com/564x/1a/a1/4a/1aa14a5570ca9bd365743552d6426beb.jpg" alt="Image" width="100%">
+      </p-image>
+
     </div>
-    <div class="grid">
-        <div class="col">
-            <form [formGroup]="registerForm">
-                <!-- <div class="grid">
+    <div class="col my-5 mx-2">
+      <p class="header-content">Register</p>
+      <form [formGroup]="registerForm">
+        <!-- <div class="grid">
                     <div class="col-2">
                       Lastname
                      <div class="col-4">
@@ -18,52 +20,61 @@
                       </small>
                     </div>
                   </div> -->
-                <div class="grid ">
-                  <div class="col-2">
-                    Username
-                   <div class="col-4">
-                 </div>
-                    <input type="text" pInputText formControlName="username" />
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                      <em class="pi pi-times-circle"></em> Field is required.
-                    </small> -->
-                  </div>
-                </div>
-                <div class="grid ">
-                  <div class="col-2">
-                    Password
-                   <div class="col-4">
-                 </div>
-                    <input type="password" pInputText formControlName="password" />
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                      <em class="pi pi-times-circle"></em> Field is required.
-                    </small> -->
-                  </div>
-                </div>
-                <div class="grid ">
-                  <div class="col-2">
-                    Email
-                   <div class="col-4">
-                 </div>
-                    <input type="email" pInputText formControlName="email" />
-                    <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
-                      <em class="pi pi-times-circle"></em> Field is required.
-                    </small> -->
-                  </div>
-                </div>
-                  
-                    
-                  <div class="grid">
-              
-                    <div class="col-1">
-              
-                      <button pButton pRipple (click)="onSubmit()">Register </button>
-              
-                    </div>
-                  </div>
-                </form>
+        <div class="grid mt-5">
+          <div class="col">
+            <p class="header-label">Username</p>
+            <div class="p-inputgroup">
 
-
+              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+              <input type="text" pInputText formControlName="username" placeholder="username"/>
+            </div>
+            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                      <em class="pi pi-times-circle"></em> Field is required.
+                    </small> -->
+          </div>
         </div>
+        <div class="grid mt-3">
+          <div class="col">
+            <p class="header-label">Password</p>
+            <div class="p-inputgroup">
+
+              <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+              <input type="password" pInputText formControlName="password" placeholder="password"/>
+            </div>
+
+
+            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                      <em class="pi pi-times-circle"></em> Field is required.
+                    </small> -->
+          </div>
+        </div>
+        <div class="grid mt-3">
+          <div class="col">
+            <p class="header-label">Email</p>
+            <div class="p-inputgroup">
+
+              <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+              <input type="email" pInputText formControlName="email" placeholder="Email"/>
+            </div>
+
+
+            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                      <em class="pi pi-times-circle"></em> Field is required.
+                    </small> -->
+          </div>
+        </div>
+
+        <div class="grid mt-5">
+
+          <div class="col-1">
+
+            <button pButton pRipple (click)="onSubmit()">Register </button>
+
+          </div>
+        </div>
+      </form>
+
+
     </div>
+  </div>
 </div>

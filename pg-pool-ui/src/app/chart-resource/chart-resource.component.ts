@@ -41,18 +41,18 @@ export class ChartResourceComponent implements OnInit {
             {
               data: listCount,
               label: "Assigned",
-              fill: true,
+              fill: false,
               tension: 0.5,
-              borderColor: 'black',
-              backgroundColor: 'rgba(255,0,0,0.3)'
+              borderColor: '#FFA726',
+                    
+
             },
             {
               data: listEmpty,
               label: "Empty",
-              fill: true,
+              fill: false,
               tension: 0.5,
-              borderColor: 'black',
-              backgroundColor: 'rgb(0, 68, 251)'
+              borderColor: '#42A5F5',
             },
     
           ]
