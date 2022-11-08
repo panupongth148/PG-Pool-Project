@@ -86,6 +86,14 @@ public class ProjectResource {
         return projectRepository.findProjectRequest();
     }
 
+    @GET
+    @Path("/getrequest")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response findProjectRequest(){
+        return Response.ok(projectRepository.getProjectRequest()).status(200).build();
+    }
+
 
     @GET
     @Path("/findbyownerid/{id}")

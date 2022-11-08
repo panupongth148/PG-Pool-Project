@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
+import pojo.DatewithinModel;
+
 public class RequestResource implements Serializable{
 
     @BsonProperty(value = "amount")
@@ -14,7 +16,7 @@ public class RequestResource implements Serializable{
     private String positionRequest;
 
     @BsonProperty(value = "date_within")
-    private Date dateWithin;
+    private DatewithinModel dateWithin;
 
     public Integer getAmount() {
         return amount;
@@ -30,12 +32,14 @@ public class RequestResource implements Serializable{
     public void setPositionRequest(String positionRequest) {
         this.positionRequest = positionRequest;
     }
-    public Date getDateWithin() {
+    public DatewithinModel getDateWithin() {
         return dateWithin;
     }
-    public void setDateWithin(Date dateWithin) {
+    public void setDateWithin(DatewithinModel dateWithin) {
         this.dateWithin = dateWithin;
     }
+    
+    
     
     
 

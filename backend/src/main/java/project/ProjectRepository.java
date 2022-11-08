@@ -15,8 +15,10 @@ import javax.transaction.Transactional;
 import org.jboss.resteasy.reactive.DateFormat;
 import java.time.ZoneId;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
+import pojo.ProjectRequest;
 import resource.Resource;
 import resource.ResourceRepository;
+import sub.document.RequestResource;
 import sub.document.SubProject;
 import sub.document.WorkingDetail;
 import user.UserRepository;
@@ -83,4 +85,19 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
         List<Project> projects = find("requests is not null").list();
         return projects;
     }
+
+   public List<ProjectRequest> getProjectRequest(){
+    List<ProjectRequest> projectRequestsList = new ArrayList<ProjectRequest>();
+    //List<String> months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    List<Project> projects = find("requests is not null").list();
+    // for(int i = 0;i< 12;i++){
+
+    // }
+    for(Project project: projects){
+        for(RequestResource request : project.getRequests()){
+            
+        }
+    }
+    return projectRequestsList;
+   }
 }
