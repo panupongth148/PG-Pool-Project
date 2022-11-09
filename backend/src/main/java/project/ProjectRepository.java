@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 import org.jboss.resteasy.reactive.DateFormat;
 import java.time.ZoneId;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
-import pojo.ProjectRequest;
+import pojo.ProjecRequestResponse.ProjectRequest;
 import resource.Resource;
 import resource.ResourceRepository;
 import sub.document.RequestResource;
@@ -94,8 +94,9 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
 
     // }
     for(Project project: projects){
+        System.out.println(project.getProjectName());
         for(RequestResource request : project.getRequests()){
-            
+            System.out.println(request.getPositionRequest());
         }
     }
     return projectRequestsList;

@@ -1,4 +1,4 @@
-package pojo;
+package pojo.upload;
 
 import javax.ws.rs.core.MediaType;
 

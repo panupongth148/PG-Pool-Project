@@ -19,10 +19,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 // import org.apache.poi.ss.usermodel.CellType;
 
-import pojo.ExcelObject;
-import pojo.ProjectdetailBoolean;
-import pojo.SubResourceBoolean;
-
+import pojo.Excel.ExcelObject;
+import pojo.Excel.BooleanObj.ProjectdetailBoolean;
+import pojo.Excel.BooleanObj.SubResourceBoolean;
 import project.Project;
 import resource.Resource;
 import sub.document.RequestResource;

@@ -1,4 +1,4 @@
-package pojo;
+package pojo.ProjecRequestResponse;
 
 public class RequestPositionModel {
     private String position;

@@ -1,4 +1,4 @@
-package pojo;
+package sub.document;
 
 import java.util.Date;
 import java.util.List;

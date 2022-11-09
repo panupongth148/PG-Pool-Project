@@ -1,4 +1,4 @@
-package pojo;
+package pojo.Excel.BooleanObj;
 
 import java.util.List;
 

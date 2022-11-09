@@ -1,4 +1,4 @@
-package pojo;
+package pojo.Excel.BooleanObj;
 
 public class SubResourceBoolean {
     private boolean empNo;

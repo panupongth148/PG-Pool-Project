@@ -1,7 +1,12 @@
-package pojo;
+package pojo.ProjecRequestResponse;
+
+import java.util.Date;
 
 public class ProjectRequest {
     private int month;
+    
+   
+
     private RequestMonthDetail requestMonthDetail;
     public int getMonth() {
         return month;

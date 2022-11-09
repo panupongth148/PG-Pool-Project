@@ -33,8 +33,8 @@ import org.jboss.resteasy.reactive.MultipartForm;
 
 import lib.SaveFile;
 import lib.excel.ReadExcel;
-import pojo.ExcelObject;
-import pojo.FormData;
+import pojo.Excel.ExcelObject;
+import pojo.upload.FormData;
 import resource.Resource;
 import resource.ResourceRepository;
 
