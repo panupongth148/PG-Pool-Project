@@ -16,6 +16,8 @@ import org.jboss.resteasy.reactive.DateFormat;
 import java.time.ZoneId;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import pojo.ProjecRequestResponse.ProjectRequest;
+import pojo.ProjecRequestResponse.RequestMonthDetail;
+import pojo.ProjecRequestResponse.RequestPositionModel;
 import resource.Resource;
 import resource.ResourceRepository;
 import sub.document.RequestResource;
@@ -91,12 +93,32 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
     //List<String> months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
     List<Project> projects = find("requests is not null").list();
     // for(int i = 0;i< 12;i++){
-
+    System.out.println("filter request");
     // }
+
+    for(int i = 0;i < 12;i++){
+        ProjectRequest projectRequest = new ProjectRequest();
+        List<RequestMonthDetail> requestMonthDetail = new ArrayList<RequestMonthDetail>();
+        
+        projectRequest.setMonth(i);
+        projectRequest.setRequestMonthDetail(requestMonthDetail);
+        projectRequestsList.add(projectRequest);
+    }
     for(Project project: projects){
         System.out.println(project.getProjectName());
+        List<RequestResource> requestResources = new ArrayList<RequestResource>();
         for(RequestResource request : project.getRequests()){
+            
+            requestResources.add(request);
+            RequestMonthDetail requestMonthDetail = new RequestMonthDetail();
+            requestMonthDetail.setProjectCode(project.getProjectCode());
+            // requestMonthDetail.setRequestPositionModel(request);
+            requestMonthDetail.setRequestPositionModel(requestResources);
+            
+            projectRequestsList.get(request.getDateWithin().getMonth()).getRequestMonthDetail().add(requestMonthDetail);
             System.out.println(request.getPositionRequest());
+            System.out.println(request.getDateWithin());
+            System.out.println(request.getDateWithin().getMonth());
         }
     }
     return projectRequestsList;

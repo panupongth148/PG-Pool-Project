@@ -195,11 +195,12 @@ public class ProjectResource {
     }
 
     @GET
-    @Path("/project/requested")
+    @Path("/requested")
     @Consumes("application/json")
     @Produces("application/json")
     public Response getProjectHaveRequest(){
-        return Response.ok(projectRepository.getProjectHaveRequest()).status(200).build();
+        System.out.println("request");
+        return Response.ok(projectRepository.getProjectRequest()).status(200).build();
     }
 
     @DELETE

@@ -13,11 +13,11 @@ public class RequestResource implements Serializable{
     @BsonProperty(value = "position_request")
     private String positionRequest;
 
-    @BsonProperty(value = "date_within")
-    private DatewithinModel dateWithin;
-    
     // @BsonProperty(value = "date_within")
-    //  private Date dateWithin;
+    // private DatewithinModel dateWithin;
+    
+    @BsonProperty(value = "date_within")
+     private Date dateWithin;
 
 
     public Integer getAmount() {
@@ -34,18 +34,18 @@ public class RequestResource implements Serializable{
     public void setPositionRequest(String positionRequest) {
         this.positionRequest = positionRequest;
     }
-    public DatewithinModel getDateWithin() {
-        return dateWithin;
-    }
-    public void setDateWithin(DatewithinModel dateWithin) {
-        this.dateWithin = dateWithin;
-    }
-    // public Date getDateWithin() {
+    // public DatewithinModel getDateWithin() {
     //     return dateWithin;
     // }
-    // public void setDateWithin(Date dateWithin) {
+    // public void setDateWithin(DatewithinModel dateWithin) {
     //     this.dateWithin = dateWithin;
     // }
+    public Date getDateWithin() {
+        return dateWithin;
+    }
+    public void setDateWithin(Date dateWithin) {
+        this.dateWithin = dateWithin;
+    }
 
 
     
