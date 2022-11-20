@@ -39,6 +39,7 @@ import { AssignResourceComponent } from './assign-resource/assign-resource.compo
 import {TableModule} from 'primeng/table';
 import {ImageModule} from 'primeng/image';
 import {ChartModule} from 'primeng/chart';
+import { DateFormatPipe } from './shared/pipe/date/date-format.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import {ChartModule} from 'primeng/chart';
     RegisterComponent,
     FilterResourcePipe,
     AssignResourceComponent,
+    DateFormatPipe,
 
   ],
   imports: [

@@ -1,12 +1,81 @@
-<div class="container">
+<div class="container mb-5">
     <div class="my-5">
         <div>
             <p class="header-title">บุคลากรที่ว่าง</p>
         </div>
-        <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2 box">
-            <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+        <div>
+            <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p>
+        </div>
+        <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2">
+            <div class="grid">
+                <div class="col-6 m-2">
+                    <p-card>
+                        <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+                    </p-card>
+                </div>
+
+            </div>
+
+
         </div>
 
+    </div>
+    <div>
+        <p class="header-title"> โครงการที่ร้องขอทรัพยากร</p>
+
+        <p-tabView [scrollable]="true">
+
+
+            <p-tabPanel *ngFor="let request of resourceForRender;let i = index" [header]="months[request.month]">
+                <div *ngIf="request.requestDetail.length > 0;else elseRequest">
+                    <div *ngFor="let info of request.requestDetail" #elseRequest>
+
+                        <p-card [style]="{ 'margin-bottom': '2em'}">
+                            <p>{{ info.projectCode + " " + info.projectName}}</p>
+                        </p-card>
+                        <div *ngFor="let position of info.requests">
+                            <!-- <p>{{ position.positionRequest}}</p> -->
+                            <div class="grid">
+                                <div class="col">
+                                    <p> ตำแหน่ง {{ position.positionRequest }}</p>
+                                </div>
+                                <div class="col">
+                                    <p> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <ng-template #elseRequest> ไม่มีโครงการในเดือนนี้</ng-template>
+
+            </p-tabPanel>
+
+
+
+        </p-tabView>
+
+        <!-- <p-tabView [scrollable]="true">
+
+
+            <p-tabPanel  *ngFor="let request of finalRequestResource;let i = index" [header]="months[request.month]" >
+                <div *ngIf="request.requestMonthDetail.length > 0;else elseRequest">
+                    <div *ngFor="let requestDetail of request.requestMonthDetail" #elseRequest>
+
+                        <p-card [style]="{ 'margin-bottom': '2em'}">
+                            <p>{{requestDetail.project.projectCode + " " + requestDetail.project.projectName}}</p>
+                        </p-card>
+                    </div>
+                    
+                </div>
+                <ng-template #elseRequest>No Project Request in this month</ng-template>
+                
+            </p-tabPanel>
+
+
+
+        </p-tabView> -->
     </div>
     <!-- <div>
         <p class="sub-header">โปรเจคที่มีการร้องขอบุคลากร</p>

@@ -13,20 +13,31 @@ export class AssignResourceComponent implements OnInit {
 
   constructor(private projectHttpRequestService: ProjectHttpRequestService, private resourceHttpRequestService: ResourceHttpRequestService) { }
   projectRequest?: any[]
+  // request resource
+  requestResource?: any[]
+  finalRequestResource?: any[]
+  //render
+  resourceForRender: any[] = []
+  // month
+  //months: any[] = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  months: any[] = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]
+
+  years: any = new Date().getFullYear()
   dataListResource?: any[] = []
   resources?: ResourceModel[]
   resourceLReq?: any[] = [];
   resourcesEmpty?: ResourceModel[]
   addResourceConfirm?: any[] = []
   positionSelected: any[] = []
-  startDateList:any[] = []
-  endDateList:any[] = []
-  durationList:any[] = []
-  assignList:any[] = []
+  startDateList: any[] = []
+  endDateList: any[] = []
+  durationList: any[] = []
+  assignList: any[] = []
   reqAssign?: any[] = []
-  projects?:any[] = []
+  projects?: any[] = []
   ngOnInit(): void {
     this.getProjectHaveRequest()
+    this.getRequestResource()
     this.getAllResource()
 
   }
@@ -46,7 +57,7 @@ export class AssignResourceComponent implements OnInit {
       this.resourcesEmpty = res.filter((val) => {
         return val.projects == null
       })
-      this.filterResourceEmpty()
+      // this.filterResourceEmpty()
     })
 
   }
@@ -76,9 +87,74 @@ export class AssignResourceComponent implements OnInit {
   addResource(projectId: any, index: any) {
     console.log(index)
     console.log(this.positionSelected[index])
-    this.projects?.push({assigned:this.assignList[index], duration: this.durationList[index], startDate:this.startDateList[index], endDate:this.endDateList[index], working:(this.assignList[index]*100)/this.durationList[index]})
+    this.projects?.push({ assigned: this.assignList[index], duration: this.durationList[index], startDate: this.startDateList[index], endDate: this.endDateList[index], working: (this.assignList[index] * 100) / this.durationList[index] })
     console.log(this.projects)
-    this.addResourceConfirm?.push({resourceId: this.positionSelected[index].resource.id , projects:this.projects})
+    this.addResourceConfirm?.push({ resourceId: this.positionSelected[index].resource.id, projects: this.projects })
     console.log(this.addResourceConfirm)
+  }
+
+
+  getRequestResource() {
+    this.projectHttpRequestService.getProjectRequsts().subscribe((val) => {
+
+      this.requestResource = val
+      const d = new Date();
+      let month = d.getMonth();
+
+      let temp = this.requestResource.map(a => {return {...a}})
+      let back = this.requestResource.splice(0,  month )
+
+      this.finalRequestResource = temp.splice(month, temp.length-1)
+
+      Array.prototype.push.apply(this.finalRequestResource,back);
+
+      this.finalRequestResource.forEach((val:any, indexFirst:any) =>{
+        if(val.requestMonthDetail.length > 0){
+          const haveProject:any[] = [];
+          this.resourceForRender?.push({
+            month: val.month,
+            requestDetail:[]})
+          val.requestMonthDetail.forEach((val2:any )=>{
+            if(!haveProject.includes(val2.project.projectCode)){
+
+              haveProject.push(val2.project.projectCode)
+              this.resourceForRender[indexFirst].requestDetail.push({projectCode : val2.project.projectCode,
+                                     projectName: val2.project.projectName,
+                                     requests:[val2.requestPositionModel]})
+
+            }else{
+
+              this.resourceForRender?.forEach((valRequest:any, index:any) =>{
+
+                valRequest.requestDetail.forEach((detail:any, index2:any) =>{
+
+                  if(detail.projectCode == val2.project.projectCode){
+
+                    this.resourceForRender[index].requestDetail[index2].requests.push(val2.requestPositionModel)
+
+                }
+                })
+              
+                
+              })
+            }
+
+          })
+
+        }else{
+          this.resourceForRender?.push({
+            month: val.month,
+            requestDetail: []
+          })  
+        }
+
+      })
+      for(let i = 0;i< this.months.length;i++){
+        if(i < month){
+          this.months[i] = this.months[i]+" ( " +(this.years+1+543)+" )"
+        }
+      }
+      // console.log(this.months)
+    })
   }
 }

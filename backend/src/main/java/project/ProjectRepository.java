@@ -3,6 +3,7 @@ package project;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,6 +91,7 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
 
    public List<ProjectRequest> getProjectRequest(){
     List<ProjectRequest> projectRequestsList = new ArrayList<ProjectRequest>();
+    int year = Year.now().getValue();
     //List<String> months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
     List<Project> projects = find("requests is not null").list();
     // for(int i = 0;i< 12;i++){
@@ -106,19 +108,25 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
     }
     for(Project project: projects){
         System.out.println(project.getProjectName());
-        List<RequestResource> requestResources = new ArrayList<RequestResource>();
+        //bug
+        //List<RequestResource> requestResources = new ArrayList<RequestResource>();
         for(RequestResource request : project.getRequests()){
-            
-            requestResources.add(request);
-            RequestMonthDetail requestMonthDetail = new RequestMonthDetail();
-            requestMonthDetail.setProjectCode(project.getProjectCode());
-            // requestMonthDetail.setRequestPositionModel(request);
-            requestMonthDetail.setRequestPositionModel(requestResources);
+            //bug
+            // requestResources.add(request);
+
+            if((request.getDateWithin().getYear() - year) < 2){
+                RequestMonthDetail requestMonthDetail = new RequestMonthDetail();
+            requestMonthDetail.setProject(project);
+            requestMonthDetail.setRequestPositionModel(request);
+            //bug
+            // requestMonthDetail.setRequestPositionModel(requestResources);
             
             projectRequestsList.get(request.getDateWithin().getMonth()).getRequestMonthDetail().add(requestMonthDetail);
             System.out.println(request.getPositionRequest());
             System.out.println(request.getDateWithin());
             System.out.println(request.getDateWithin().getMonth());
+            }
+            
         }
     }
     return projectRequestsList;
