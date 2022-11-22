@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 
 import org.jboss.resteasy.reactive.DateFormat;
 import java.time.ZoneId;
+import java.time.chrono.ThaiBuddhistDate;
+
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import pojo.ProjecRequestResponse.ProjectRequest;
 import pojo.ProjecRequestResponse.RequestMonthDetail;
@@ -31,7 +33,6 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
 
     @Inject
     private ResourceRepository resourceRepository;
-
 
     @Inject
     private UserRepository userRepository;
@@ -78,57 +79,87 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
         // List<Project> listData = list(" > ?1 and firstname != ?2", )
         return resourceList;
     }
-    
 
-    public List<Project> findProjectByUserId(String userId){
-         return find("project_owner", userId).list();
+    public List<Project> findProjectByUserId(String userId) {
+        return find("project_owner", userId).list();
     }
 
-    public List<Project> getProjectHaveRequest(){
+    public List<Project> getProjectHaveRequest() {
         List<Project> projects = find("requests is not null").list();
         return projects;
     }
 
-   public List<ProjectRequest> getProjectRequest(){
-    List<ProjectRequest> projectRequestsList = new ArrayList<ProjectRequest>();
-    int year = Year.now().getValue();
-    //List<String> months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    List<Project> projects = find("requests is not null").list();
-    // for(int i = 0;i< 12;i++){
-    System.out.println("filter request");
-    // }
+    public List<ProjectRequest> getProjectRequest() {
+        List<ProjectRequest> projectRequestsList = new ArrayList<ProjectRequest>();
+        int year = Year.now().getValue();
+        // List<String> months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July",
+        // "Aug", "Sep", "Oct", "Nov", "Dec"];
+        List<Project> projects = find("requests is not null").list();
+        // for(int i = 0;i< 12;i++){
+        System.out.println("filter request");
+        // }
 
-    for(int i = 0;i < 12;i++){
-        ProjectRequest projectRequest = new ProjectRequest();
-        List<RequestMonthDetail> requestMonthDetail = new ArrayList<RequestMonthDetail>();
-        
-        projectRequest.setMonth(i);
-        projectRequest.setRequestMonthDetail(requestMonthDetail);
-        projectRequestsList.add(projectRequest);
-    }
-    for(Project project: projects){
-        System.out.println(project.getProjectName());
-        //bug
-        //List<RequestResource> requestResources = new ArrayList<RequestResource>();
-        for(RequestResource request : project.getRequests()){
-            //bug
-            // requestResources.add(request);
+        for (int i = 0; i < 12; i++) {
+            ProjectRequest projectRequest = new ProjectRequest();
+            List<RequestMonthDetail> requestMonthDetail = new ArrayList<RequestMonthDetail>();
 
-            if((request.getDateWithin().getYear() - year) < 2){
-                RequestMonthDetail requestMonthDetail = new RequestMonthDetail();
-            requestMonthDetail.setProject(project);
-            requestMonthDetail.setRequestPositionModel(request);
-            //bug
-            // requestMonthDetail.setRequestPositionModel(requestResources);
-            
-            projectRequestsList.get(request.getDateWithin().getMonth()).getRequestMonthDetail().add(requestMonthDetail);
-            System.out.println(request.getPositionRequest());
-            System.out.println(request.getDateWithin());
-            System.out.println(request.getDateWithin().getMonth());
-            }
-            
+            projectRequest.setMonth(i);
+            projectRequest.setRequestMonthDetail(requestMonthDetail);
+            projectRequestsList.add(projectRequest);
         }
+        for (Project project : projects) {
+            System.out.println(project.getProjectName());
+            // bug
+            // List<RequestResource> requestResources = new ArrayList<RequestResource>();
+            for (RequestResource request : project.getRequests()) {
+                // bug
+                // requestResources.add(request);
+
+                if ((request.getDateWithin().getYear() - year) < 2) {
+                    RequestMonthDetail requestMonthDetail = new RequestMonthDetail();
+                    requestMonthDetail.setProject(project);
+                    requestMonthDetail.setRequestPositionModel(request);
+                    // bug
+                    // requestMonthDetail.setRequestPositionModel(requestResources);
+
+                    projectRequestsList.get(request.getDateWithin().getMonth()).getRequestMonthDetail()
+                            .add(requestMonthDetail);
+                    // System.out.println(request.getPositionRequest());
+                    // System.out.println(request.getDateWithin());
+                    // System.out.println(request.getDateWithin().getMonth());
+                }
+
+            }
+        }
+        return projectRequestsList;
     }
-    return projectRequestsList;
-   }
+
+    public Integer getAllAmountResource() {
+        Integer allAmount = 0;
+        ThaiBuddhistDate tbd = ThaiBuddhistDate.now(ZoneId.systemDefault());
+        String dateNow = tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        org.joda.time.LocalDate now = org.joda.time.LocalDate.parse(dateNow);
+        // org.joda.time.LocalDate today = new org.joda.time.LocalDate();
+        org.joda.time.LocalDate d1 = now.plusMonths(12).withDayOfMonth(1);
+        // System.out.println(d1);
+        List<Project> projects = find("requests is not null").list();
+        for (Project project : projects) {
+            for (RequestResource request : project.getRequests()) {
+                org.joda.time.LocalDate formatJoda = convertToLocalDate(request.getDateWithin());
+                if (formatJoda.isBefore(now)) {
+                    allAmount = allAmount + request.getAmount();
+                }
+                
+
+            }
+        }
+        return allAmount;
+    }
+  
+
+    public org.joda.time.LocalDate convertToLocalDate(Date date) {
+        if (date == null)
+            return null;
+        return new org.joda.time.LocalDate(date);
+    }
 }

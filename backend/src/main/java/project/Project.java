@@ -41,6 +41,9 @@ public class Project {
 	@BsonProperty(value = "project_owner")
 	private String projectOwner;
 
+	@BsonProperty(value = "is_history")
+	private boolean isHistory;
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -121,5 +124,14 @@ public class Project {
 		this.projectOwner = projectOwner;
 	}
 
+	public boolean isHistory() {
+		return isHistory;
+	}
+
+	public void setHistory(boolean isHistory) {
+		this.isHistory = isHistory;
+	}
+
+	
 	
 }

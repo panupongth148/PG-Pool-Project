@@ -82,7 +82,8 @@ export class NewProjectComponent implements OnInit {
     memberAmount: 0,
     contractStart: this.projectForm.get("contractStart")?.value,
     contractEnd: this.projectForm.get("contractEnd")?.value,
-    projectOwner: this.user.id
+    projectOwner: this.user.id,
+    isHistory: false
     }
     await this.projectHttpRequestService.addProject(project).subscribe(res =>{
       console.log("sucess")

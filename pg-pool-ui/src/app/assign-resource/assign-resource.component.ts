@@ -18,6 +18,7 @@ export class AssignResourceComponent implements OnInit {
   finalRequestResource?: any[]
   //render
   resourceForRender: any[] = []
+  requestEachAmount: any[] = [{ label: "Programmer", amount: 0}, {label: "Programmer Specialist 1", amount: 0}, {label: "Programmer Specialist 2", amount:0}]
   // month
   //months: any[] = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   months: any[] = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]
@@ -35,6 +36,8 @@ export class AssignResourceComponent implements OnInit {
   assignList: any[] = []
   reqAssign?: any[] = []
   projects?: any[] = []
+  allRequestAmount?:number;
+  
   ngOnInit(): void {
     this.getProjectHaveRequest()
     this.getRequestResource()
@@ -96,7 +99,7 @@ export class AssignResourceComponent implements OnInit {
 
   getRequestResource() {
     this.projectHttpRequestService.getProjectRequsts().subscribe((val) => {
-
+      // console.log(val)
       this.requestResource = val
       const d = new Date();
       let month = d.getMonth();
@@ -115,6 +118,16 @@ export class AssignResourceComponent implements OnInit {
             month: val.month,
             requestDetail:[]})
           val.requestMonthDetail.forEach((val2:any )=>{
+            // console.log(val2)
+            if(val2.requestPositionModel.positionRequest == "Programmer"){
+              this.requestEachAmount[0].amount += val2.requestPositionModel.amount
+            }
+            if(val2.requestPositionModel.positionRequest == "Programmer Specialist 1"){
+              this.requestEachAmount[1].amount += val2.requestPositionModel.amount
+            }
+            if(val2.requestPositionModel.positionRequest == "Programmer Specialist 2"){
+              this.requestEachAmount[2].amount += val2.requestPositionModel.amount
+            }
             if(!haveProject.includes(val2.project.projectCode)){
 
               haveProject.push(val2.project.projectCode)
@@ -155,6 +168,15 @@ export class AssignResourceComponent implements OnInit {
         }
       }
       // console.log(this.months)
+    })
+    // console.log(this.requestEachAmount)
+    this.getAllRequestAmount();
+  }
+
+  getAllRequestAmount(){
+    this.projectHttpRequestService.getRequestAllAmount().subscribe((val) =>{
+      console.log(val)
+      this.allRequestAmount = val
     })
   }
 }

@@ -41,6 +41,10 @@ export class ProjectHttpRequestService {
   }
 
   getProjectRequsts(){
-    return this.http.get<Array<any>>("api/project/getrequest")
+    return this.http.get<Array<any>>("api/project/getrequest");
+  }
+
+  getRequestAllAmount(){
+    return this.http.get<any>("api/project/allamount");
   }
 }

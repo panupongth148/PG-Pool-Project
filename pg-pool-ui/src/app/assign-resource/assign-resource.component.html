@@ -1,10 +1,18 @@
 <div class="container mb-5">
     <div class="my-5">
         <div>
-            <p class="header-title">บุคลากรที่ว่าง</p>
+            <p class="header-title"> การร้องขอ</p>
         </div>
         <div>
-            <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p>
+            <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p> <p> จำนวนทรัพยากรที่ต้องการของการร้องขอทั้งหมด : {{allRequestAmount}} คน</p> 
+        </div>
+        <div>
+            <div *ngFor="let requestAmount of requestEachAmount">
+                <p>ตำแหน่ง {{requestAmount.label}} จำนวน {{ requestAmount.amount }} คน</p>
+            </div>
+        </div>
+        <div>
+            <p class="header-title">บุคลากรที่ว่าง</p>
         </div>
         <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2">
             <div class="grid">

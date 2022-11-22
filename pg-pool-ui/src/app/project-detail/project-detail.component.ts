@@ -29,7 +29,8 @@ export class ProjectDetailComponent implements OnInit {
       memberAmount: 0,
       contractStart: new Date(),
       contractEnd: new Date(),
-      projectOwner: ""
+      projectOwner: "",
+      isHistory:false
     }
 
     this.resources =[{

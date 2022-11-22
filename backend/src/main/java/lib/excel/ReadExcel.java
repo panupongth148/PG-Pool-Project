@@ -59,9 +59,11 @@ public class ReadExcel {
     public ExcelObject read(byte[] bytes) {
         try {
             // FileInputStream file = new FileInputStream(
-            //         new File("C:\\Users\\admin\\Downloads\\PD220002 (DLT) Team  Working  Period.xlsx"));
+            // new File("C:\\Users\\admin\\Downloads\\PD220002 (DLT) Team Working
+            // Period.xlsx"));
             // FileInputStream file = new FileInputStream(
-            //         new File("C:\\Users\\admin\\Downloads\\PD200071 (CDGS) Team  Working  Period.xlsx"));
+            // new File("C:\\Users\\admin\\Downloads\\PD200071 (CDGS) Team Working
+            // Period.xlsx"));
             // Create Workbook instance holding reference to .xlsx file
 
             InputStream file = new ByteArrayInputStream(bytes);
@@ -87,7 +89,6 @@ public class ReadExcel {
                         case NUMERIC:
                             if (this.isProgrammer) {
                                 if (cell.getColumnIndex() == 6) {
-
 
                                     this.workingDetail.setDuration(cell.getNumericCellValue());
                                 } else if (cell.getColumnIndex() == 7) {
@@ -122,7 +123,7 @@ public class ReadExcel {
 
                             break;
                         case STRING:
-                           
+
                             // Project Code
                             if (projectdetailBoolean.isProjectCode() && cell.getRowIndex() == 3
                                     && cell.getColumnIndex() == 2) {
@@ -132,8 +133,10 @@ public class ReadExcel {
                                 this.setProjectCodeTemp(cell.getStringCellValue());
 
                             }
-                            //Check Programmer
-                            if (cell.getRowIndex() > 8 && (cell.getStringCellValue().contains("Programmer Specialist") || cell.getStringCellValue().equalsIgnoreCase("programmer"))
+                            // Check Programmer
+                            if (cell.getRowIndex() > 8
+                                    && (cell.getStringCellValue().contains("Programmer Specialist")
+                                            || cell.getStringCellValue().equalsIgnoreCase("programmer"))
                                     && cell.getColumnIndex() == 1) {
 
                                 if (this.subProject != null && this.resource != null && this.resourceList != null
@@ -155,7 +158,7 @@ public class ReadExcel {
                                 this.setPassPosition(cell.getStringCellValue());
                                 this.setResource(true);
                             }
-                            //Check Not Programmer
+                            // Check Not Programmer
                             if (cell.getRowIndex() > 8 && !cell.getStringCellValue().contains("Programmer")
                                     && cell.getColumnIndex() == 1 && cell.getStringCellValue() != "") {
                                 isProgrammer = false;
@@ -173,9 +176,17 @@ public class ReadExcel {
                                 if (cell.getColumnIndex() == 4) {
                                     // this.subProject.getEndDate().add(cell.getStringCellValue());
                                     Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    if (day.getYear() < 2500) {
+                                        day.setYear(day.getYear() - 543);
+                                        project.setContractStart(day);
+                                    }
                                     this.workingDetail.setStartDate(day);
                                 } else if (cell.getColumnIndex() == 5) {
                                     Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    if (day.getYear() < 2500) {
+                                        day.setYear(day.getYear() - 543);
+                                        project.setContractStart(day);
+                                    }
                                     this.workingDetail.setEndDate(day);
                                 }
 
@@ -204,25 +215,32 @@ public class ReadExcel {
                                 // day.setMonth(cellValue.charAt(3)+ cellValue.charAt(4));
                                 // day.setYear(cellValue.charAt(6)+ cellValue.charAt(7) + + cellValue.charAt(8)+
                                 // cellValue.charAt(9));
+                                if (day.getYear() < 2500) {
+                                    day.setYear(day.getYear() - 543);
+                                    project.setContractStart(day);
+                                }
 
-                                project.setContractStart(day);
                                 projectdetailBoolean.setContractEnd(true);
-                            //Contract end
+                                // Contract end
                             } else if (projectdetailBoolean.isContractEnd() && cell.getRowIndex() == 5
                                     && cell.getColumnIndex() == 6) {
                                 projectdetailBoolean.setContractEnd(false);
                                 String cellValue = cell.getStringCellValue();
                                 Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                if (day.getYear() < 2500) {
+                                    day.setYear(day.getYear() - 543);
+                                    project.setContractStart(day);
+                                }
                                 project.setContractEnd(day);
-                            //set empNo, prefix, firstName, lastName, startDate, endDate
+                                // set empNo, prefix, firstName, lastName, startDate, endDate
                             } else if (isProgrammer) {
 
-                                //empNo
+                                // empNo
                                 if (cell.getColumnIndex() == 2) {
                                     this.resource.setEmpNo(cell.getStringCellValue());
 
                                 }
-                                // name 
+                                // name
                                 else if (cell.getColumnIndex() == 3) {
                                     String[] arrOfStr = cell.getStringCellValue().split(" ");
                                     String prefix = arrOfStr[0];
@@ -232,20 +250,28 @@ public class ReadExcel {
                                     this.resource.setFirstName(firstName);
                                     this.resource.setLastName(lastName);
 
-                                } 
-                                //startDate
+                                }
+                                // startDate
                                 else if (cell.getColumnIndex() == 4) {
                                     // Date date = new
                                     // SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
                                     // this.subProject.getWorkingDetail().add(cell.getStringCellValue());
                                     Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    if (day.getYear() < 2500) {
+                                        day.setYear(day.getYear() - 543);
+                                        project.setContractStart(day);
+                                    }
                                     this.workingDetail.setStartDate(day);
-                                } 
-                                //endDate
+                                }
+                                // endDate
                                 else if (cell.getColumnIndex() == 5) {
-                                    
+
                                     Date day = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
-                                    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(cell.getStringCellValue());
+                                    if (date1.getYear() < 2500) {
+                                        date1.setYear(date1.getYear() - 543);
+                                        project.setContractStart(date1);
+                                    }
                                     // System.out.println(date1);
                                     this.workingDetail.setEndDate(date1);
                                 }
@@ -257,11 +283,13 @@ public class ReadExcel {
                 }
 
             }
+            this.project.setHistory(false);
             this.listSubProject.add(this.subProject);
             this.resource.setProjects(this.listSubProject);
             this.resourceList.add(this.resource);
             this.project.setMemberAmount(this.resourceList.size());
             file.close();
+
             excelObject.setProject(this.project);
             excelObject.setResourceList(this.resourceList);
         } catch (

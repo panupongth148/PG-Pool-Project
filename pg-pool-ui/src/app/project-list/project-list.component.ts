@@ -25,7 +25,8 @@ export class ProjectListComponent implements OnInit {
       progress: 0.0,
       contractStart: new Date(),
       contractEnd: new Date(),
-      projectOwner: ""
+      projectOwner: "",
+      isHistory:false
     }]
     this.getUser();
     this.getAllResource();

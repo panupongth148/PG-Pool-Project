@@ -11,4 +11,5 @@ export default interface ProjectResponseModel{
     contractStart: Date
     contractEnd: Date,
     projectOwner: string
+    isHistory: boolean
 }

@@ -54,7 +54,8 @@ export class ResourceDetailComponent implements OnInit {
       memberAmount: 0,
       contractStart: new Date(),
       contractEnd: new Date(),
-      projectOwner: ""
+      projectOwner: "",
+      isHistory: false
     }]
   }
 

@@ -8,6 +8,7 @@ export default interface ProjectCreateRequestModel{
         positionRequest: string
     }]
     memberAmount:number,
-    contractStart: Date
-    contractEnd: Date
+    contractStart: Date,
+    contractEnd: Date,
+    isHistory: boolean
 }

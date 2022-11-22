@@ -212,4 +212,13 @@ public class ProjectResource {
             throws IOException {
 
     }
+
+    @GET
+    @Path("/allamount")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response getAllAmount(){
+        Integer amount = projectRepository.getAllAmountResource();
+        return Response.ok(amount).status(200).build();
+    }
 }

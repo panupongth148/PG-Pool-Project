@@ -8,7 +8,7 @@ export class DateFormatPipe implements PipeTransform {
   transform(value: any, ): any {
     let months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]
     
-    console.log(typeof value)
+    // console.log(typeof value)
     let date = new Date(value)
     let year;
     if(date.getFullYear() > 2500){
@@ -16,7 +16,7 @@ export class DateFormatPipe implements PipeTransform {
     }else{
       year = date.getFullYear()+543
     }
-    console.log(date.getFullYear())
+    // console.log(date.getFullYear())
     return date.getDate() + " " + months[date.getMonth()] + " "+ year;
   }
 
