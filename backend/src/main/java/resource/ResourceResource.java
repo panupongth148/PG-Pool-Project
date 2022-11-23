@@ -75,12 +75,12 @@ public class ResourceResource {
         return Response.ok(resourceRepository.findResourcesCanAssigned()).status(200).build();
     }
 
-    // @GET
-    // @Path("getbardetail")
-    // public Response GetBarDetail(){
-        
-    //     return Response.ok(resourceRepository.getResourceInRange()).status(200).build();
-    // }
+    @GET
+    @Path("/getchartdetail")
+    public Response GetBarDetail(){
+        resourceRepository.getResourceInRange();
+        return Response.ok("success test get bar detail api").status(200).build();
+    }
 
     @DELETE
     public void deleteAll(){

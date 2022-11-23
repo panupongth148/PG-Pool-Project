@@ -32,6 +32,8 @@ import org.jboss.resteasy.reactive.MultipartForm;
 // import org.jboss.resteasy.reactive.server.core.multipart.FormData;
 
 import lib.SaveFile;
+import lib.Schedule.ManageDatabase;
+import lib.Schedule.ManageResource;
 import lib.excel.ReadExcel;
 import pojo.Excel.ExcelObject;
 import pojo.upload.FormData;
@@ -55,9 +57,18 @@ public class ProjectResource {
     @Inject
     ReadExcel readExcel;
 
+    // test schedule
+    @Inject
+    ManageResource manageResource;
+
+    @Inject
+    ManageDatabase manageDatabase;
+
     @GET
+    @Consumes("application/json")
+    @Produces("application/json")
     public List<Project> list() {
-        return projectRepository.listAll();
+        return projectRepository.getProjectPresent();
     }
 
     @GET
@@ -153,7 +164,18 @@ public class ProjectResource {
             // // System.out.println("Lastname: " + resource.getLastName());
             // }
             // formData.getFile().uploadedFile();
-
+            List<Project> projectCheckExisList = projectRepository.find("project_code", excelObject.getProject().getProjectCode()).list();
+            if(projectCheckExisList.size() > 0){
+                System.out.println(projectCheckExisList.get(0).getProjectName());
+                projectRepository.delete(projectCheckExisList.get(0));
+                projectRepository.persist(excelObject.getProject());
+                for(Resource resource: excelObject.getResourceList()){
+                    System.out.println(resource.getFirstName());
+                }
+                resourceRepository.persist(excelObject.getResourceList());
+                return Response.ok(excelObject).status(200).build();
+            }
+            System.out.println("new import");
             projectRepository.persist(excelObject.getProject());
             resourceRepository.persist(excelObject.getResourceList());
 
@@ -221,4 +243,23 @@ public class ProjectResource {
         Integer amount = projectRepository.getAllAmountResource();
         return Response.ok(amount).status(200).build();
     }
+
+    @GET
+    @Path("/manageresource")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response ManageResourceSchedule(){
+        manageResource.manageResource();
+        return Response.ok("sucess send api").status(200).build();
+    }
+
+    @GET
+    @Path("/managedatabase")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response ManageDatabaseSchedule(){
+        manageDatabase.manageDatabaseProject();
+        return Response.ok("sucess send manage database project api").status(200).build();
+    }
+    
 }

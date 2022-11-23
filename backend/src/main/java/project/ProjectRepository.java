@@ -14,10 +14,13 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.jboss.resteasy.reactive.DateFormat;
+import org.joda.time.DateTime;
+
 import java.time.ZoneId;
 import java.time.chrono.ThaiBuddhistDate;
 
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
+import pojo.ResponseChartDataModel;
 import pojo.ProjecRequestResponse.ProjectRequest;
 import pojo.ProjecRequestResponse.RequestMonthDetail;
 import pojo.ProjecRequestResponse.RequestPositionModel;
@@ -36,6 +39,7 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
 
     @Inject
     private UserRepository userRepository;
+
 
     public Project findByName(String name) {
         return find("project_name", name).firstResult();
@@ -81,12 +85,16 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
     }
 
     public List<Project> findProjectByUserId(String userId) {
-        return find("project_owner", userId).list();
+        return find("project_owner = ?1 and history = ?2", userId, false).list();
     }
 
     public List<Project> getProjectHaveRequest() {
         List<Project> projects = find("requests is not null").list();
         return projects;
+    }
+
+    public List<Project> getProjectPresent(){
+        return find("history = ?1", false).list();
     }
 
     public List<ProjectRequest> getProjectRequest() {
@@ -136,17 +144,24 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
 
     public Integer getAllAmountResource() {
         Integer allAmount = 0;
-        ThaiBuddhistDate tbd = ThaiBuddhistDate.now(ZoneId.systemDefault());
-        String dateNow = tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        org.joda.time.LocalDate now = org.joda.time.LocalDate.parse(dateNow);
+        // ThaiBuddhistDate tbd = ThaiBuddhistDate.now(ZoneId.systemDefault());
+        // String dateNow = tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // org.joda.time.LocalDate now = org.joda.time.LocalDate.parse(dateNow);
         // org.joda.time.LocalDate today = new org.joda.time.LocalDate();
-        org.joda.time.LocalDate d1 = now.plusMonths(12).withDayOfMonth(1);
+        // org.joda.time.LocalDate d1 = now.plusMonths(12).withDayOfMonth(1);
         // System.out.println(d1);
+        
+
+        
+        DateTime now = new DateTime();
+        org.joda.time.LocalDate today = now.toLocalDate();
+
+        
         List<Project> projects = find("requests is not null").list();
         for (Project project : projects) {
             for (RequestResource request : project.getRequests()) {
                 org.joda.time.LocalDate formatJoda = convertToLocalDate(request.getDateWithin());
-                if (formatJoda.isBefore(now)) {
+                if (formatJoda.isBefore(today)) {
                     allAmount = allAmount + request.getAmount();
                 }
                 

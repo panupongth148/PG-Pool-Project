@@ -14,12 +14,15 @@ import org.joda.time.LocalDate;
 import io.quarkus.scheduler.Scheduled;
 import project.Project;
 import project.ProjectRepository;
+import resource.Resource;
 import resource.ResourceRepository;
 
 @ApplicationScoped
-
 public class ManageResource {
     
+    private List<Resource> resources;
+
+
     @Inject
     ProjectRepository projectRepository;
 
@@ -36,24 +39,50 @@ public class ManageResource {
         // this.today = org.joda.time.LocalDate.parse(dateNow);
     }
 
+    
+
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+
+
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
+    }
+
 
 
     @Scheduled(cron = "{cron.expr}")
-    public void ManageResource() {
+    public void manageResource() {
         // System.out.println(today);
-        List<Project> projects = projectRepository.listAll();
+        try {
+            List<Project> projects = projectRepository.listAll();
         // System.out.println("manage resource");
         for(Project project: projects){
             LocalDate endContract = convertToLocalDate(project.getContractEnd());
-            System.out.println(project.getProjectName());
-            System.out.println(this.today);
-            System.out.println(endContract);
+            // System.out.println(project.getProjectName());
+            // System.out.println(this.today);
+            // System.out.println(endContract);
             if(endContract.isBefore(this.today)){
-                System.out.println(project.getProjectName());
+                // System.out.println(project.getProjectName());
                 project.setHistory(true);
+                this.resources = resourceRepository.find("projects.project_code = ?1", project.getProjectCode()).list();
+                // System.out.println(resources);
+                for(Resource resource:this.resources){
+                    // System.out.println(resource.getFirstName());
+                    resource.setProjects(null);
+                }
             }
         }
+
         projectRepository.update(projects);
+        resourceRepository.update(this.resources);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+        
     }
 
     public LocalDate convertToLocalDate(Date date) {

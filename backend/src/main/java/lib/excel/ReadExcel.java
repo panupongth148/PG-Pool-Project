@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -134,6 +135,11 @@ public class ReadExcel {
 
                             }
                             // Check Programmer
+                            // System.out.println(cell.getStringCellValue());
+                            // System.out.println((cell.getStringCellValue().contains("Programmer Specialist")
+                            // || cell.getStringCellValue().equalsIgnoreCase("programmer")));
+
+                            // System.out.println(StringUtils.equals(cell.getStringCellValue(),"Programmer"));
                             if (cell.getRowIndex() > 8
                                     && (cell.getStringCellValue().contains("Programmer Specialist")
                                             || cell.getStringCellValue().equalsIgnoreCase("programmer"))
@@ -145,7 +151,7 @@ public class ReadExcel {
                                     this.resource.setProjects(this.listSubProject);
                                     this.resourceList.add(this.resource);
                                 }
-
+                                System.out.println(cell.getStringCellValue());
                                 this.subProject = new SubProject();
                                 this.listSubProject = new ArrayList<SubProject>();
                                 this.resource = new Resource();
