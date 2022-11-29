@@ -31,6 +31,10 @@ export class ResourceHttpRequestService {
     return this.http.get<any>("api/resource/"+ id);
   }
   getResourceEmpty(){
-    return this.http.get<any>("resource/empty");
+    return this.http.get<any>("api/resource/empty");
+  }
+
+  deleteResourceById(id:any){
+    return this.http.delete<any>('api/resource/'+id);
   }
 }

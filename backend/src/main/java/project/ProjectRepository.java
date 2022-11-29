@@ -13,6 +13,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import org.bson.types.ObjectId;
 import org.jboss.resteasy.reactive.DateFormat;
 import org.joda.time.DateTime;
 
@@ -39,7 +40,6 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
 
     @Inject
     private UserRepository userRepository;
-
 
     public Project findByName(String name) {
         return find("project_name", name).firstResult();
@@ -93,7 +93,7 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
         return projects;
     }
 
-    public List<Project> getProjectPresent(){
+    public List<Project> getProjectPresent() {
         return find("history = ?1", false).list();
     }
 
@@ -145,18 +145,16 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
     public Integer getAllAmountResource() {
         Integer allAmount = 0;
         // ThaiBuddhistDate tbd = ThaiBuddhistDate.now(ZoneId.systemDefault());
-        // String dateNow = tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // String dateNow =
+        // tbd.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         // org.joda.time.LocalDate now = org.joda.time.LocalDate.parse(dateNow);
         // org.joda.time.LocalDate today = new org.joda.time.LocalDate();
         // org.joda.time.LocalDate d1 = now.plusMonths(12).withDayOfMonth(1);
         // System.out.println(d1);
-        
 
-        
         DateTime now = new DateTime();
         org.joda.time.LocalDate today = now.toLocalDate();
 
-        
         List<Project> projects = find("requests is not null").list();
         for (Project project : projects) {
             for (RequestResource request : project.getRequests()) {
@@ -164,13 +162,26 @@ public class ProjectRepository implements PanacheMongoRepository<Project> {
                 if (formatJoda.isBefore(today)) {
                     allAmount = allAmount + request.getAmount();
                 }
-                
 
             }
         }
         return allAmount;
     }
-  
+
+    public String deleteProject(String id) {
+        try {
+            ObjectId objId = new ObjectId(id);
+            Project project = findById(objId);
+            String projectCode = project.getProjectCode();
+            resourceRepository.deleteByProjectCode(projectCode);
+            deleteById(objId);
+            return "success";
+        } catch (Exception e) {
+            // TODO: handle exception
+            return e.toString();
+        }
+
+    }
 
     public org.joda.time.LocalDate convertToLocalDate(Date date) {
         if (date == null)

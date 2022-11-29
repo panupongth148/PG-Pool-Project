@@ -47,4 +47,8 @@ export class ProjectHttpRequestService {
   getRequestAllAmount(){
     return this.http.get<any>("api/project/allamount");
   }
+  
+  deleteProjectById(id:any){
+    return this.http.delete<any>("api/project/"+id)
+  }
 }

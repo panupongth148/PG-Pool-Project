@@ -1,7 +1,13 @@
+<p-toast></p-toast>
+
 <div class="container">
     <div class="grid text-center">
         <div class="col">
             {{ project.projectName}}
+        </div>
+        <div>
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+            <button pButton pRipple type="button" label="Delete" class="p-button-raised p-button-danger inline-block right-0" (click)="deleteProject(project.id)"></button>
         </div>
 
     </div>

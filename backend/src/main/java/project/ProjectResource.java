@@ -210,6 +210,12 @@ public class ProjectResource {
         projectRepository.delete(person);
     }
 
+    @DELETE
+    @Path("/deletealmost/{id}")
+    public Response deleteAllAboutProject(String id){
+        return Response.ok(projectRepository.deleteProject(id)).status(200).build();
+    }
+
     @GET
     @Path("/search/{name}")
     public Project search(String name) {

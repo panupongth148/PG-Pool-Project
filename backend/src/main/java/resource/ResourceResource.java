@@ -57,9 +57,8 @@ public class ResourceResource {
 
     @DELETE
     @Path("/{id}")
-    public void delete(String id) {
-    	Resource resource = resourceRepository.findById(new ObjectId(id));
-        resourceRepository.delete(resource);
+    public Response delete(String id) {
+    	return Response.ok(resourceRepository.deleteResourceById(id)).status(200).build();
     }
 
     @GET

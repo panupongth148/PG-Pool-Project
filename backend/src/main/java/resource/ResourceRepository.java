@@ -7,6 +7,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
@@ -20,8 +21,8 @@ import sub.document.WorkingDetail;
 @ApplicationScoped
 public class ResourceRepository implements PanacheMongoRepository<Resource> {
 
-    @Inject
-    private List<ResponseChartDataModel> responseChartDataModelList = new ArrayList<>();
+    // @Inject
+    // private List<ResponseChartDataModel> responseChartDataModelList = new ArrayList<>();
     
 	public Resource findByName(String name) {
         return find("first_name", name).firstResult();
@@ -42,7 +43,7 @@ public class ResourceRepository implements PanacheMongoRepository<Resource> {
             ResponseChartDataModel responseChartDataModel = new ResponseChartDataModel();
             responseChartDataModel.setMonth(i);
             responseChartDataModel.setResources(new ArrayList<Resource>());
-            this.responseChartDataModelList.add(responseChartDataModel);
+            // this.responseChartDataModelList.add(responseChartDataModel);
         }
         System.out.println(d1);
         for(Resource resource:resources){
@@ -56,9 +57,36 @@ public class ResourceRepository implements PanacheMongoRepository<Resource> {
         }
         
     }
+
+    public void deleteByProjectCode(String projectCode){
+        System.out.println(projectCode);
+        System.out.println("delete project");
+        List<Resource> resources = find("projects.project_code", projectCode).list();
+        try {
+            for(Resource resource:resources){
+                deleteById(resource.getId());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        
+    }
     public org.joda.time.LocalDate convertToLocalDate(Date date) {
         if (date == null)
             return null;
         return new org.joda.time.LocalDate(date);
+    }
+
+    public String deleteResourceById(String id){
+        try {
+            System.out.println(id);
+            ObjectId objId = new ObjectId(id);
+            deleteById(objId);
+            return "success";
+        } catch (Exception e) {
+            // TODO: handle exception
+            return e.toString();
+        }
     }
 }

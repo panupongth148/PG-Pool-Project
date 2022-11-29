@@ -40,6 +40,9 @@ import {TableModule} from 'primeng/table';
 import {ImageModule} from 'primeng/image';
 import {ChartModule} from 'primeng/chart';
 import { DateFormatPipe } from './shared/pipe/date/date-format.pipe';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +64,7 @@ import { DateFormatPipe } from './shared/pipe/date/date-format.pipe';
     FilterResourcePipe,
     AssignResourceComponent,
     DateFormatPipe,
+    
 
   ],
   imports: [
@@ -83,12 +87,14 @@ import { DateFormatPipe } from './shared/pipe/date/date-format.pipe';
     ToastModule,
     TableModule,
     ImageModule,
-    ChartModule
+    ChartModule,
+    ConfirmDialogModule,
+    
     
     
     
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

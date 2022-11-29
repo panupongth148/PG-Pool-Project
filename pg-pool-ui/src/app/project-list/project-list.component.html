@@ -12,9 +12,10 @@
             <button pButton routerLink="/new/project" class="" style="float: right;">New Project</button>
         </div>
     </div>
-    <div *ngFor="let project of projects" class="p-2 my-3 position-card" (click)="toDetailProject(project.id)">
-        <p-card [header]="project.projectCode" [style]="{'width': '90%', 'margin-bottom': '2em'}">
-            <p>        {{ project.projectName}} </p>
+    <div *ngFor="let project of projects" class="p-2 my-3 position-card" >
+        <p-card [header]="project.projectCode" [style]="{'width': '90%', 'margin-bottom': '2em'}" (click)="toDetailProject(project.id)">
+            <p class="inline-block">        {{ project.projectName}} </p>
+            <!-- <button pButton pRipple type="button" label="Danger" class="p-button-raised p-button-danger inline-block right-0"></button> -->
         </p-card>
         
 
