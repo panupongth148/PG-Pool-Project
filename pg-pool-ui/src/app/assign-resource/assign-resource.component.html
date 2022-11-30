@@ -1,14 +1,17 @@
 <div class="container mb-5">
     <div class="my-5">
         <div>
-            <p class="header-title"> การร้องขอ</p>
+            <!-- <p class="header-title"> การร้องขอ</p> -->
         </div>
         <div>
             <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p> <p> จำนวนทรัพยากรที่ต้องการของการร้องขอทั้งหมด : {{allRequestAmount}} คน</p> 
         </div>
         <div>
             <div *ngFor="let requestAmount of requestEachAmount">
-                <p>ตำแหน่ง {{requestAmount.label}} จำนวน {{ requestAmount.amount }} คน</p>
+                <div *ngIf="requestAmount.amount > 0">
+                    <p>ตำแหน่ง {{requestAmount.label}} จำนวน {{ requestAmount.amount }} คน</p>
+                </div>
+                
             </div>
         </div>
         <div>
@@ -45,7 +48,8 @@
                             <!-- <p>{{ position.positionRequest}}</p> -->
                             <div class="grid">
                                 <div class="col">
-                                    <p> ตำแหน่ง {{ position.positionRequest }}</p>
+                                    <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา</p> 
+                                    <!-- แจ้งเตือนหากไม่พอ -->
                                 </div>
                                 <div class="col">
                                     <p> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }}</p>

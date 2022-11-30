@@ -98,6 +98,8 @@ public class ReadExcel {
                                 } else if (cell.getColumnIndex() == 8) {
                                     this.workingDetail.setAssigned(cell.getNumericCellValue());
                                     // System.out.println(this.workingDetail.getAssigned());;
+                                    System.out.println("temp Project Code : ");
+                                    System.out.println(this.getProjectCodeTemp());
                                     this.subProject.setProjectCode(this.getProjectCodeTemp());
 
                                     this.subProject.getWorkingDetail().add(this.workingDetail);

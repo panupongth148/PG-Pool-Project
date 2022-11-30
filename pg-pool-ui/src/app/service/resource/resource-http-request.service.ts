@@ -37,4 +37,8 @@ export class ResourceHttpRequestService {
   deleteResourceById(id:any){
     return this.http.delete<any>('api/resource/'+id);
   }
+
+  getChartData(){
+    return this.http.get<Array<any>>('api/resource/getchartdetail')
+  }
 }

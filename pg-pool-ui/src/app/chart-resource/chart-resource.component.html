@@ -5,6 +5,15 @@
     [options]="lineChartOptions"
     [legend]="lineChartLegend">
   </canvas> -->
-  <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+  <!-- working ไม่ครบ 100 = ว่างจาก assigned -->
+  <p-tabView>
+    <p-tabPanel header="Year">
+      <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+    </p-tabPanel>
+    <p-tabPanel header="Month">
+      <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+    </p-tabPanel>
+</p-tabView>
+  
 
 </div>

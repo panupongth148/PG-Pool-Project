@@ -39,7 +39,7 @@ export class AssignResourceComponent implements OnInit {
   allRequestAmount?:number;
   
   ngOnInit(): void {
-    this.getProjectHaveRequest()
+    
     this.getRequestResource()
     this.getAllResource()
 

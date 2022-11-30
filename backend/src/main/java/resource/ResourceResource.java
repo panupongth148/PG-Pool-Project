@@ -68,7 +68,7 @@ public class ResourceResource {
     }
 
     @GET
-    @Path("resource/empty")
+    @Path("/empty")
     public Response findResourceEmpty(){
         
         return Response.ok(resourceRepository.findResourcesCanAssigned()).status(200).build();
@@ -77,8 +77,8 @@ public class ResourceResource {
     @GET
     @Path("/getchartdetail")
     public Response GetBarDetail(){
-        resourceRepository.getResourceInRange();
-        return Response.ok("success test get bar detail api").status(200).build();
+        
+        return Response.ok(resourceRepository.getResourceInRange()).status(200).build();
     }
 
     @DELETE
