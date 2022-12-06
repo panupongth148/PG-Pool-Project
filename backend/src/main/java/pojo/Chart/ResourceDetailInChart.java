@@ -3,12 +3,14 @@ package pojo.Chart;
 import java.util.Date;
 
 public class ResourceDetailInChart {
+    private String empNo;
     private String prefix;
     private String firstName;
     private String lastName;
     private String position;
     private Date startDate;
     private Date endDate;
+    
     
     public String getPrefix() {
         return prefix;
@@ -45,6 +47,12 @@ public class ResourceDetailInChart {
     }
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+    public String getEmpNo() {
+        return empNo;
+    }
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
     }
 
     

@@ -164,20 +164,20 @@ public class ProjectResource {
             // // System.out.println("Lastname: " + resource.getLastName());
             // }
             // formData.getFile().uploadedFile();
-            List<Project> projectCheckExisList = projectRepository.find("project_code", excelObject.getProject().getProjectCode()).list();
-            if(projectCheckExisList.size() > 0){
-                System.out.println(projectCheckExisList.get(0).getProjectName());
-                projectRepository.delete(projectCheckExisList.get(0));
-                projectRepository.persist(excelObject.getProject());
-                for(Resource resource: excelObject.getResourceList()){
-                    System.out.println(resource.getFirstName());
-                }
-                resourceRepository.persist(excelObject.getResourceList());
-                return Response.ok(excelObject).status(200).build();
-            }
-            System.out.println("new import");
-            projectRepository.persist(excelObject.getProject());
-            resourceRepository.persist(excelObject.getResourceList());
+            // List<Project> projectCheckExisList = projectRepository.find("project_code", excelObject.getProject().getProjectCode()).list();
+            // if(projectCheckExisList.size() > 0){
+            //     System.out.println(projectCheckExisList.get(0).getProjectName());
+            //     projectRepository.delete(projectCheckExisList.get(0));
+            //     projectRepository.persist(excelObject.getProject());
+            //     for(Resource resource: excelObject.getResourceList()){
+            //         System.out.println(resource.getFirstName());
+            //     }
+            //     resourceRepository.persist(excelObject.getResourceList());
+            //     return Response.ok(excelObject).status(200).build();
+            // }
+            // System.out.println("new import");
+            // projectRepository.persist(excelObject.getProject());
+            // resourceRepository.persist(excelObject.getResourceList());
 
             return Response.ok(excelObject).status(200).build();
 

@@ -37,6 +37,7 @@ public class ResourceRepository implements PanacheMongoRepository<Resource> {
 
     public List<ChartModelResponse> getResourceInRange(){
         List<Resource> resources = find("projects is not null").list();
+        List<String> historyEmpResource = new ArrayList<>();
         DateTime now = new DateTime();
         this.chartModelResponses = new ArrayList<ChartModelResponse>();
         org.joda.time.LocalDate today = now.toLocalDate();
@@ -81,19 +82,24 @@ public class ResourceRepository implements PanacheMongoRepository<Resource> {
                 // System.out.println(jodaDateEndDate);
                 if(jodaDateEndDate.isBefore(d1)){
                     //set Resource in month list
+                    if(!historyEmpResource.contains(resource.getEmpNo())){
+                        System.out.print("Project Code : ");
+                        System.out.println(subProject.getProjectCode());
+                        ResourceDetailInChart resourceDetailInChart = new ResourceDetailInChart();
+                        resourceDetailInChart.setEmpNo(resource.getEmpNo());
+                        resourceDetailInChart.setPrefix(resource.getPrefix());
+                        resourceDetailInChart.setFirstName(resource.getFirstName());
+                        resourceDetailInChart.setLastName(resource.getLastName());
+                        resourceDetailInChart.setPosition(resource.getPosition());
+                        resourceDetailInChart.setStartDate(subProject.getWorkingDetail().get(0).getStartDate());
+                        resourceDetailInChart.setEndDate(subProject.getWorkingDetail().get(subProject.getWorkingDetail().size()-1).getEndDate());
+                        int monthInEnd = subProject.getWorkingDetail().get(subProject.getWorkingDetail().size()-1).getEndDate().getMonth();
+                        this.chartModelResponses.get(monthInEnd).getResources().add(resourceDetailInChart);
+                        historyEmpResource.add(resource.getEmpNo());
+                    }
+
                     
-                    System.out.print("Project Code : ");
-                    System.out.println(subProject.getProjectCode());
-                    ResourceDetailInChart resourceDetailInChart = new ResourceDetailInChart();
-                    
-                    resourceDetailInChart.setPrefix(resource.getPrefix());
-                    resourceDetailInChart.setFirstName(resource.getFirstName());
-                    resourceDetailInChart.setLastName(resource.getLastName());
-                    resourceDetailInChart.setPosition(resource.getPosition());
-                    resourceDetailInChart.setStartDate(subProject.getWorkingDetail().get(0).getStartDate());
-                    resourceDetailInChart.setEndDate(subProject.getWorkingDetail().get(subProject.getWorkingDetail().size()-1).getEndDate());
-                    int monthInEnd = subProject.getWorkingDetail().get(subProject.getWorkingDetail().size()-1).getEndDate().getMonth();
-                    this.chartModelResponses.get(monthInEnd).getResources().add(resourceDetailInChart);
+                   
                     
 
                 }

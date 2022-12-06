@@ -83,11 +83,14 @@ public class ReadExcel {
                 while (cellIterator.hasNext()) {
 
                     Cell cell = cellIterator.next();
+                    
                     // System.out.println("row : " + cell.getRowIndex() + ", col : " +
                     // cell.getColumnIndex());
                     // Check the cell type and format accordingly
                     switch (cell.getCellType()) {
                         case NUMERIC:
+                        // sheet.getRow(1).getCell(0).setCellType(Cell.CELL_TYPE_NUMERIC);
+                            // cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                             if (this.isProgrammer) {
                                 if (cell.getColumnIndex() == 6) {
 
@@ -126,7 +129,7 @@ public class ReadExcel {
 
                             break;
                         case STRING:
-
+                            cell.setCellValue(cell.getStringCellValue());
                             // Project Code
                             if (projectdetailBoolean.isProjectCode() && cell.getRowIndex() == 3
                                     && cell.getColumnIndex() == 2) {
@@ -137,11 +140,14 @@ public class ReadExcel {
 
                             }
                             // Check Programmer
-                            // System.out.println(cell.getStringCellValue());
-                            // System.out.println((cell.getStringCellValue().contains("Programmer Specialist")
-                            // || cell.getStringCellValue().equalsIgnoreCase("programmer")));
+                            System.out.println(cell.getStringCellValue());
+                            System.out.println(cell.getStringCellValue().equals("Programmer"));
+                            System.out.println((cell.getStringCellValue().contains("Programmer Specialist")
+                            || cell.getStringCellValue().equalsIgnoreCase("programmer")));
 
-                            // System.out.println(StringUtils.equals(cell.getStringCellValue(),"Programmer"));
+                            System.out.println(StringUtils.equals(cell.getStringCellValue(),"Programmer"));
+
+
                             if (cell.getRowIndex() > 8
                                     && (cell.getStringCellValue().contains("Programmer Specialist")
                                             || cell.getStringCellValue().equalsIgnoreCase("programmer"))

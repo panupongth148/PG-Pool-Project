@@ -11,7 +11,17 @@
       <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
     </p-tabPanel>
     <p-tabPanel header="Month">
-      <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+      <div class="grid">
+        <div class="col">
+          <p-dropdown [options]="months" [(ngModel)]="selectedMonth" placeholder="Select a Month"(onChange)="onChangeDropdown($event)" [showClear]="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col">
+          <p-chart type="line" [data]="lineChartDataMonth" [options]="lineChartOptions"></p-chart>
+        </div>
+      </div>
+      
     </p-tabPanel>
 </p-tabView>
   
