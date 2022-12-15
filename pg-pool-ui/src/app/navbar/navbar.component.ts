@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
@@ -12,31 +12,19 @@ import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit{
     user?: UserModel;
-    items: MenuItem[] = [{
-        label: 'File',
-        icon: 'pi pi-fw pi-file',
-    },
-
-    {
-        label: 'Users',
-        icon: 'pi pi-fw pi-user',
-    },
-    {
-        label: 'Events',
-        icon: 'pi pi-fw pi-calendar',
-    },
-    {
-        label: 'Quit',
-        icon: 'pi pi-fw pi-power-off'
-    }];
-
-    constructor(private router: Router, private userComservice: UserCommunicateService, private jwtService:JwtDecodeService) {
+    items: MenuItem[] = []
+    constructor(private router: Router, private userComservice: UserCommunicateService, private jwtService:JwtDecodeService, private elementRef: ElementRef) {
 
 
     }
-
+    ngAfterViewInit() {
+        this.elementRef.nativeElement.ownerDocument
+            .body.style.backgroundColor ='#004CFF';
+            this.elementRef.nativeElement.ownerDocument
+            .body.style.color ='#FFFFFF';
+    }
     ngOnInit() {
         this.items = [
             {
@@ -48,6 +36,11 @@ export class NavbarComponent implements OnInit {
                 label: 'Resource',
                 icon: 'pi pi-fw pi-pencil',
                 routerLink: "/resource"
+            },
+            {
+                label: 'Request',
+                icon: 'pi pi-fw pi-arrow-right',
+                routerLink: "/request"
             },
         ];
         this.authChange();

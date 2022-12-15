@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardProjectsComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'assign', component: AssignResourceComponent}
+  { path: 'request', component: AssignResourceComponent}
 
 ];
 

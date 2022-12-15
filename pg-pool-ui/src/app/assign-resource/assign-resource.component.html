@@ -4,14 +4,15 @@
             <!-- <p class="header-title"> การร้องขอ</p> -->
         </div>
         <div>
-            <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p> <p> จำนวนทรัพยากรที่ต้องการของการร้องขอทั้งหมด : {{allRequestAmount}} คน</p> 
+            <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p>
+            <!-- <p> จำนวนทรัพยากรที่ต้องการของการร้องขอทั้งหมด : {{allRequestAmount}} คน</p> -->
         </div>
         <div>
             <div *ngFor="let requestAmount of requestEachAmount">
                 <div *ngIf="requestAmount.amount > 0">
                     <p>ตำแหน่ง {{requestAmount.label}} จำนวน {{ requestAmount.amount }} คน</p>
                 </div>
-                
+
             </div>
         </div>
         <div>
@@ -21,7 +22,14 @@
             <div class="grid">
                 <div class="col-6 m-2">
                     <p-card>
-                        <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+                        <div *ngIf="resource.working == 0.0;else elseResourceEmpty">
+                            <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+                        </div>
+                        <ng-template #elseResourceEmpty>
+                            <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+                            <!-- <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}
+                                การทำงาน {{resource.working}}</p> -->
+                        </ng-template>
                     </p-card>
                 </div>
 
@@ -46,20 +54,42 @@
                         </p-card>
                         <div *ngFor="let position of info.requests">
                             <!-- <p>{{ position.positionRequest}}</p> -->
-                            <div class="grid">
-                                <div class="col">
-                                    <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา</p> 
-                                    <!-- แจ้งเตือนหากไม่พอ -->
+
+
+                            <!-- <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา</p>  -->
+                            <div *ngIf="warningResource?.includes(position.positionRequest);else elseResourceEmpty">
+                                <div class="grid">
+                                    <div class="col">
+                                        <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา </p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="inline"> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }} </p>
+                                        <fa-icon [icon]="warningIcon" class="ml-1" (mouseover)="mouseOver()"></fa-icon>
+                                        <!-- <p-message severity="warn" text="ตำแหน่งงานไม่เพียงพอต่อการร้องขอ" class="inline"></p-message> -->
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <p> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }}</p>
-                                </div>
+                                <!-- แจ้งเตือนหากไม่พอ -->
                             </div>
 
+                            <ng-template #elseResourceEmpty>
+                                <div class="grid">
+                                    <div class="col">
+
+                                        <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา </p>
+
+                                    </div>
+                                    <div class="col">
+                                        <p> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }}</p>
+                                    </div>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
 
+
                 </div>
+
+
                 <ng-template #elseRequest> ไม่มีโครงการในเดือนนี้</ng-template>
 
             </p-tabPanel>

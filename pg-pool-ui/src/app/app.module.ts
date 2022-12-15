@@ -43,6 +43,10 @@ import { DateFormatPipe } from './shared/pipe/date/date-format.pipe';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +93,9 @@ import {ConfirmationService} from 'primeng/api';
     ImageModule,
     ChartModule,
     ConfirmDialogModule,
-    
+    MessagesModule,
+    MessageModule,
+    FontAwesomeModule
     
     
     

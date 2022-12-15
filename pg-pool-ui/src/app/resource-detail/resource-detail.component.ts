@@ -69,8 +69,9 @@ export class ResourceDetailComponent implements OnInit {
     try {
       this.resourceHttpRequestService.getResourceById(this.id).subscribe(res => {
         this.resource = res;
-        // console.log(res);
-        if(res[0]){
+        console.log(res);
+        if(res){
+          console.log("have res")
           this.getProjectsByProductCode();
         }
         

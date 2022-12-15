@@ -26,11 +26,11 @@ public class Project {
 	@BsonProperty(value = "requests")
 	private List<RequestResource> requests;
 
-	@BsonProperty(value = "member_amount")
-	private int memberAmount;
+	// @BsonProperty(value = "member_amount")
+	// private int memberAmount;
 
-	@BsonProperty(value = "progress")
-	private float progress;
+	// @BsonProperty(value = "progress")
+	// private float progress;
 
 	@BsonProperty(value = "contract_start")
 	private Date contractStart;
@@ -68,13 +68,13 @@ public class Project {
 		this.projectCode = projectCode;
 	}
 
-	public float getProgress() {
-		return progress;
-	}
+	// public float getProgress() {
+	// 	return progress;
+	// }
 
-	public void setProgress(float progress) {
-		this.progress = progress;
-	}
+	// public void setProgress(float progress) {
+	// 	this.progress = progress;
+	// }
 
 	public Date getContractStart() {
 		return contractStart;
@@ -100,13 +100,13 @@ public class Project {
 		this.requests = requests;
 	}
 
-	public int getMemberAmount() {
-		return memberAmount;
-	}
+	// public int getMemberAmount() {
+	// 	return memberAmount;
+	// }
 
-	public void setMemberAmount(int memberAmount) {
-		this.memberAmount = memberAmount;
-	}
+	// public void setMemberAmount(int memberAmount) {
+	// 	this.memberAmount = memberAmount;
+	// }
 
 	public String getCustomerCode() {
 		return customerCode;

@@ -163,10 +163,11 @@ export class ChartResourceComponent implements OnInit {
     let back = this.resourceAssigned?.map((x) => x);
     console.log(mon)
     front = front?.slice(mon)
-    back = back?.slice(0, mon)
+    back = back!.slice(0, mon)
     console.log(front)
     console.log(back)
-    // Array.prototype.push.apply(front, back);
+    Array.prototype.push.apply(front, back);
+    console.log(front)
     this.resourceAssigned?.forEach((val: any) => {
       // console.log(val)
       let month = val.month
@@ -256,6 +257,7 @@ export class ChartResourceComponent implements OnInit {
 
     if (this.chartMonth) {
       // console.log(this.chartDetail)
+      this.chartMonth
       const listLabel: string[] = []
       const listCount: number[] = []
       const listEmpty: number[] = []

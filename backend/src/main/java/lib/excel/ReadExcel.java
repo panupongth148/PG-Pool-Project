@@ -301,7 +301,6 @@ public class ReadExcel {
             this.listSubProject.add(this.subProject);
             this.resource.setProjects(this.listSubProject);
             this.resourceList.add(this.resource);
-            this.project.setMemberAmount(this.resourceList.size());
             file.close();
 
             excelObject.setProject(this.project);

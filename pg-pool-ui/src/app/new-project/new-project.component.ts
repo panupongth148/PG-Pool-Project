@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { UserCommunicateService } from '../service/communicate/user-communicate.service';
 import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
@@ -12,7 +13,8 @@ import UserModel from '../shared/interface/UserModel';
 @Component({
   selector: 'app-new-project',
   templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.scss']
+  styleUrls: ['./new-project.component.scss'],
+  providers: [MessageService]
 })
 export class NewProjectComponent implements OnInit {
   // resources: Array<ResourceModel>;
@@ -33,7 +35,7 @@ export class NewProjectComponent implements OnInit {
    uploadedFiles: any[] = [];
  
   selectedResource = "";
-  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectHttpRequestService:ProjectHttpRequestService, private router:Router, private userCommunacate:UserCommunicateService, private jwtService:JwtDecodeService) { 
+  constructor(private resourceHttpRequestService: ResourceHttpRequestService, private projectHttpRequestService:ProjectHttpRequestService, private router:Router, private userCommunacate:UserCommunicateService, private jwtService:JwtDecodeService, private messageService: MessageService) { 
     // this.resources = [{
     //   id: "",
     //   firstName: "",
@@ -95,6 +97,8 @@ export class NewProjectComponent implements OnInit {
 
   }
   onUpload(event:any) {
+    // this.messageService.add({severity:'success', summary: 'Success', detail: 'Import Success'});
+    // console.log("upload")
     for(let file of event.files) {
         this.uploadedFiles.push(file);
         console.log("choose file")
@@ -103,6 +107,7 @@ export class NewProjectComponent implements OnInit {
     const formData = new FormData();
     formData.append("userId", this.user.id)
     formData.append("file", this.uploadedFiles[0])
+    // this.messageService.add({severity:'success', summary: 'Success', detail: 'Import Success'});
     this.projectHttpRequestService.importExcel(formData).subscribe(val =>{
        console.log(val)
     })   
