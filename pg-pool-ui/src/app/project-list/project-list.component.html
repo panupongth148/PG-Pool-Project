@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="grid">
         <div class="col">
-            <p class="header-title"> Project</p>
+            <p class="title-sub1"> โครงการ</p>
         </div>
         
 
@@ -9,17 +9,21 @@
     <div class="grid">
         <div class="col"></div>
         <div class="col">
-            <button pButton routerLink="/new/project" class="" style="float: right;">New Project</button>
+            <button pButton routerLink="/new/project" class="p-button-raised p-button-success text-button" style="float: right;">นำเข้าแผนโครงการ</button>
         </div>
     </div>
-    <div *ngFor="let project of projects" class="p-2 my-3 position-card" >
-        <p-card [header]="project.projectCode" [style]="{'width': '90%', 'margin-bottom': '2em'}" (click)="toDetailProject(project.id)">
-            <p class="inline-block">        {{ project.projectName}} </p>
-            <!-- <button pButton pRipple type="button" label="Danger" class="p-button-raised p-button-danger inline-block right-0"></button> -->
-        </p-card>
-        
-
+    <hr>
+    <div class="grid mt-3">
+        <div *ngFor="let project of projects" class="p-2 my-3 position-card col-4" >
+          
+                <p-card [header]="project.projectCode" [style]="{'width': '90%', 'margin-bottom': '2em'}" (click)="toDetailProject(project.id)">
+                    <p class="inline-block">        {{ project.projectName}} </p>
+                    <!-- <button pButton pRipple type="button" label="Danger" class="p-button-raised p-button-danger inline-block right-0"></button> -->
+                </p-card>
+            
+        </div>
     </div>
+    
     
 </div>
 

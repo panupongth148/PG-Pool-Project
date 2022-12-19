@@ -15,30 +15,37 @@ import { JwtDecodeService } from '../service/Jwt/jwt-decode.service';
 export class NavbarComponent implements OnInit, AfterViewInit{
     user?: UserModel;
     items: MenuItem[] = []
+    userItem: MenuItem[] = []
     constructor(private router: Router, private userComservice: UserCommunicateService, private jwtService:JwtDecodeService, private elementRef: ElementRef) {
 
 
     }
     ngAfterViewInit() {
-        this.elementRef.nativeElement.ownerDocument
-            .body.style.backgroundColor ='#004CFF';
-            this.elementRef.nativeElement.ownerDocument
-            .body.style.color ='#FFFFFF';
+        // this.elementRef.nativeElement.ownerDocument
+        //     .body.style.backgroundColor ='#004CFF';
+        //     this.elementRef.nativeElement.ownerDocument
+        //     .body.style.color ='#FFFFFF';
     }
     ngOnInit() {
+        this.userItem = [ 
+        {
+            label: 'ออกจากระบบ',
+            command: e => this.logout()
+            
+        },]
         this.items = [
             {
-                label: 'Project',
+                label: 'โครงการ',
                 icon: 'pi pi-fw pi-file',
                 routerLink: "/project"
             },
             {
-                label: 'Resource',
+                label: 'ทรัพยากรบุคคล',
                 icon: 'pi pi-fw pi-pencil',
                 routerLink: "/resource"
             },
             {
-                label: 'Request',
+                label: 'คำร้องขอ',
                 icon: 'pi pi-fw pi-arrow-right',
                 routerLink: "/request"
             },
@@ -73,6 +80,7 @@ export class NavbarComponent implements OnInit, AfterViewInit{
         }
     }
     logout(){
+        console.log("logout")
         localStorage.removeItem("PG_Pool_token")
         this.router.navigate(['/login'])
         .then(() => {

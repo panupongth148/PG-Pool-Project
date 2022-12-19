@@ -12,6 +12,7 @@ import { DashboardProjectsComponent } from './dashboard-projects/dashboard-proje
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AssignResourceComponent } from './assign-resource/assign-resource.component';
+import { AuthAuthenticatedGuard } from './auth-authenticated.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,14 +27,18 @@ const routes: Routes = [
         component: NewResourceComponent, // child route component that the router renders
       },
     ],
+    canActivate: [AuthAuthenticatedGuard]
   },
-  { path: 'newresource', component: NewResourceComponent },
-  { path: 'project', component: ProjectListComponent },
+  { path: 'newresource', component: NewResourceComponent,
+  canActivate: [AuthAuthenticatedGuard] },
+  { path: 'project', component: ProjectListComponent,
+  canActivate: [AuthAuthenticatedGuard] },
   {
     path: 'project/:id',
     component: ProjectDetailComponent
   },
-  { path: 'new/project', component: NewProjectComponent },
+  { path: 'new/project', component: NewProjectComponent,
+  canActivate: [AuthAuthenticatedGuard] },
   { path: 'resource/:id', component: ResourceDetailComponent},
   { path: 'dashboard', component: DashboardProjectsComponent},
   { path: 'login', component: LoginComponent},

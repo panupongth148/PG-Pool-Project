@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProjectHttpRequestService } from '../service/project/project-http-request.service';
 import { ResourceHttpRequestService } from '../service/resource/resource-http-request.service';
 import ProjectResponseModel from '../shared/interface/ProjectResponseModel';
@@ -40,6 +40,8 @@ export class AssignResourceComponent implements OnInit {
   assignList: any[] = []
   reqAssign?: any[] = []
   projects?: any[] = []
+
+  @Output() newItemEvent = new EventEmitter<string>();
 
   checkResource?: any[] = [{
     position: "Programmer",

@@ -46,6 +46,8 @@ import {ConfirmationService} from 'primeng/api';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MenuModule} from 'primeng/menu';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ConfirmDialogModule,
     MessagesModule,
     MessageModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MenuModule
     
     
     
