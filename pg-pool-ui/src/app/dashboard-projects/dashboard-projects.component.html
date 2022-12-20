@@ -6,7 +6,7 @@
             <div class="grid">
                 <div class="col">
                     <p class="title-sub1">ภาพรวมโครงการ</p>
-                    <div class="grid">
+                    <div class="grid mt-2">
                         <div class="col-4">
                             <p>โครงการทั้งหมด</p>
                            
@@ -24,11 +24,11 @@
                         </div>
                         <div class="col-4">
                             <p>คำร้องขอทั้งหมด</p>
-                            <div class="card" >
+                            <div class="card" [routerLink]="['/request']">
                                 
-                                <div class="card-body">
+                                <div class="card-body" >
                                   <!-- <h5 class="card-title">คำร้องขอทรัพยากร</h5> -->
-                                  <p class="card-text">{{requestEachAmount.length}}</p>
+                                  <p class="card-text">{{requestEachAmount.length}} ตำแหน่ง</p>
                               
                                 </div>
                               </div>
