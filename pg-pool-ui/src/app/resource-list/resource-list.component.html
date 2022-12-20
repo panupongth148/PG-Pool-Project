@@ -46,17 +46,18 @@
 
 
     </div>
+    <!-- <div class="grid mt-3">
+        <div *ngFor="let project of projects" class="p-2 my-3 position-card col-4" ></div></div> -->
     <div class="my-3 grid">
                 
-        <div *ngFor="let f of (resources | filterResource:searchText)as folder" class="p-2 box-container col-12"
+        <div *ngFor="let f of (resources | filterResource:searchText)as folder" class="p-2 box-container col-4"
             (click)="toDetailResource(f.id)">
             <p-card [style]="{'width': '100%', 'margin-bottom': '2em'}">
-                <div class="grid">
-                    <div class="col"><p>{{f.prefix + " "}}
+            <p>{{f.prefix + " "}}
                         {{f.firstName + " "}}
-                        {{f.lastName}}</p></div>
-                        <div class="col">{{f.position}}</div>
-                </div>
+                        {{f.lastName}}</p>
+                    {{f.position}}
+            
                 
                 
             </p-card>

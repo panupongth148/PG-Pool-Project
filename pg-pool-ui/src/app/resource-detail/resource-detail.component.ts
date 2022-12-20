@@ -13,6 +13,7 @@ import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api
 })
 export class ResourceDetailComponent implements OnInit {
   id: any;
+  loading:any = true;
   resource: ResourceModel;
   projects: Array<ProjectResponseModel>;
   constructor(private route: ActivatedRoute, private resourceHttpRequestService: ResourceHttpRequestService, private projectHttpRequestService: ProjectHttpRequestService, private router:Router, private confirmationService: ConfirmationService, private messageService: MessageService) {
@@ -93,6 +94,7 @@ export class ResourceDetailComponent implements OnInit {
       this.projectHttpRequestService.getProjectsByProductCode(projectCodeList).subscribe((res) =>{
         console.log(res)
         this.projects = res;
+        this.loading = false
       })
     }catch(err){
       console.log(err)

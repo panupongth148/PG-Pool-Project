@@ -1,11 +1,13 @@
 <div class="container mb-5">
     <div class="my-5">
-        <div>
-            <!-- <p class="header-title"> การร้องขอ</p> -->
+
+        
+        <!-- <div>
+            
         </div>
         <div>
             <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p>
-            <!-- <p> จำนวนทรัพยากรที่ต้องการของการร้องขอทั้งหมด : {{allRequestAmount}} คน</p> -->
+            
         </div>
         <div>
             <div *ngFor="let requestAmount of requestEachAmount">
@@ -14,33 +16,38 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
+
+
+
         <div>
-            <p class="header-title">บุคลากรที่ว่าง</p>
+            <p class="title-sub1">บุคลากรที่ว่าง</p>
         </div>
-        <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2">
-            <div class="grid">
-                <div class="col-6 m-2">
-                    <p-card>
-                        <div *ngIf="resource.working == 0.0;else elseResourceEmpty">
-                            <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
-                        </div>
-                        <ng-template #elseResourceEmpty>
-                            <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
-                            <!-- <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}
+        <div class="grid">
+            <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2 col-6">
+
+
+                <p-card>
+                    <div *ngIf="resource.working == 0.0;else elseResourceEmpty">
+                        <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+                    </div>
+                    <ng-template #elseResourceEmpty>
+                        <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}} มีการมอบหมายงาน </p>
+                        <!-- <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}
                                 การทำงาน {{resource.working}}</p> -->
-                        </ng-template>
-                    </p-card>
-                </div>
+                    </ng-template>
+                </p-card>
+
+
+
+
 
             </div>
-
-
         </div>
 
     </div>
     <div>
-        <p class="header-title"> โครงการที่ร้องขอทรัพยากร</p>
+        <p class="title-sub1"> โครงการที่ร้องขอทรัพยากร</p>
 
         <p-tabView [scrollable]="true">
 
@@ -63,7 +70,8 @@
                                         <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา </p>
                                     </div>
                                     <div class="col">
-                                        <p class="inline"> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }} </p>
+                                        <p class="inline"> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat
+                                            }} </p>
                                         <fa-icon [icon]="warningIcon" class="ml-1" (mouseover)="mouseOver()"></fa-icon>
                                         <!-- <p-message severity="warn" text="ตำแหน่งงานไม่เพียงพอต่อการร้องขอ" class="inline"></p-message> -->
                                     </div>

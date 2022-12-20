@@ -1,3 +1,3 @@
-<div
-*ngIf="isLogin"><app-navbar></app-navbar></div>
+<div *ngIf="isLogin;else elseNav"><app-navbar></app-navbar></div>
+<ng-template #elseNav><app-pre-nav></app-pre-nav></ng-template>
 <router-outlet></router-outlet>

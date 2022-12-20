@@ -7,9 +7,28 @@
     padding: 5px;
     cursor: pointer;
 }
-.container{
-    margin: 10%;
-}
-.text-center{
+// .container{
+//     margin: 10%;
+// }
+
+.my-center-text {
     text-align: center;
+    // width: 100%;
+}
+
+
+.title-sub1{
+    font-size: 1.5vw;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.title-sub2{
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.title-detail{
+    font-size: 18px;
+    font-family: 'Anuphan', sans-serif;
 }

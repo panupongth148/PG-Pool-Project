@@ -16,7 +16,7 @@ import { AuthAuthenticatedGuard } from './auth-authenticated.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomepageComponent },
+  { path: 'home', component: HomepageComponent, canActivate: [AuthAuthenticatedGuard] },
 
   {
     path: 'resource',
@@ -29,21 +29,34 @@ const routes: Routes = [
     ],
     canActivate: [AuthAuthenticatedGuard]
   },
-  { path: 'newresource', component: NewResourceComponent,
-  canActivate: [AuthAuthenticatedGuard] },
-  { path: 'project', component: ProjectListComponent,
-  canActivate: [AuthAuthenticatedGuard] },
+  {
+    path: 'newresource', component: NewResourceComponent,
+    canActivate: [AuthAuthenticatedGuard]
+  },
+  {
+    path: 'project', component: ProjectListComponent,
+    canActivate: [AuthAuthenticatedGuard]
+  },
   {
     path: 'project/:id',
-    component: ProjectDetailComponent
+    component: ProjectDetailComponent,
+    canActivate: [AuthAuthenticatedGuard]
   },
-  { path: 'new/project', component: NewProjectComponent,
-  canActivate: [AuthAuthenticatedGuard] },
-  { path: 'resource/:id', component: ResourceDetailComponent},
-  { path: 'dashboard', component: DashboardProjectsComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'request', component: AssignResourceComponent}
+  {
+    path: 'new/project', component: NewProjectComponent,
+    canActivate: [AuthAuthenticatedGuard]
+  },
+  {
+    path: 'resource/:id', component: ResourceDetailComponent,
+    canActivate: [AuthAuthenticatedGuard]
+  },
+  {
+    path: 'dashboard', component: DashboardProjectsComponent,
+    canActivate: [AuthAuthenticatedGuard]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'request', component: AssignResourceComponent }
 
 ];
 

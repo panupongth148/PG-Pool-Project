@@ -47,6 +47,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MenuModule} from 'primeng/menu';
+import { PreNavComponent } from './pre-nav/pre-nav.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {MenuModule} from 'primeng/menu';
     FilterResourcePipe,
     AssignResourceComponent,
     DateFormatPipe,
+    PreNavComponent,
     
 
   ],
