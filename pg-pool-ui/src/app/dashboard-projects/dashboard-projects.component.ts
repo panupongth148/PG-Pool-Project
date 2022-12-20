@@ -63,7 +63,7 @@ export class DashboardProjectsComponent implements OnInit {
   }
   getPositionRequest() {
     this.projectHttpRequestService.getProjectRequsts().subscribe((val) => {
-      console.log(val)
+      // console.log(val)
       this.requestResource = val
       const d = new Date();
       let month = d.getMonth();
@@ -131,7 +131,7 @@ export class DashboardProjectsComponent implements OnInit {
       })
 
       // console.log(this.months)
-      console.log(this.requestEachAmount)
+      // console.log(this.requestEachAmount)
 
     })
   }

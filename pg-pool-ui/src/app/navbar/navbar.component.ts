@@ -36,17 +36,14 @@ export class NavbarComponent implements OnInit, AfterViewInit{
         this.items = [
             {
                 label: 'โครงการ',
-                icon: 'pi pi-fw pi-file',
                 routerLink: "/project"
             },
             {
                 label: 'ทรัพยากรบุคคล',
-                icon: 'pi pi-fw pi-pencil',
                 routerLink: "/resource"
             },
             {
                 label: 'คำร้องขอ',
-                icon: 'pi pi-fw pi-arrow-right',
                 routerLink: "/request"
             },
         ];

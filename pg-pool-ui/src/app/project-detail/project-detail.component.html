@@ -3,12 +3,12 @@
 <div class="container mt-5">
     <div class="grid">
         <div class="col my-center-text">
-            <p class="title-sub1">ข้อมูลทรัพยากร</p>
+            <p class="title-sub1">ข้อมูลโครงการ</p>
         </div>
 
     </div>
-    <div class="grid my-center-text">
-        <div class="col">
+    <div class="grid ">
+        <div class="col my-center-text">
             {{ project.projectName}}
         </div>
         <div>
@@ -22,7 +22,7 @@
     </div>
     <div class="grid my-center-text">
         <div class="col">
-            <b>Contract Start : </b> {{project.contractStart | dateFormat }} <b>Contract End : </b> {{project.contractEnd | dateFormat}}
+            <b>สัญญาเริ่ม : </b> {{project.contractStart | dateFormat }} <b>หมดสัญญา : </b> {{project.contractEnd | dateFormat}}
         </div>
 
     </div>
@@ -129,7 +129,7 @@
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
-                <td colspan="8">No Resource found.</td>
+                <td colspan="8">ยังไม่มีการมอบหมายทรัพยากร</td>
             </tr>
         </ng-template>
     </p-table>

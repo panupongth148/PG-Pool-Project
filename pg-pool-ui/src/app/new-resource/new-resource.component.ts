@@ -65,15 +65,15 @@ export class NewResourceComponent implements OnInit {
       tel: this.resourceForm.get("tel")?.value,
       empEmail: this.resourceForm.get("empEmail")?.value,
       position: this.resourceForm.get("position")?.value.name,
-      hireDate: this.resourceForm.get("hireDate")?.value,
-      expireDate: this.resourceForm.get("expireDate")?.value,
+      hireDate: new Date(),
+      expireDate: new Date(),
       projects: null
     } as AddResourceModel;
     console.log(resource)
     await this.resourceHttpRequestService.AddResource(resource).subscribe(response => {
       
       
-      this.messageService.add({severity:'success', summary: 'Success', detail: 'Register Success'});
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'บันทึกข้อมูลทรัพยากรสำเร็จ'});
       const myTimeout = setTimeout(this.toResource, 2000);
       
       
@@ -84,7 +84,7 @@ export class NewResourceComponent implements OnInit {
   }
 
   toResource(){
-    this.router.navigate(['/resource'])
+    this.router.navigate(['resource'])
       .then(() => {
         window.location.reload();
       });

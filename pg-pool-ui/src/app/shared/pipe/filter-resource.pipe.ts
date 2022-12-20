@@ -6,12 +6,27 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterResourcePipe implements PipeTransform {
 
   transform(value: any, searchValue: any): any {
-
-
-    if (!searchValue) {
+    console.log(value)
+    if (!searchValue || searchValue == "all") {
       // console.log("in non search text")
       // console.log(value)
       return value;
+    }
+    if(searchValue == "filassign" || searchValue == "filempty"){
+      if(searchValue == "filassign"){
+        return value.filter((val: any) => {
+          if(val.projects != null){
+            return val
+          }
+        });
+      }else{
+        return value.filter((val: any) => {
+          if(val.projects == null){
+            return val
+          }
+        });
+      }
+      
     }
     const result = value.filter((val: any) => {
       if (searchValue.indexOf(" ") > -1) {

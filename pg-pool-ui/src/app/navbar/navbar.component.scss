@@ -23,5 +23,10 @@
 // /deep/ .menucus ul li:nth-child(3) {
 //     background: red;
 // }
+:host ::ng-deep{
+    .p-menubar{
+        background-color: #FFFFFF;
+    }
+}
 
 

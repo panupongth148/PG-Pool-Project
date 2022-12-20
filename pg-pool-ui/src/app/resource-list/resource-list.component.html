@@ -1,8 +1,8 @@
 <div class="container mt-5">
     <div style="text-align: center; margin-bottom: 30px">
-        <h1 class="title-content">Resource</h1>
+        <h1 class="title-sub1">ทรัพยากรทั้งหมด</h1>
     </div>
-
+    
     <div class="grid mx-5 my-3">
         <!-- <div class="col-6">
             <div class="mb-3">
@@ -28,12 +28,24 @@
                 </a>
             </form> -->
 
-        <div class="col-9">
-            <input type="search" [(ngModel)]="searchText" pInputText placeholder="Name Resource">
+        <div class="col-4">
+            <p class="inline title-sub2 mr-2">ค้นหา :</p>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="search" [(ngModel)]="searchText" pInputText placeholder="ใส่ชื่อเพื่อค้นหาทรัพยากร" width="100%">
+            </span>
+            
         </div>
-
-        <div class="col-3">
-            <button pButton routerLink="/newresource">New</button>
+        <div class="col-7">
+            <span class="p-buttonset">
+                <button pButton pRipple label="ทั้งหมด" (click)="searchText = 'all'" class="p-button-outlined p-button-help"></button>
+                <button pButton pRipple label="มอบหมายแล้ว" class="p-button-outlined p-button-help" (click)="searchText = 'filassign'"></button>
+                <button pButton pRipple label="ว่าง" (click)="searchText = 'filempty'" class="p-button-outlined p-button-help"></button>
+                
+            </span>
+        </div>
+        <div class="col-1">
+            <button pButton routerLink="/newresource" style="right: 2px">New</button>
         </div>
 
 
@@ -48,6 +60,7 @@
     </div>
     <!-- <div class="grid mt-3">
         <div *ngFor="let project of projects" class="p-2 my-3 position-card col-4" ></div></div> -->
+        <hr>
     <div class="my-3 grid">
                 
         <div *ngFor="let f of (resources | filterResource:searchText)as folder" class="p-2 box-container col-4"
