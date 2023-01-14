@@ -1,0 +1,29 @@
+<div style="display: block;">
+  <!-- <canvas baseChart width="200" height="200"
+    [type]="'line'"
+    [data]="lineChartData"
+    [options]="lineChartOptions"
+    [legend]="lineChartLegend">
+  </canvas> -->
+  <!-- working ไม่ครบ 100 = ว่างจาก assigned -->
+  <p-tabView>
+    <p-tabPanel header="ปี">
+      <p-chart type="line" [data]="lineChartData" [options]="options"></p-chart>
+    </p-tabPanel>
+    <p-tabPanel header="รายเดือน">
+      <div class="grid">
+        <div class="col">
+          <p class="inline mr-3">เลือกเดือนที่ต้องการแสดง : </p><p-dropdown [options]="months" [(ngModel)]="selectedMonth" placeholder="Select a Month"(onChange)="onChangeDropdown($event)" optionLabel="label"></p-dropdown>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col">
+          <p-chart type="line" [data]="lineChartDataMonth" [options]="options" ></p-chart>
+        </div>
+      </div>
+      
+    </p-tabPanel>
+</p-tabView>
+  
+
+</div>

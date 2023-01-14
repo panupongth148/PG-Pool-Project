@@ -1,0 +1,50 @@
+.box-container{
+
+    cursor: pointer;
+}
+
+.search-container{
+    width: 490px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  
+  
+  .search-icon .fa-search{
+      position: relative;
+      float: right;
+      width: 75px !important;
+      top: -39px;
+      right: -38px;
+      font-size: 30px;
+  }
+  .title-content{
+    font-family: 'Kanit', sans-serif;
+    font-size: 32px;
+  }
+  .title1{
+    font-family: 'Kanit', sans-serif;
+    font-size: 26px;
+  }
+
+  .my-center-text {
+    text-align: center;
+    // width: 100%;
+}
+
+
+.title-sub1{
+    font-size: 1.5vw;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.title-sub2{
+    font-size: 18px;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.title-detail{
+    font-size: 18px;
+    font-family: 'Anuphan', sans-serif;
+}

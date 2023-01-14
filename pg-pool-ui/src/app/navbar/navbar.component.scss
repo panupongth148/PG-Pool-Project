@@ -1,0 +1,32 @@
+// .menubar{
+//     background-color: #004CFF;
+//     color: white;
+// }
+
+.logo{
+    font-size: 32px;
+    color: purple;
+    cursor: pointer;
+}
+
+.login-text{
+    cursor: pointer;
+}
+// .ui-menubar {color: white; }
+
+// /deep/ .menucus ul li:nth-child(1) {
+//     background: green;
+// }
+// /deep/ .menucus ul li:nth-child(2) {
+//     background: yellow;
+// }
+// /deep/ .menucus ul li:nth-child(3) {
+//     background: red;
+// }
+:host ::ng-deep{
+    .p-menubar{
+        background-color: #FFFFFF;
+    }
+}
+
+

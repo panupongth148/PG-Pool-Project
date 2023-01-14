@@ -1,0 +1,40 @@
+<p-toast></p-toast>
+<div class="container mt-5">
+    
+    <p class="my-center-text title-sub1">โครงการใหม่</p>
+    <p-tabView>
+        <p-tabPanel header="นำเข้าไฟล์โครงการด้วยไฟล์ excel" class="title-detail">
+            <div class="grid mt-3">
+                <div class="col">
+                    <p class="title-sub2">นำเข้า Excel ไฟล์</p>
+                </div>
+            </div>
+        
+            <div class="grid">
+                <div class="col">
+                    <p-fileUpload #fileInput name="image" (uploadHandler)="onUpload($event)"
+                    [customUpload]="true" >
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">เลือกไฟล์ {{file.name}} - {{file.size}} bytes </li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+                
+            </div>
+        </p-tabPanel>
+        <div class="grid">
+            <div class="col">
+                <button pButton  class="p-button-raised p-button-success mt-5" (click)="importExcel()">นำเข้าไฟล์</button>
+                <button pButton pRipple class="p-button-raised p-button-danger ml-2" [routerLink]="['/project']">ยกเลิก </button>
+            </div>
+        </div>
+        
+    </p-tabView>
+
+    
+
+
+
+</div>

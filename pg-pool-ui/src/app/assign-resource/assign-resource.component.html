@@ -1,0 +1,192 @@
+<div class="container mb-5">
+    <div class="my-5">
+
+        
+        <!-- <div>
+            
+        </div>
+        <div>
+            <p> จำนวนบุคลากรที่ว่าง : {{resourcesEmpty?.length}} คน</p>
+            
+        </div>
+        <div>
+            <div *ngFor="let requestAmount of requestEachAmount">
+                <div *ngIf="requestAmount.amount > 0">
+                    <p>ตำแหน่ง {{requestAmount.label}} จำนวน {{ requestAmount.amount }} คน</p>
+                </div>
+
+            </div>
+        </div> -->
+
+
+
+        <!-- <div>
+            <p class="title-sub1">บุคลากรที่ว่าง</p>
+        </div>
+        <div class="grid">
+            <div *ngFor="let resource of resourcesEmpty" class="pl-3 mt-2 col-6">
+
+
+                <p-card>
+                    <div *ngIf="resource.working == 0.0;else elseResourceEmpty">
+                        <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}}</p>
+                    </div>
+                    <ng-template #elseResourceEmpty>
+                        <p>{{resource.firstName + " "}}{{resource.lastName + " "}} ตำแหน่ง {{resource.position}} มีการมอบหมายงาน </p>
+                        
+                    </ng-template>
+                </p-card>
+
+
+
+
+
+            </div>
+        </div>
+
+    </div> -->
+    <div>
+        <p class="title-sub1"> โครงการที่ร้องขอทรัพยากร</p>
+
+        <p-tabView [scrollable]="true">
+
+
+            <p-tabPanel *ngFor="let request of resourceForRender;let i = index" [header]="months[request.month]">
+                <div *ngIf="request.requestDetail.length > 0;else elseRequest">
+                    <div *ngFor="let info of request.requestDetail" #elseRequest>
+
+                        <p-card [style]="{ 'margin-bottom': '2em'}">
+                            <p>{{ info.projectCode + " " + info.projectName}}</p>
+                        </p-card>
+                        <div *ngFor="let position of info.requests">
+                            <!-- <p>{{ position.positionRequest}}</p> -->
+
+
+                            <!-- <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา</p>  -->
+                            <div *ngIf="warningResource?.includes(position.positionRequest);else elseResourceEmpty">
+                                <div class="grid">
+                                    <div class="col">
+                                        <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา </p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="inline"> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat
+                                            }} </p>
+                                        <fa-icon [icon]="warningIcon" class="ml-1" (mouseover)="mouseOver()"></fa-icon>
+                                        <!-- <p-message severity="warn" text="ตำแหน่งงานไม่เพียงพอต่อการร้องขอ" class="inline"></p-message> -->
+                                    </div>
+                                </div>
+                                <!-- แจ้งเตือนหากไม่พอ -->
+                            </div>
+
+                            <ng-template #elseResourceEmpty>
+                                <div class="grid">
+                                    <div class="col">
+
+                                        <p> ตำแหน่ง {{ position.positionRequest }} จำนวน {{position.amount}} อัตรา </p>
+
+                                    </div>
+                                    <div class="col">
+                                        <p> วันที่เริ่มร้องขอ วันที่ {{ position.dateWithin | dateFormat }}</p>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <ng-template #elseRequest> ไม่มีโครงการในเดือนนี้</ng-template>
+
+            </p-tabPanel>
+
+
+
+        </p-tabView>
+
+        <!-- <p-tabView [scrollable]="true">
+
+
+            <p-tabPanel  *ngFor="let request of finalRequestResource;let i = index" [header]="months[request.month]" >
+                <div *ngIf="request.requestMonthDetail.length > 0;else elseRequest">
+                    <div *ngFor="let requestDetail of request.requestMonthDetail" #elseRequest>
+
+                        <p-card [style]="{ 'margin-bottom': '2em'}">
+                            <p>{{requestDetail.project.projectCode + " " + requestDetail.project.projectName}}</p>
+                        </p-card>
+                    </div>
+                    
+                </div>
+                <ng-template #elseRequest>No Project Request in this month</ng-template>
+                
+            </p-tabPanel>
+
+
+
+        </p-tabView> -->
+    </div>
+    <!-- <div>
+        <p class="sub-header">โปรเจคที่มีการร้องขอบุคลากร</p>
+        <div *ngFor="let project of projectRequest; let index = index" class="pl-3 mt-2 box">
+            {{ project.projectName}} {{" "}} {{project.projectCode}}
+            <div>
+                <p>ตำแหน่งที่ต้องการ</p>
+            </div>
+            <div class="" *ngFor="let position of project.requests">
+                <p>{{position.positionRequest}} ภายใน {{position.dateWithin | date}}</p>
+
+
+                มีดู duration ของ resource แต่ละคนอยู่แล้ว
+            </div>
+            <h5>Assigned Resource</h5>
+            <div *ngFor="let data of dataListResource">
+                <div *ngIf="data.projectCode == project.projectCode">
+                    <p-dropdown [options]="data.resourceL" placeholder="Select a Resource" optionLabel="label" [(ngModel)]="positionSelected[index]"
+                        [showClear]="true"></p-dropdown>
+                    <div class="grid">
+                        <div class="col">
+                            <h6>Start Date</h6>
+                            <input pInput type="date" [(ngModel)]="startDateList[index]">
+                        </div>
+                        <div class="col">
+                            <h6>End Date</h6>
+                            <input pInput type="date"  [(ngModel)]="endDateList[index]">
+                        </div>
+                        <div class="col">
+                            <h6>Duration</h6>
+                            <input pInputText type="text"  [(ngModel)]="durationList[index]">
+                        </div>
+                        <div class="col">
+                            <h6>Assigned</h6>
+                            <input pInputText type="text"  [(ngModel)]="assignList[index]">
+                        </div>
+                        <div class="col">
+                            <button type="button" pButton pRipple (click)="addResource(project.id, index)"
+                                label="add" class="p-button-success mb-2" [(ngModel)]="positionSelected"></button>
+                        </div>
+                    </div>
+
+                    <br>
+
+
+                    <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Country">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selectedCountry">
+                            <img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedCountry.code.toLowerCase()" />
+                            <div>{{selectedCountry.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-country pTemplate="item">
+                        <div class="country-item">
+                            <img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + country.code.toLowerCase()" />
+                            <div>{{country.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                </div>
+
+            </div>
+        </div>
+    </div> -->
+</div>

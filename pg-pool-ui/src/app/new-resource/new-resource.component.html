@@ -1,0 +1,102 @@
+<p-toast></p-toast>
+<div class="container align-items-center mt-5">
+  <!-- <div class="grid">
+    <div class="col">
+      <p class="title-sub1 my-center-text">สร้างทรัพยากรใหม่</p>
+    </div>
+  </div> -->
+  <div class="grid my-5 box-content">
+    
+    <div class="col relative" style="position: relative">
+      <p-image class="img-size" src="https://img.freepik.com/free-vector/managers-looking-chart-monitor_1262-19283.jpg?w=996&t=st=1667660411~exp=1667661011~hmac=f951cf544a679c8cb288330fd614d7d9fc8af8aca473c83a7191c1664291d47a" alt="Image" width="100%">
+      </p-image>
+    </div>
+    <div class="col">
+      <div class="my-3"><p class="title-sub2">สร้างทรัพยากรโปรแกรมเมอร์</p></div>
+      <div class="mt-5">
+      <form [formGroup]="resourceForm">
+        <div class="grid ">
+          <div class="col">
+            <p>รหัสประจำตัวพนักงาน</p>
+
+            <input type="text" pInputText formControlName="empNo" />
+            <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+              <em class="pi pi-times-circle"></em> Field is required.
+            </small> -->
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col">
+            <p>คำนำหน้า</p>
+            <p-dropdown [options]="prefixs" formControlName="prefix" placeholder="Select a Prefix" optionLabel="name"
+              [showClear]="true"></p-dropdown>
+          </div>
+          <div class="col">
+            <p>ชื่อ</p>
+            <input type="text" pInputText formControlName="firstName" />
+          </div>
+          <div class="col">
+            <p>นามสกุล</p>
+            <input type="text" pInputText formControlName="lastName" />
+          </div>
+        </div>
+
+
+        <div class="grid">
+
+
+          <div class="col">
+            <p>โทรศัพท์</p>
+            <input type="text" pInputText formControlName="tel" />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col">
+            <p>อีเมลพนักงาน</p>
+            <input type="text" pInputText formControlName="empEmail" />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col-4">
+            <p>ตำแหน่ง</p>
+            <p-dropdown [options]="positions" formControlName="position" placeholder="เลือกตำแหน่ง"
+              optionLabel="name" [showClear]="true"></p-dropdown>
+          </div>
+        </div>
+          
+
+          <!-- <small *ngIf="resourceForm.get('lastName')?.invalid" id="lastName-help" class="p-error block">
+                  <em class="pi pi-times-circle"></em> Field is required.
+                </small> -->
+        
+
+        <!-- <div class="grid">
+          <div class="col">
+            <p>Hiredate</p>
+            
+            <input type="date" pInputText formControlName="hireDate" />
+            
+          </div>
+          <div class="col">
+
+            <p>Expire Date</p>
+            <input type="date" pInputText formControlName="expireDate" />
+          </div>
+
+        </div> -->
+        
+        <div class="grid my-5">
+
+          <div class="col">
+
+            <button pButton pRipple  (click)="onSubmit()" class="p-button-raised p-button-success inline">สร้าง </button>
+            <button pButton pRipple  (click)="onSubmit()" class="p-button-raised p-button-danger ml-2" [routerLink]="['/resource']">ยกเลิก </button>
+
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+</div>

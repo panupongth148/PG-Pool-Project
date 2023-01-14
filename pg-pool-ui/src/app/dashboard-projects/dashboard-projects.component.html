@@ -1,0 +1,85 @@
+<!-- <canvas id="canvas" width="400" height="400"></canvas> -->
+<div class="container mt-4">
+    <div class="grid">
+        <div class="col">
+            <!-- <h4>Chart Resource</h4> -->
+            <div class="grid">
+                <div class="col">
+                    <p class="title-sub1">ภาพรวมโครงการ</p>
+                    <div class="grid mt-2">
+                        <div class="col-4">
+                            <p>โครงการทั้งหมด</p>
+                           
+                            <div class="card" >
+                               
+                                <div class="card-body mouse-pointer" [routerLink]="['/project']">
+                                  <!-- <h5 class="card-title">โครงการทั้งหมด</h5> -->
+                                  <p class="card-text">{{projects!.length}} โครงการ</p>
+                                  
+                                </div>
+                              </div>
+                            <!-- <p-card header="จำนวนโครงการ">
+                            โครงการ {{projects!.length}}
+                            </p-card> -->
+                        </div>
+                        <div class="col-4">
+                            <p>คำร้องขอทั้งหมด</p>
+                            <div class="card" [routerLink]="['/request']">
+                                
+                                <div class="card-body" >
+                                  <!-- <h5 class="card-title">คำร้องขอทรัพยากร</h5> -->
+                                  <p class="card-text">{{requestEachAmount.length}} ตำแหน่ง</p>
+                              
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-4">
+                            <p>ตำแหน่งทรัพยาที่ต้องการ</p>
+                            <div class="card">
+                                
+                                <div class="card-body">
+                                  <!-- <h5 class="card-title">คำร้องขอทรัพยากร</h5> -->
+                                  <div *ngFor="let position of requestEachAmount">
+                                    <div *ngIf="position.amount > 0">
+                                        <p>ตำแหน่ง {{position.label}} จำนวน {{position.amount}} ตำแหน่ง</p>
+                                    </div>
+                                
+                                  </div>
+                                  <!-- <p class="card-text">{{requestEachAmount.length}}</p> -->
+                              
+                                </div>
+                              </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div class="col-6 my-center-text">
+                    <p class="title-sub1">โครงการพนักงานใกล้หมดมอบหมาย</p>
+                </div> -->
+            </div>
+            
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+
+        </div>
+
+    </div>
+    <div class="grid my-3">
+        <div class="col">
+            <div class="">
+                <p class="title-sub1">แผนภูมิการใช้ทรัพยากร</p>
+            </div>
+
+            <div class="graph" class="mt-3">
+                <app-chart-resource></app-chart-resource>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

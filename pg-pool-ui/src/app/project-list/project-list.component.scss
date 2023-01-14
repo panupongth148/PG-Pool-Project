@@ -1,0 +1,39 @@
+.box {
+    border: 10;
+    border-color: black;
+    background-color: rgb(83, 54, 248);
+    color: white;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.header-title {
+    font-size: 32px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.header-content {
+    font-size: 24px;
+}
+
+.header-sub-content {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.position-card {
+    justify-content: center;
+    align-items: center;
+
+}
+
+.title-sub1{
+    font-size: 2vw;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.text-button{
+    font-family: 'Anuphan', sans-serif;
+}

@@ -1,0 +1,45 @@
+.text-center {
+    text-align: center;
+}
+
+.box-member {
+    border-radius: 10px;
+    background-color: rgb(24, 22, 150);
+    color: white;
+    height: 3rem;
+    padding-bottom: 1%;
+    margin: 10px;
+}
+
+.working-detail {
+    border-radius: 25px;
+    border: 2px solid rgb(24, 22, 150);
+    padding: 10px;
+    margin: 10px;
+    display: block;
+}
+.f-list-project{
+    padding: auto;
+}
+
+.my-center-text {
+    text-align: center;
+    // width: 100%;
+}
+
+
+.title-sub1{
+    font-size: 1.5vw;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.title-sub2{
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: 'Anuphan', sans-serif;
+}
+
+.title-detail{
+    font-size: 18px;
+    font-family: 'Anuphan', sans-serif;
+}

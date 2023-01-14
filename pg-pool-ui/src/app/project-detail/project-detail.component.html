@@ -1,0 +1,136 @@
+<p-toast></p-toast>
+
+<div class="container mt-5">
+    <div class="grid">
+        <div class="col my-center-text">
+            <p class="title-sub1">ข้อมูลโครงการ</p>
+        </div>
+
+    </div>
+    <div class="grid ">
+        <div class="col my-center-text">
+            {{ project.projectName}}
+        </div>
+        <div>
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+            <button pButton pRipple type="button" label="Delete" class="p-button-raised p-button-danger inline-block right-0" (click)="deleteProject(project.id)"></button>
+        </div>
+
+    </div>
+    <div class="grid">
+        <div class="col"></div>
+    </div>
+    <div class="grid my-center-text">
+        <div class="col">
+            <b>สัญญาเริ่ม : </b> {{project.contractStart | dateFormat }} <b>หมดสัญญา : </b> {{project.contractEnd | dateFormat}}
+        </div>
+
+    </div>
+    <div class="grid">
+        <div class="col"> </div>
+    </div>
+    <!-- <div class="grid box-member" *ngFor="let resource of resources" (click)="toDetailResource(resource.id)">
+        <div class="col-6">
+            {{resource.prefix}} {{resource.firstName}} {{resource.lastName}}
+        </div>
+        <div class="col-6">
+             <div *ngIf="resource.project"></div>
+             <span class="material-icons">
+                edit
+            </span>
+            <span class="material-icons">
+                delete
+            </span> 
+        </div>
+    </div> -->
+    <p-table #dt [value]="resources" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" responsiveLayout="scroll"
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [filterDelay]="0" [globalFilterFields]="['name','country.name','representative.name','status']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                <h4>ทรัพยากรในโครงการ</h4>
+                <!-- <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target!.value, 'contains')" placeholder="Global Search" />
+            </span> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+
+                <th pSortableColumn="firstName">
+                    <div class="flex justify-content-between align-items-center">
+                        ชื่อ
+                        <p-sortIcon field="firstName"></p-sortIcon>
+                        <p-columnFilter type="text" field="firstName" display="menu" class="ml-auto"></p-columnFilter>
+                    </div>
+                </th>
+                <th pSortableColumn="startDate">
+                    <div class="flex justify-content-between align-items-center">
+                        วันกำหนดเริ่ม
+
+                    </div>
+                </th>
+                <th pSortableColumn="endDate">
+                    <div class="flex justify-content-between align-items-center">
+                        วันกำหนดจบ
+
+                    </div>
+                </th>
+                <th pSortableColumn="Working">
+                    <div class="flex justify-content-between align-items-center">
+                        การทำงาน
+
+                    </div>
+                </th>
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-resource>
+            <tr class="p-selectable-row" [routerLink]="['/resource/'+resource.id]">
+                <!-- <td>
+                <p-tableCheckbox [value]="resource"></p-tableCheckbox>
+            </td> -->
+
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{resource.prefix + " "}}{{resource.firstName+ " "}}{{resource.lastName}}
+                </td>
+                <td>
+                    <div *ngFor="let project of resource.projects">
+                        <div *ngFor="let working of project.workingDetail">
+
+                            {{working.startDate | dateFormat}}
+                            <!-- อ้างอิงปัจจุบัน -->
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let project of resource.projects">
+                        <div *ngFor="let working of project.workingDetail">
+
+
+                            {{working.endDate | dateFormat}}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let project of resource.projects">
+                        <div *ngFor="let working of project.workingDetail">
+
+
+                            {{working.working}}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">ยังไม่มีการมอบหมายทรัพยากร</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

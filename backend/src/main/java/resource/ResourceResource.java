@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 
 import project.Project;
 
-@Path("/resource")
+@Path("/api/resource")
 @Consumes("application/json")
 @Produces("application/json")
 public class ResourceResource {
@@ -37,6 +37,12 @@ public class ResourceResource {
         return resourceRepository.findById(new ObjectId(id));
     }
 
+    @GET
+    @Path("/findbypc/{code}")
+    public List<Resource> findByProductCode(String code){
+        return resourceRepository.findByProjectCode(code);
+    }
+
     @POST
     public Response create(Resource resource) {
        resourceRepository.persist(resource);
@@ -51,15 +57,28 @@ public class ResourceResource {
 
     @DELETE
     @Path("/{id}")
-    public void delete(String id) {
-    	Resource resource = resourceRepository.findById(new ObjectId(id));
-        resourceRepository.delete(resource);
+    public Response delete(String id) {
+    	return Response.ok(resourceRepository.deleteResourceById(id)).status(200).build();
     }
 
     @GET
     @Path("/search/{name}")
     public Resource search(String name) {
         return resourceRepository.findByName(name);
+    }
+
+    @GET
+    @Path("/empty")
+    public Response findResourceEmpty(){
+        
+        return Response.ok(resourceRepository.findResourcesCanAssigned()).status(200).build();
+    }
+
+    @GET
+    @Path("/getchartdetail")
+    public Response GetBarDetail(){
+        
+        return Response.ok(resourceRepository.getResourceInRange()).status(200).build();
     }
 
     @DELETE
